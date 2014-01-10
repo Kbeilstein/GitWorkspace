@@ -8,13 +8,13 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 @SuppressWarnings("serial")
-public class Test extends JFrame
+public class Main extends JFrame
 {
-    public Test()
+    public Main()
     {
 
         super("Array Liste");
-        ArrayModel arrayModel = new ArrayModel(10);
+        ArrayModel arrayModel = new ArrayModel(11);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,15 +49,15 @@ public class Test extends JFrame
         Insets insets = getInsets();
         aView.setBounds(40, 5, 400, 50);
         nextB.setBounds(165, 60 + insets.top, 70, 20);
-        sp.setBounds(5 + insets.left, 90, 400, 200);
+        sp.setBounds(5 + insets.left, 90, 410, 200);
 
         setLocation(600, 200);
-        setSize(426, 330);
+        setSize(436, 330);
         setVisible(true);
     }
 
     public static void main(String[] args)
     {
-        new Test();
+        new Main();
     }
 }
