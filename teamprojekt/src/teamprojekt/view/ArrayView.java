@@ -27,11 +27,11 @@ public class ArrayView extends JPanel
             g.setColor(Color.BLACK);
             g.drawRect(dummy, 10, 30, 30);
 
-            if (array[i] < 10)
+            if (0 < array[i] && array[i] < 10)
             {
                 g.drawString(" " + array[i], space + dummy, 30);
             }
-            else if (array[i] < 100)
+            else if (0 < array[i] && array[i] < 100)
             {
                 g.drawString(array[i] + "", space + dummy, 30);
             }

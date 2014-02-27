@@ -7,10 +7,6 @@ public class ArrayModel
     public ArrayModel(int length)
     {
         array = new int[length];
-        for (int i = 0; i < length; i++)
-        {
-            array[i] = 100;
-        }
     }
 
     public void printArray()
