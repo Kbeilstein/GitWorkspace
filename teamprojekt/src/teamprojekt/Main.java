@@ -12,6 +12,7 @@ import teamprojekt.model.ArrayModel;
 import teamprojekt.model.Sondieren;
 import teamprojekt.view.ArrayView;
 import teamprojekt.view.LogView;
+import teamprojekt.view.MainView;
 import teamprojekt.view.NextButtonView;
 
 @SuppressWarnings("serial")
@@ -65,6 +66,7 @@ public class Main extends JFrame
 
     public static void main(String[] args)
     {
-        new Main();
+//        new Main();
+        new MainView();
     }
 }
