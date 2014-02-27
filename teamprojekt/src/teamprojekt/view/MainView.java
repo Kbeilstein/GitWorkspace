@@ -30,7 +30,7 @@ public class MainView extends JFrame
         setLayout(new GridLayout(0,2));
         // Neue Views HIER anmelden        
         
-        
+         add(new ComboView());        
         
 
          ArrayModel arrayModel = new ArrayModel(11);

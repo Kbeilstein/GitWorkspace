@@ -5,27 +5,24 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 
-import teamprojekt.model.ArrayModel;
-
 public class StartButtonHandler implements ActionListener
 {
-    private JComboBox<?> cvVerfahren;
-
-    private int[] arraySize;
+    private JComboBox<String> cbVerfahren;
 
     private JComboBox<?> cbArraySize;
 
-    public StartButtonHandler(JComboBox<?> cbVerfahren, JComboBox<?> cbArraySize, int[] arraySize)
+    public StartButtonHandler(JComboBox<String> cbVerfahren, JComboBox<Integer> cbArraySize)
     {
-        this.cvVerfahren = cbVerfahren;
+        this.cbVerfahren = cbVerfahren;
         this.cbArraySize = cbArraySize;
-        this.arraySize = arraySize;
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        ArrayModel array = new ArrayModel(arraySize[cbArraySize.getSelectedIndex()]);
-
+        System.out.println(cbVerfahren.getSelectedItem());
+        System.out.println(cbArraySize.getSelectedItem());
+        // ArrayModel array = new ArrayModel((int)
+        // cbArraySize.getSelectedItem());
     }
 }
