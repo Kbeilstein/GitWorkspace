@@ -7,6 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
+import teamprojekt.control.NextButtonHandler;
+import teamprojekt.model.ArrayModel;
+import teamprojekt.model.Sondieren;
+import teamprojekt.view.ArrayView;
+import teamprojekt.view.LogView;
+import teamprojekt.view.NextButtonView;
+
 @SuppressWarnings("serial")
 public class Main extends JFrame
 {

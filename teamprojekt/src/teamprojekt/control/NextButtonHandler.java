@@ -1,7 +1,9 @@
-package teamprojekt;
+package teamprojekt.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import teamprojekt.view.NextButtonView;
 
 public class NextButtonHandler implements ActionListener
 {

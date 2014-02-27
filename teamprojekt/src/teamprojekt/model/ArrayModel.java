@@ -1,4 +1,4 @@
-package teamprojekt;
+package teamprojekt.model;
 
 public class ArrayModel
 {

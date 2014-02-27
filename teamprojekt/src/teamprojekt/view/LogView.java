@@ -1,4 +1,4 @@
-package teamprojekt;
+package teamprojekt.view;
 
 import javax.swing.JTextArea;
 

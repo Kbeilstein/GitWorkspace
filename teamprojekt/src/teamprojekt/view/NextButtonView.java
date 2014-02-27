@@ -1,6 +1,8 @@
-package teamprojekt;
+package teamprojekt.view;
 
 import javax.swing.JButton;
+
+import teamprojekt.model.Sondieren;
 
 @SuppressWarnings("serial")
 public class NextButtonView extends JButton

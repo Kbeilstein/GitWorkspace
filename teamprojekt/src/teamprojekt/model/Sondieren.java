@@ -1,4 +1,7 @@
-package teamprojekt;
+package teamprojekt.model;
+
+import teamprojekt.view.ArrayView;
+import teamprojekt.view.LogView;
 
 public class Sondieren
 {
