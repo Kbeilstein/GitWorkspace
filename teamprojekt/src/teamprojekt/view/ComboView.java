@@ -1,40 +1,50 @@
 package teamprojekt.view;
 
-import java.awt.event.*;
+import java.awt.GridLayout;
+import java.util.Arrays;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 
-public class ComboView extends JFrame implements ActionListener
+@SuppressWarnings("serial")
+public class ComboView extends JPanel 
 
 {
+    private String[] verFahren = {"Lineares Sondieren",
+                    "Verallg. Lineares Sondieren", 
+                    "Quadratisches Sondieren", 
+                    "altanierendes Quad. Sondieren",
+                    "Doppelthashing"};
 
-    private static final long serialVersionUID = 7692824654665347324L;
+    private int[] arryGroesse = {5,7,11,13,17,19};
+    
+    
 
-    public ComboView(String title, String[] selItem)
+    public ComboView()
     {
-
-        super(title);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-        JComboBox<?> versVerf = new JComboBox(selItem);
-
-        versVerf.setEditable(true);
-        versVerf.addActionListener(this);
+        setLayout(new GridLayout(0,1));
+        
+        
+        JComboBox<?> versVerf = new JComboBox(verFahren);
+        versVerf.setEditable(false);
         add(versVerf);
-        setLocation(200, 200);
-        setSize(400, 100);
-        setVisible(true);
+        
+        
+        JComboBox<?> versArryLaenge = new JComboBox(Arrays.toString(arryGroesse).split("[\\[\\]]")[1].split(", "));
+        versArryLaenge.setEditable(false);
+        add(versArryLaenge);
+        
+        JButton start = new JButton("Start");
+        add(start);
+        
+        
+        
     }
 
-    public void actionPerformed(ActionEvent evt)
-    {
-        JComboBox<?> cb = (JComboBox<?>) evt.getSource();
-        // System.out.println("ActionEvent: selected " + cb.getSelectedItem() +
-        // " (Index " + cb.getSelectedIndex() + ")");
-    }
 
-    public static void main(String[] args)
-    {
-        new ComboView("Auswahl des Verfahrens", args);
-    }
+    
+    
+    
+    
 }
