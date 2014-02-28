@@ -21,6 +21,6 @@ public class NextButtonView extends JButton
         // sond.verallgLinearesSondieren((int) (Math.random() * 100));
         // sond.linearesSondieren(7);
         // sond.verallgLinearesSondieren(7);
-        sond.quadratischesSondieren((int) (Math.random() * 100));
+        sond.add((int) (Math.random() * 100));
     }
 }

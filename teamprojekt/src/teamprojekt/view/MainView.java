@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 
 import teamprojekt.control.NextButtonHandler;
 import teamprojekt.model.ArrayModel;
+import teamprojekt.model.LinearesSondieren;
 import teamprojekt.model.Sondieren;
 
 public class MainView extends JFrame
@@ -41,7 +42,7 @@ public class MainView extends JFrame
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Array");
 
         LogView lv = new LogView();
-        Sondieren sond = new Sondieren(arrayModel, lv, aView);
+        Sondieren sond = new LinearesSondieren(arrayModel, lv, aView);
 
         NextButtonView nextB = new NextButtonView(sond);
         NextButtonHandler nextBHandler = new NextButtonHandler();
