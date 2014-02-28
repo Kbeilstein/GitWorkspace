@@ -1,11 +1,14 @@
 package teamprojekt.view;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import teamprojekt.control.ComboHashHandler;
 import teamprojekt.control.StartButtonHandler;
 
 @SuppressWarnings("serial")
@@ -27,15 +30,16 @@ public class ComboView extends JPanel
         add(versVerf);
 
         JComboBox<Integer> versArryLaenge = new JComboBox<Integer>();
-        for (int wert : arrayGroesse)
-        {
-            versArryLaenge.addItem(wert);
-        }
         versArryLaenge.setEditable(false);
         add(versArryLaenge);
+        versVerf.addActionListener(new ComboHashHandler(versArryLaenge));
 
         JButton start = new JButton("Start");
         start.addActionListener(new StartButtonHandler(versVerf, versArryLaenge));
         add(start);
+        
+        
+
     }
+
 }
