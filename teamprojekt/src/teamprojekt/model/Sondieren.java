@@ -119,7 +119,6 @@ public class Sondieren
             {
                 logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " + " + i + "^2");
                 arrayPosition = ((wert % arrayLaenge) + (i * i)) % arrayLaenge;
-                System.out.println(arrayPosition + " i " + i);
                 i++;
             }
 
