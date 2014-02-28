@@ -1,49 +1,46 @@
 package teamprojekt.model;
 
-import teamprojekt.view.ArrayView;
 import teamprojekt.view.LogView;
 
 public abstract class Sondieren
 {
 
-    private int[] array;
+    private ArrayModel array;
 
     private LogView logView;
 
-    private ArrayView aView;
-
-    public Sondieren(ArrayModel arrayModel, LogView logView, ArrayView aView)
+    public Sondieren(ArrayModel arrayModel, LogView logView)
     {
-        this.array = arrayModel.getArray();
+        this.array = arrayModel;
         this.logView = logView;
-        this.aView = aView;
     }
 
-    public abstract void add(int wert);
+    public abstract void add(int value);
 
-    public abstract int search(int wert);
+    public abstract int search(int value);
 
-    public abstract void delete(int wert);
+    public abstract void delete(int value);
 
-    protected void insArrayEintragen(int arrayPosition, int wert)
+    protected void insArrayEintragen(int arrayPosition, int value)
     {
         // Ausgabe in die LogView
-        logView.write(wert + " an Stelle " + arrayPosition + " vom Feld geschrieben");
-        // schreiben des Wertes ins Array
-        array[arrayPosition] = wert;
-        // Array muss neu gezeichnet werden
-        aView.changed();
+        logView.write(value + " an Stelle " + arrayPosition + " vom Feld geschrieben");
+        // schreiben des valuees ins Array
+        array.setValueAt(arrayPosition, value);
     }
 
-    // Ausgabe des Array in die Konsole
-    public void printArray()
+    public void deleted(int index, int value)
     {
-        // Array wird durchlaufen und die int-Werte in die Konsole ausgegeben
-        for (int wert : array)
+        if (index != -1)
         {
-            System.out.print(wert + " ");
+            array.delete(index);
+            logView.write(value + " an Stelle " + index + " vom Feld gelöscht");
         }
-        System.out.println();
+        else
+        {
+            logView.write(value + " im Array nicht vorhanden");
+        }
+        logView.write("");
     }
 
     // kontrollfunktion, ob das Array noch freie Plätze enthält
@@ -52,11 +49,11 @@ public abstract class Sondieren
         boolean full = false;
 
         // das Array wird durchlaufen bis zum Ende und full auf "true" gesetzt
-        // oder der Wert 0 auftritt, welcher ein noch leere Arrayposition
+        // oder der value 0 auftritt, welcher ein noch leere Arrayposition
         // kennzeichnet
-        for (int wert : array)
+        for (int value : array.getArray())
         {
-            if (wert == 0 || wert == -1)
+            if (value == 0 || value == -1)
             {
                 full = false;
                 break;

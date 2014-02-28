@@ -1,6 +1,5 @@
 package teamprojekt.model;
 
-import teamprojekt.view.ArrayView;
 import teamprojekt.view.LogView;
 
 public class LinearesSondieren extends Sondieren
@@ -12,9 +11,9 @@ public class LinearesSondieren extends Sondieren
 
     private int arrayLaenge;
 
-    public LinearesSondieren(ArrayModel arrayModel, LogView logView, ArrayView aView)
+    public LinearesSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView, aView);
+        super(arrayModel, logView);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLaenge = arrayModel.getLength();
@@ -50,15 +49,18 @@ public class LinearesSondieren extends Sondieren
         int arrayPosition = wert % arrayLaenge;
         // Wert um den "verschoben" wird
         int i = 1;
+        
+        int[] array = arrayModel.getArray();
 
         // solange nicht der Wert oder ein leere Platz (mit 0 gekennzeichnet)
         // auftritt läuft die while Schleife das ganze Array einmal durch
-        while (i < arrayLaenge && arrayModel.getArray()[arrayPosition] != wert && arrayModel.getArray()[arrayPosition] != 0)
+        while (i < arrayLaenge && array[arrayPosition] != wert && array[arrayPosition] != 0)
         {
             arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
             i++;
         }
-        if (arrayModel.getArray()[arrayPosition] == wert)
+        
+        if (array[arrayPosition] == wert)
         {
             index = arrayPosition;
         }
@@ -68,8 +70,7 @@ public class LinearesSondieren extends Sondieren
     @Override
     public void delete(int wert)
     {
-        // TODO Auto-generated method stub
-
+        deleted(search(wert), wert);
     }
 
     private int getAddPosition(int wert)
@@ -78,14 +79,17 @@ public class LinearesSondieren extends Sondieren
         int arrayPosition = wert % arrayLaenge;
         // Wert um den "verschoben" wird
         int i = 1;
+        
+        int[] array = arrayModel.getArray();
 
         // noch unbelegte Arraypositionen sind mit dem int Wert 0
         // gekennzeichnet
         // while Schleife wird nur bei Kollisionen durchlaufen
-        while (arrayModel.getArray()[arrayPosition] != 0)
+        while (array[arrayPosition] != 0 && array[arrayPosition] != -1 )
         {
             logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Lineares Sondieren " + (wert % arrayLaenge) + " + " + i);
             arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
+            System.out.println("endlos");
             i++;
         }
         return arrayPosition;

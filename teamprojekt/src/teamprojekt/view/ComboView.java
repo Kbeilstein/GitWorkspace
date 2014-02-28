@@ -1,8 +1,6 @@
 package teamprojekt.view;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,9 +15,6 @@ public class ComboView extends JPanel
 {
     private String[] verfahren =
     { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "altanierendes Quad. Sondieren", "Doppelthashing" };
-
-    private int[] arrayGroesse =
-    { 5, 7, 11, 13, 17, 19 };
 
     public ComboView()
     {
@@ -37,9 +32,6 @@ public class ComboView extends JPanel
         JButton start = new JButton("Start");
         start.addActionListener(new StartButtonHandler(versVerf, versArryLaenge));
         add(start);
-        
-        
-
     }
 
 }

@@ -1,6 +1,5 @@
 package teamprojekt.model;
 
-import teamprojekt.view.ArrayView;
 import teamprojekt.view.LogView;
 
 public class DoppelHashing extends Sondieren
@@ -12,9 +11,9 @@ public class DoppelHashing extends Sondieren
 
     private int arrayLaenge;
 
-    public DoppelHashing(ArrayModel arrayModel, LogView logView, ArrayView aView)
+    public DoppelHashing(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView, aView);
+        super(arrayModel, logView);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLaenge = arrayModel.getLength();
@@ -68,13 +67,13 @@ public class DoppelHashing extends Sondieren
     @Override
     public int search(int wert)
     {
-        return 0;        
+        return 0;
     }
 
     @Override
     public void delete(int wert)
     {
         // TODO Auto-generated method stub
-        
+
     }
 }

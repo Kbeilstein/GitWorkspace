@@ -35,13 +35,12 @@ public class ArrayView extends JPanel
             {
                 g.drawString(array[i] + "", space + dummy, 30);
             }
+            else
+            {
+                g.drawString(" ", space + dummy, 30);
+            }
 
             dummy += 30;
         }
-    }
-
-    public void changed()
-    {
-        repaint();
     }
 }

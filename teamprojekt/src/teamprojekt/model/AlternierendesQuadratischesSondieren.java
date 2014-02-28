@@ -1,6 +1,5 @@
 package teamprojekt.model;
 
-import teamprojekt.view.ArrayView;
 import teamprojekt.view.LogView;
 
 public class AlternierendesQuadratischesSondieren extends Sondieren
@@ -12,9 +11,9 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
 
     private int arrayLaenge;
 
-    public AlternierendesQuadratischesSondieren(ArrayModel arrayModel, LogView logView, ArrayView aView)
+    public AlternierendesQuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView, aView);
+        super(arrayModel, logView);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLaenge = arrayModel.getLength();
@@ -89,6 +88,6 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
     public void delete(int wert)
     {
         // TODO Auto-generated method stub
-        
+
     }
 }

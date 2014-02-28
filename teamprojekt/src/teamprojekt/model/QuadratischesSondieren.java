@@ -1,6 +1,5 @@
 package teamprojekt.model;
 
-import teamprojekt.view.ArrayView;
 import teamprojekt.view.LogView;
 
 public class QuadratischesSondieren extends Sondieren
@@ -12,9 +11,9 @@ public class QuadratischesSondieren extends Sondieren
 
     private int arrayLaenge;
 
-    public QuadratischesSondieren(ArrayModel arrayModel, LogView logView, ArrayView aView)
+    public QuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView, aView);
+        super(arrayModel, logView);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLaenge = arrayModel.getLength();
