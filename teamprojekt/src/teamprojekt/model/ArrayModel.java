@@ -22,4 +22,9 @@ public class ArrayModel
     {
         return array;
     }
+    
+    public int getLength()
+    {
+        return array.length;
+    }
 }
