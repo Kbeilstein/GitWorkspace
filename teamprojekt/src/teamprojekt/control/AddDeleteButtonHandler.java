@@ -22,16 +22,20 @@ public class AddDeleteButtonHandler implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e)
-    {        
+    {
         JButton button = (JButton) e.getSource();
-        if (button.getText().equals("add"))
+        if (!textBox.getText().isEmpty())
         {
-            sondieren.add(Integer.parseInt(textBox.getText()));
+            if (button.getText().equals("add"))
+            {
+                sondieren.add(Integer.parseInt(textBox.getText()));
+            }
+            if (button.getText().equals("delete"))
+            {
+                sondieren.delete(Integer.parseInt(textBox.getText()));
+            }
         }
-        if (button.getText().equals("delete"))
-        {
-            sondieren.delete(Integer.parseInt(textBox.getText()));
-        }
+        textBox.setText("");
     }
 
 }

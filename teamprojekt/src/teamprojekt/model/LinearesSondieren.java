@@ -49,7 +49,7 @@ public class LinearesSondieren extends Sondieren
         int arrayPosition = wert % arrayLaenge;
         // Wert um den "verschoben" wird
         int i = 1;
-        
+
         int[] array = arrayModel.getArray();
 
         // solange nicht der Wert oder ein leere Platz (mit 0 gekennzeichnet)
@@ -59,7 +59,7 @@ public class LinearesSondieren extends Sondieren
             arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
             i++;
         }
-        
+
         if (array[arrayPosition] == wert)
         {
             index = arrayPosition;
@@ -79,17 +79,16 @@ public class LinearesSondieren extends Sondieren
         int arrayPosition = wert % arrayLaenge;
         // Wert um den "verschoben" wird
         int i = 1;
-        
+
         int[] array = arrayModel.getArray();
 
         // noch unbelegte Arraypositionen sind mit dem int Wert 0
         // gekennzeichnet
         // while Schleife wird nur bei Kollisionen durchlaufen
-        while (array[arrayPosition] != 0 && array[arrayPosition] != -1 )
+        while (array[arrayPosition] != 0 && array[arrayPosition] != -1)
         {
             logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Lineares Sondieren " + (wert % arrayLaenge) + " + " + i);
             arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
-            System.out.println("endlos");
             i++;
         }
         return arrayPosition;
