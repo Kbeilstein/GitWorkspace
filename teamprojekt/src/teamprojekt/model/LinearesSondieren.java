@@ -87,7 +87,8 @@ public class LinearesSondieren extends Sondieren
         // gekennzeichnet
         while (array[arrayPosition] != 0 && array[arrayPosition] != -1)
         {
-            logView.colLS(wert, arrayPosition, arrayLaenge, i);            arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
+            logView.colLS(wert, arrayPosition, arrayLaenge, i);
+            arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
             i++;
         }
         return arrayPosition;

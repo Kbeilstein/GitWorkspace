@@ -1,7 +1,7 @@
 package teamprojekt.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -14,12 +14,12 @@ public class HashingView extends JFrame
         super("Hasing");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        setLayout(new GridLayout(0, 2));
+        setLayout(new BorderLayout());
         // Neue Views HIER anmelden
 
         MainView panel = new MainView();
-        add(new ComboView(panel));
-        add(panel);
+        add(new ComboView(panel), BorderLayout.WEST);
+        add(panel, BorderLayout.CENTER);
 
         // Variable um die Bildschirmbreite abzuspeichern
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

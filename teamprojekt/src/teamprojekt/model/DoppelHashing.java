@@ -103,7 +103,7 @@ public class DoppelHashing extends Sondieren
         // while Schleife wird nur bei Kollisionen durchlaufen
         while (array[arrayPosition] != 0 && array[arrayPosition] != -1 && i < arrayLaenge)
         {
-            logView.colDH(wert, arrayPosition, arrayLaenge, i);            
+            logView.colDH(wert, arrayPosition, arrayLaenge, i);
             // Loesung um ein "-" bei modulo abzufangen
             // (a % b + b) % b
             arrayPosition = (((wert % arrayLaenge) - i * (1 + wert % (arrayLaenge - 2))) % arrayLaenge + arrayLaenge) % arrayLaenge;
