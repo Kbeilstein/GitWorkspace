@@ -28,11 +28,11 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
         // freie Plaetze enthaelt
         if (isFull())
         {
-            logView.write("Array voll");
+            logView.full();
         }
         else if (search(wert) != -1)
         {
-            logView.write(wert + " schon im Array vorhanden");
+            logView.available(wert);
         }
         else
         {
@@ -44,7 +44,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
             }
             else
             {
-                logView.write("FEHLER - Wert kann nicht eingefügt werden");
+                logView.error();
             }
         }
         logView.write("");
@@ -121,7 +121,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
             // wenn i und j gleich sind, wird + gerechnet
             if (i == j)
             {
-                logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " + " + i + "^2");
+                logView.colQSi(wert, arrayPosition, arrayPosition, i);
                 arrayPosition = ((wert % arrayLaenge) + i * i) % arrayLaenge;
                 i++;
             }
@@ -131,7 +131,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
             // naechsten Durchlauf wieder mit + gerechnet wird
             else
             {
-                logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " - " + j + "^2");
+                logView.colQSj(wert, arrayPosition, arrayPosition, j);
                 // Loesung um ein "-" bei modulo abzufangen
                 // (a % b + b) % b
                 arrayPosition = (((wert % arrayLaenge) - j * j) % arrayLaenge + arrayLaenge) % arrayLaenge;

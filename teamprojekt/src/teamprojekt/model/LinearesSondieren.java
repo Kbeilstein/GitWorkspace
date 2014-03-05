@@ -25,11 +25,11 @@ public class LinearesSondieren extends Sondieren
         // freie Plaetze enthaelt
         if (isFull())
         {
-            logView.write("Array voll");
+            logView.full();
         }
         else if (search(wert) != -1)
         {
-            logView.write(wert + " schon im Array vorhanden");
+            logView.available(wert);
         }
         else
         {
@@ -87,8 +87,7 @@ public class LinearesSondieren extends Sondieren
         // gekennzeichnet
         while (array[arrayPosition] != 0 && array[arrayPosition] != -1)
         {
-            logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Lineares Sondieren " + (wert % arrayLaenge) + " + " + i);
-            arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
+            logView.colLS(wert, arrayPosition, arrayLaenge, i);            arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
             i++;
         }
         return arrayPosition;

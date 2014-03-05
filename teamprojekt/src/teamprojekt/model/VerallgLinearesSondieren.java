@@ -39,11 +39,11 @@ public class VerallgLinearesSondieren extends Sondieren
         // freie Plaetze enthaelt
         if (isFull())
         {
-            logView.write("Array voll");
+            logView.full();
         }
         else if (search(wert) != -1)
         {
-            logView.write(wert + " schon im Array vorhanden");
+            logView.available(wert);
         }
         else
         {
@@ -98,7 +98,7 @@ public class VerallgLinearesSondieren extends Sondieren
         int[] array = arrayModel.getArray();
 
         // ÄNDERN Ausgabe in Label evtl
-        logView.write("Fuer c wurde " + c + " gewaehlt");
+        logView.choosenC(c);
 
         // noch unbelegte Arraypositionen sind mit dem int Wert 0, gelöschte mit
         // -1
@@ -106,7 +106,7 @@ public class VerallgLinearesSondieren extends Sondieren
         // while Schleife wird nur bei Kollisionen durchlaufen
         while (array[arrayPosition] != 0 && array[arrayPosition] != -1)
         {
-            logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> erw. Lineares Sondieren " + (wert % arrayLaenge) + " + " + c + " * " + i);
+            logView.colErwLS(wert, arrayPosition, arrayLaenge, c, i);
             arrayPosition = ((wert % arrayLaenge) + c * i) % arrayLaenge;
             i++;
         }

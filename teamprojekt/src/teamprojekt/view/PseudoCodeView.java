@@ -45,7 +45,7 @@ public class PseudoCodeView extends JFrame
                 label.setText("alternierendesQuadratischesSondieren");
                 break;
             case 4:
-                label.setText("doppetHashing");
+                label.setText("doppelHashing");
                 break;
 
             default:
