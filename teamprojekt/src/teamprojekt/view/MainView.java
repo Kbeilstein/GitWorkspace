@@ -15,8 +15,9 @@ import javax.swing.border.Border;
 
 import teamprojekt.control.AddDeleteButtonHandler;
 import teamprojekt.control.ArrayViewListener;
+import teamprojekt.model.AlternierendesQuadratischesSondieren;
 import teamprojekt.model.ArrayModel;
-import teamprojekt.model.LinearesSondieren;
+import teamprojekt.model.DoppelHashing;
 import teamprojekt.model.Sondieren;
 
 public class MainView extends JFrame
@@ -45,7 +46,7 @@ public class MainView extends JFrame
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Array");
 
         LogView lv = new LogView();
-        Sondieren sond = new LinearesSondieren(arrayModel, lv);
+        Sondieren sond = new DoppelHashing(arrayModel, lv);
 
         JButton addButton = new JButton("add");
         JButton deleteButton = new JButton("delete");

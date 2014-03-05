@@ -43,6 +43,7 @@ public class LinearesSondieren extends Sondieren
     @Override
     public int search(int wert)
     {
+        // mit -1 initialisiert, kennzeichnet "nicht gefunden"
         int index = -1;
 
         // Anfangsposition des Hashwertes
@@ -54,7 +55,7 @@ public class LinearesSondieren extends Sondieren
 
         // solange nicht der Wert oder ein leere Platz (mit 0 gekennzeichnet)
         // auftritt läuft die while Schleife das ganze Array einmal durch
-        while (i < arrayLaenge && array[arrayPosition] != wert && array[arrayPosition] != 0)
+        while (i < arrayLaenge && array[arrayPosition] != wert && array[arrayPosition] != 0 && array[arrayPosition] != wert)
         {
             arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
             i++;
@@ -82,9 +83,8 @@ public class LinearesSondieren extends Sondieren
 
         int[] array = arrayModel.getArray();
 
-        // noch unbelegte Arraypositionen sind mit dem int Wert 0
+        // freie Arraypositionen sind mit dem int Wert 0 und -1
         // gekennzeichnet
-        // while Schleife wird nur bei Kollisionen durchlaufen
         while (array[arrayPosition] != 0 && array[arrayPosition] != -1)
         {
             logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Lineares Sondieren " + (wert % arrayLaenge) + " + " + i);
