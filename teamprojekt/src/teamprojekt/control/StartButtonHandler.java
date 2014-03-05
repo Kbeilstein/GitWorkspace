@@ -33,10 +33,6 @@ public class StartButtonHandler implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println(cbVerfahren.getSelectedItem());
-        System.out.println(cbArraySize.getSelectedItem());
-        // ArrayModel array = new ArrayModel((int)
-        // cbArraySize.getSelectedItem());
         Sondieren sond;
 
         LogView lv = new LogView();

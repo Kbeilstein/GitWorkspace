@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import teamprojekt.control.ComboHashHandler;
+import teamprojekt.control.PseudoCodeButtonHandler;
 import teamprojekt.control.StartButtonHandler;
 
 @SuppressWarnings("serial")
@@ -46,5 +47,13 @@ public class ComboView extends JPanel
         c.gridx = 0; // aligned with button 2
         c.gridy = 2; // third row
         add(start, c);
+
+        JButton pseudoCode = new JButton("Pseudo Code");
+        pseudoCode.addActionListener(new PseudoCodeButtonHandler(versVerf));
+        c.fill = GridBagConstraints.NONE;
+        c.insets = new Insets(50, 0, 0, 0);
+        c.gridx = 0;
+        c.gridy = 3;
+        add(pseudoCode, c);
     }
 }
