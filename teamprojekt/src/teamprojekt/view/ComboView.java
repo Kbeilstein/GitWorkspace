@@ -14,10 +14,10 @@ import teamprojekt.control.StartButtonHandler;
 @SuppressWarnings("serial")
 public class ComboView extends JPanel
 {
-    private String[] verfahren =
+    final private String[] verfahren =
     { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "altanierendes Quad. Sondieren", "Doppelthashing" };
 
-    public ComboView()
+    public ComboView(MainView panel)
     {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -39,7 +39,7 @@ public class ComboView extends JPanel
         versVerf.addActionListener(new ComboHashHandler(versArryLaenge));
 
         JButton start = new JButton("Start");
-        start.addActionListener(new StartButtonHandler(versVerf, versArryLaenge));
+        start.addActionListener(new StartButtonHandler(versVerf, versArryLaenge, panel));
 
         c.fill = GridBagConstraints.NONE;
         c.insets = new Insets(30, 0, 0, 0); // top padding
