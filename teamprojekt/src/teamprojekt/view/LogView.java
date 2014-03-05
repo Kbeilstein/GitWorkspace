@@ -25,6 +25,11 @@ public class LogView extends JTextArea
         write(value + " an Stelle " + index + " vom Feld gelöscht");
     }
 
+    public void available(int wert)
+    {
+        write(wert + " schon im Array vorhanden");
+    }
+
     public void unAvailable(int value)
     {
         write(value + " im Array nicht vorhanden");
@@ -38,11 +43,6 @@ public class LogView extends JTextArea
     public void error()
     {
         write("FEHLER - Wert kann nicht eingefügt werden");
-    }
-
-    public void available(int wert)
-    {
-        write(wert + " schon im Array vorhanden");
     }
 
     public void choosenC(int c)
@@ -70,7 +70,7 @@ public class LogView extends JTextArea
         write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " - " + j + "^2");
     }
 
-    public void colDH(int wert, int arrayPosition, int i, int arrayLaenge)
+    public void colDH(int wert, int arrayPosition, int arrayLaenge, int i)
     {
         write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Doppel-Hashing " + arrayPosition + " - " + i + " * (1 + " + wert + " mod " + (arrayLaenge - 2) + ")");
     }

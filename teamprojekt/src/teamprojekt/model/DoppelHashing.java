@@ -29,11 +29,11 @@ public class DoppelHashing extends Sondieren
         // freie Plaetze enthaelt
         if (isFull())
         {
-            logView.write("Array voll");
+            logView.full();
         }
         else if (search(wert) != -1)
         {
-            logView.write(wert + " schon im Array vorhanden");
+            logView.available(wert);
         }
         else
         {
@@ -45,7 +45,7 @@ public class DoppelHashing extends Sondieren
             }
             else
             {
-                logView.write("FEHLER - Wert kann nicht eingefügt werden");
+                logView.error();
             }
         }
         logView.write("");
@@ -103,7 +103,7 @@ public class DoppelHashing extends Sondieren
         // while Schleife wird nur bei Kollisionen durchlaufen
         while (array[arrayPosition] != 0 && array[arrayPosition] != -1 && i < arrayLaenge)
         {
-            logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Doppel-Hashing " + arrayPosition + " - " + i + " * (1 + " + wert + " mod " + (arrayLaenge - 2) + ")");
+            logView.colDH(wert, arrayPosition, arrayLaenge, i);            
             // Loesung um ein "-" bei modulo abzufangen
             // (a % b + b) % b
             arrayPosition = (((wert % arrayLaenge) - i * (1 + wert % (arrayLaenge - 2))) % arrayLaenge + arrayLaenge) % arrayLaenge;

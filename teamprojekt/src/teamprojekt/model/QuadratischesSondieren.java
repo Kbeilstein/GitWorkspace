@@ -27,11 +27,11 @@ public class QuadratischesSondieren extends Sondieren
         // freie Plaetze enthaelt
         if (isFull())
         {
-            logView.write("Array voll");
+            logView.full();
         }
         else if (search(wert) != -1)
         {
-            logView.write(wert + " schon im Array vorhanden");
+            logView.available(wert);
         }
         else
         {
@@ -43,7 +43,7 @@ public class QuadratischesSondieren extends Sondieren
             }
             else
             {
-                logView.write("FEHLER - Wert kann nicht eingefügt werden");
+                logView.error();
             }
         }
         logView.write("");
@@ -100,7 +100,7 @@ public class QuadratischesSondieren extends Sondieren
         // wird, wird abgebrochen und ein -1 als Kenzeichnung zurück gegeben
         while (array[arrayPosition] != 0 && array[arrayPosition] != -1 && i < arrayLaenge)
         {
-            logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " + " + i + "^2");
+            logView.colQSi(wert, arrayPosition, arrayLaenge, i);
             arrayPosition = ((wert % arrayLaenge) + (i * i)) % arrayLaenge;
             i++;
         }
