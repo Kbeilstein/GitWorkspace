@@ -24,16 +24,22 @@ public class TextBoxView extends JTextField
             {
                 // Prüfen, ob bereits 5 Zeichen drin stehen
                 if (getLength() >= 2)
+                {
                     return;
+                }
 
                 // Prüfen, ob die einzufügenden Zeichen Zahlen sind
                 for (int i = 0; i < str.length(); i++)
                 {
                     if (!Character.isDigit(str.charAt(i)))
+                    {
                         return;
+                    }
 
                     if (str.charAt(0) == '0' && off == 0)
+                    {
                         return;
+                    }
                 }
 
                 // Zahl(en) einfügen
