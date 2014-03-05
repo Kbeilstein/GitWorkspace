@@ -24,7 +24,7 @@ public abstract class Sondieren
     protected void insArrayEintragen(int arrayPosition, int value)
     {
         // Ausgabe in die LogView
-        logView.write(value + " an Stelle " + arrayPosition + " vom Feld geschrieben");
+        logView.added(value, arrayPosition);
         // schreiben des valuees ins Array
         array.setValueAt(arrayPosition, value);
     }
@@ -34,11 +34,11 @@ public abstract class Sondieren
         if (index != -1)
         {
             array.delete(index);
-            logView.write(value + " an Stelle " + index + " vom Feld gelöscht");
+            logView.deleted(index, value);
         }
         else
         {
-            logView.write(value + " im Array nicht vorhanden");
+            logView.unAvailable(value);
         }
         logView.write("");
     }
