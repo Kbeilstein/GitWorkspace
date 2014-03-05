@@ -24,7 +24,7 @@ public class ComboView extends JPanel
 
         JComboBox<String> versVerf = new JComboBox<String>(verfahren);
         versVerf.setEditable(false);
-        c.insets = new Insets(10, 0, 0, 0); // top padding        
+        c.insets = new Insets(10, 0, 0, 0); // top padding
         c.gridx = 0;
         c.gridy = 0;
         add(versVerf, c);
@@ -44,7 +44,7 @@ public class ComboView extends JPanel
         c.fill = GridBagConstraints.NONE;
         c.insets = new Insets(30, 0, 0, 0); // top padding
         c.gridx = 0; // aligned with button 2
-        c.gridy = 2; // third row        
+        c.gridy = 2; // third row
         add(start, c);
     }
 }

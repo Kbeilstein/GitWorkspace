@@ -25,49 +25,92 @@ public class QuadratischesSondieren extends Sondieren
     {
         // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
         // freie Plaetze enthaelt
-        if (!isFull())
+        if (isFull())
         {
-            // Anfangsposition des Hashwertes
-            int arrayPosition = wert % (arrayLaenge);
-            int i = 1;
+            logView.write("Array voll");
+        }
+        else if (search(wert) != -1)
+        {
+            logView.write(wert + " schon im Array vorhanden");
+        }
+        else
+        {
+            int addPosition = getAddPosition(wert);
 
-            // noch unbelegte Arraypositionen sind mit dem int Wert 0
-            // gekennzeichnet
-            // while Schleife wird nur bei Kollisionen durchlaufen
-            while (arrayModel.getArray()[arrayPosition] != 0 && i < arrayLaenge)
+            if (addPosition != -1)
             {
-                logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " + " + i + "^2");
-                arrayPosition = ((wert % arrayLaenge) + (i * i)) % arrayLaenge;
-                i++;
-            }
-
-            // falls das Sondieren bei einem nicht vollen Array keinen leeren
-            // Platz findet
-            if (i < arrayLaenge)
-            {
-                insArrayEintragen(arrayPosition, wert);
+                insArrayEintragen(getAddPosition(wert), wert);
             }
             else
             {
                 logView.write("FEHLER - Wert kann nicht eingefügt werden");
             }
         }
-        else
-        {
-            logView.write("Array voll");
-        }
+        logView.write("");
     }
 
     @Override
     public int search(int wert)
     {
-        return 0;
+        // mit -1 initialisiert, kennzeichnet "nicht gefunden"
+        int index = -1;
+
+        // Anfangsposition des Hashwertes
+        int arrayPosition = wert % (arrayLaenge);
+        // Wert um den "verschoben" wird
+        int i = 1;
+
+        int[] array = arrayModel.getArray();
+
+        // freie Arraypositionen sind mit dem int Wert 0 und -1
+        // gekennzeichnet
+        // falls nach so vielen Durchläufen wie der Arraylänge nichts gefunden
+        // wird, wird abgebrochen und ein -1 als Kenzeichnung zurück gegeben
+        while (array[arrayPosition] != 0 && i < arrayLaenge && array[arrayPosition] != wert)
+        {
+            arrayPosition = ((wert % arrayLaenge) + (i * i)) % arrayLaenge;
+            i++;
+        }
+
+        if (array[arrayPosition] == wert)
+        {
+            index = arrayPosition;
+        }
+        return index;
     }
 
     @Override
     public void delete(int wert)
     {
-        // TODO Auto-generated method stub
+        deleted(search(wert), wert);
+    }
 
+    private int getAddPosition(int wert)
+    {
+        // Anfangsposition des Hashwertes
+        int arrayPosition = wert % (arrayLaenge);
+        // Wert um den "verschoben" wird
+        int i = 1;
+
+        int[] array = arrayModel.getArray();
+
+        // freie Arraypositionen sind mit dem int Wert 0 und -1
+        // gekennzeichnet
+        // falls nach so vielen Durchläufen wie der Arraylänge nichts gefunden
+        // wird, wird abgebrochen und ein -1 als Kenzeichnung zurück gegeben
+        while (array[arrayPosition] != 0 && array[arrayPosition] != -1 && i < arrayLaenge)
+        {
+            logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " + " + i + "^2");
+            arrayPosition = ((wert % arrayLaenge) + (i * i)) % arrayLaenge;
+            i++;
+        }
+
+        // falls das Sondieren bei einem nicht vollen Array keinen leeren
+        // Platz findet
+        if (i >= arrayLaenge)
+        {
+            arrayPosition = -1;
+        }
+        return arrayPosition;
     }
 }

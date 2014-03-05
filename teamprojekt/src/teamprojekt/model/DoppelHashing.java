@@ -19,7 +19,7 @@ public class DoppelHashing extends Sondieren
         this.arrayLaenge = arrayModel.getLength();
     }
 
-    // / h(k) = k mod m
+    // h(k) = k mod m
     // h'(k) = 1 + k mod (m-2)
     // h(k), h(k)-h(k), h(k)-2*h(k), ... , h(k)-(m-1)*h(k)
     @Override
@@ -27,53 +27,95 @@ public class DoppelHashing extends Sondieren
     {
         // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
         // freie Plaetze enthaelt
-        if (!isFull())
+        if (isFull())
         {
-            // Anfangsposition des Hashwertes
-            int arrayPosition = wert % (arrayLaenge);
-            // Variablen um bei Kollision die Hashfunktion weiter zu zaehlen
-            int i = 1;
+            logView.write("Array voll");
+        }
+        else if (search(wert) != -1)
+        {
+            logView.write(wert + " schon im Array vorhanden");
+        }
+        else
+        {
+            int addPosition = getAddPosition(wert);
 
-            // noch unbelegte Arraypositionen sind mit dem int Wert 0
-            // gekennzeichnet
-            // while Schleife wird nur bei Kollisionen durchlaufen
-            while (arrayModel.getArray()[arrayPosition] != 0 && i < arrayLaenge)
+            if (addPosition != -1)
             {
-                logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Doppel-Hashing " + arrayPosition + " - " + i + " * (1 + " + wert + " mod " + (arrayLaenge - 2) + ")");
-                // Loesung um ein "-" bei modulo abzufangen
-                // (a % b + b) % b
-                arrayPosition = (((wert % arrayLaenge) - i * (1 + wert % (arrayLaenge - 2))) % arrayLaenge + arrayLaenge) % arrayLaenge;
-                i++;
-            }
-
-            // falls das Sondieren bei einem nicht vollen Array keinen leeren
-            // Platz findet
-            if (i < arrayLaenge)
-            {
-                insArrayEintragen(arrayPosition, wert);
+                insArrayEintragen(getAddPosition(wert), wert);
             }
             else
             {
                 logView.write("FEHLER - Wert kann nicht eingefügt werden");
             }
         }
-        else
-        {
-            // Ausgabe in die LogView bei vollem Array
-            logView.write("Array voll");
-        }
+        logView.write("");
     }
 
     @Override
     public int search(int wert)
     {
-        return 0;
+        // mit -1 initialisiert, kennzeichnet "nicht gefunden"
+        int index = -1;
+
+        // Anfangsposition des Hashwertes
+        int arrayPosition = wert % (arrayLaenge);
+        // Wert um den "verschoben" wird
+        int i = 1;
+
+        int[] array = arrayModel.getArray();
+
+        // freie Arraypositionen sind mit dem int Wert 0 und -1
+        // gekennzeichnet
+        // falls nach so vielen Durchläufen wie der Arraylänge nichts gefunden
+        // wird, wird abgebrochen und ein -1 als Kenzeichnung zurück gegeben
+        while (array[arrayPosition] != 0 && i < arrayLaenge && array[arrayPosition] != wert)
+        {
+            // Loesung um ein "-" bei modulo abzufangen
+            // (a % b + b) % b
+            arrayPosition = (((wert % arrayLaenge) - i * (1 + wert % (arrayLaenge - 2))) % arrayLaenge + arrayLaenge) % arrayLaenge;
+            i++;
+        }
+
+        if (array[arrayPosition] == wert)
+        {
+            index = arrayPosition;
+        }
+        return index;
     }
 
     @Override
     public void delete(int wert)
     {
-        // TODO Auto-generated method stub
+        deleted(search(wert), wert);
+    }
 
+    private int getAddPosition(int wert)
+    {
+        // Anfangsposition des Hashwertes
+        int arrayPosition = wert % (arrayLaenge);
+        // Variablen um bei Kollision die Hashfunktion weiter zu zaehlen
+        int i = 1;
+
+        int[] array = arrayModel.getArray();
+
+        // noch unbelegte Arraypositionen sind mit dem int Wert 0
+        // gekennzeichnet
+        // while Schleife wird nur bei Kollisionen durchlaufen
+        while (array[arrayPosition] != 0 && array[arrayPosition] != -1 && i < arrayLaenge)
+        {
+            logView.write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Doppel-Hashing " + arrayPosition + " - " + i + " * (1 + " + wert + " mod " + (arrayLaenge - 2) + ")");
+            // Loesung um ein "-" bei modulo abzufangen
+            // (a % b + b) % b
+            arrayPosition = (((wert % arrayLaenge) - i * (1 + wert % (arrayLaenge - 2))) % arrayLaenge + arrayLaenge) % arrayLaenge;
+            i++;
+        }
+
+        // falls das Sondieren bei einem nicht vollen Array keinen leeren
+        // Platz findet
+        if (i >= arrayLaenge)
+        {
+            arrayPosition = -1;
+        }
+        return arrayPosition;
     }
 }

@@ -36,6 +36,7 @@ public class ComboHashHandler implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        @SuppressWarnings("unchecked")
         JComboBox<String> cb = (JComboBox<String>) e.getSource();
         int index = cb.getSelectedIndex();
         switch (index)
