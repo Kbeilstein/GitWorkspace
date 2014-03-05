@@ -26,11 +26,11 @@ public class AddDeleteButtonHandler implements ActionListener
         JButton button = (JButton) e.getSource();
         if (!textBox.getText().isEmpty())
         {
-            if (button.getText().equals("add"))
+            if (button.getText().equals("hinzuf\u00fcgen"))
             {
                 sondieren.add(Integer.parseInt(textBox.getText()));
             }
-            if (button.getText().equals("delete"))
+            if (button.getText().equals("l\u00f6schen"))
             {
                 sondieren.delete(Integer.parseInt(textBox.getText()));
             }

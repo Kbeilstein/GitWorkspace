@@ -1,11 +1,11 @@
 package teamprojekt.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
@@ -29,16 +29,18 @@ public class MainView extends JPanel
     public void fill(ArrayModel arrayModel, LogView lv, Sondieren sond)
     {
         removeAll();
+
         ArrayView aView = new ArrayView(arrayModel.getArray());
         arrayModel.addListener(new ArrayViewListener(aView));
-        aView.setMinimumSize(new Dimension(100, 5));
 
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Array");
 
-        JButton addButton = new JButton("add");
-        JButton deleteButton = new JButton("delete");
+        JButton addButton = new JButton("hinzuf\u00FCgen");
+        JButton deleteButton = new JButton("l\u00f6schen");
 
+        JLabel textBoxLabel = new JLabel();
+        textBoxLabel.setText("Eingabe:");
         TextBoxView textBox = new TextBoxView();
         AddDeleteButtonHandler nextBHandler = new AddDeleteButtonHandler(textBox, sond);
         addButton.addActionListener(nextBHandler);
@@ -47,23 +49,27 @@ public class MainView extends JPanel
         lv.setEditable(false);
         lv.setAutoscrolls(true);
 
-        JScrollPane sp = new JScrollPane(lv);
-
         setLayout(null);
 
+        JScrollPane sp = new JScrollPane(lv);
         add(aView);
+
+        textBox.setColumns(2);
+        add(textBoxLabel);
         add(textBox);
         add(addButton);
         add(deleteButton);
+
         add(sp);
         setBorder(titleBorder1);
 
         Insets insets = getInsets();
-        aView.setBounds(40, 5, 400, 50);
-        textBox.setBounds(65, 60 + insets.top, 70, 20);
-        addButton.setBounds(165, 60 + insets.top, 70, 20);
-        deleteButton.setBounds(245, 60 + insets.top, 70, 20);
-        sp.setBounds(5 + insets.left, 90, 410, 200);
+        aView.setBounds(40, 15, 600, 50);
+        textBoxLabel.setBounds(35, 60 + insets.top, 50, 20);
+        textBox.setBounds(95, 60 + insets.top, 50, 20);
+        addButton.setBounds(75, 90 + insets.top, 100, 20);
+        deleteButton.setBounds(185, 90 + insets.top, 80, 20);
+        sp.setBounds(5 + insets.left, 130 + insets.top, 410, 200);
         updateUI();
     }
 }
