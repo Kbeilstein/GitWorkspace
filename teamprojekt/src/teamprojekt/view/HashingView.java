@@ -22,13 +22,16 @@ public class HashingView extends JFrame
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weightx = 1.0;
+        constraints.weighty = 1.0;
         constraints.insets = new Insets(10, 10, 10, 0);
 
         MainView panel = new MainView();
         add(new ComboView(panel), constraints);
-        setBackground(Color.white);        
-        constraints.gridx = 1; // GridBagConstraints.RELATIVE;
+        setBackground(Color.white);
+        constraints.gridx = GridBagConstraints.RELATIVE;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_END;
         constraints.gridheight = 3;
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.ipadx = 700;
@@ -38,6 +41,7 @@ public class HashingView extends JFrame
         // Variable um die Bildschirmbreite abzuspeichern
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setMinimumSize(new Dimension(990, 500));
+        setLocationRelativeTo(panel);
 
         // Fenstergröße dem Bildschirm entsprechend anpassen (Breite - 400, Höhe
         // - 200)

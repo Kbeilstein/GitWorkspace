@@ -11,7 +11,7 @@ public class QuadratischesSondieren extends Sondieren
 
     private int arrayLaenge;
 
-    private static final String name = "Quadratisches Sondieren";
+    private static final String NAME = "Quadratisches Sondieren";
 
     public QuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
@@ -119,6 +119,6 @@ public class QuadratischesSondieren extends Sondieren
     @Override
     public String getName()
     {
-        return name;
+        return NAME;
     }
 }

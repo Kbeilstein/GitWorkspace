@@ -18,15 +18,15 @@ import teamprojekt.model.Sondieren;
 @SuppressWarnings("serial")
 public class MainView extends JPanel
 {
-    private static final int firstRowHeight = 140;
+    private static final int FIRST_ROW_HEIGHT = 140;
 
-    private static final int secondRowHeight = 30;
+    private static final int SECOND_ROW_HEIGHT = 30;
 
-    private static final int firstRow = 15;
+    private static final int FIRST_ROW = 15;
 
-    private static final int secondRow = firstRowHeight + firstRow + 10;
+    private static final int SECOND_ROW = FIRST_ROW_HEIGHT + FIRST_ROW + 10;
 
-    private static final int thirdRow = secondRow + secondRowHeight;
+    private static final int THIRD_ROW = SECOND_ROW + SECOND_ROW_HEIGHT;
 
     public MainView()
     {
@@ -97,12 +97,12 @@ public class MainView extends JPanel
         setBorder(titleBorder1);
 
         Insets insets = getInsets();
-        aView.setBounds(10, firstRow, 660, firstRowHeight);
-        textBoxLabel.setBounds(30, secondRow + insets.top, 50, 20);
-        textBox.setBounds(90, secondRow + insets.top, 50, 20);
-        addButton.setBounds(155, secondRow + insets.top, 100, 20);
-        deleteButton.setBounds(265, secondRow + insets.top, 80, 20);
-        sp.setBounds(5 + insets.left, thirdRow + insets.top, 410, 220);
+        aView.setBounds(10, FIRST_ROW, 660, FIRST_ROW_HEIGHT);
+        textBoxLabel.setBounds(30, SECOND_ROW + insets.top, 50, 20);
+        textBox.setBounds(90, SECOND_ROW + insets.top, 50, 20);
+        addButton.setBounds(155, SECOND_ROW + insets.top, 100, 20);
+        deleteButton.setBounds(265, SECOND_ROW + insets.top, 80, 20);
+        sp.setBounds(5 + insets.left, THIRD_ROW + insets.top, 410, 220);
         updateUI();
     }
 }

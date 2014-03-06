@@ -11,7 +11,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
 
     private int arrayLaenge;
     
-    private static final String name = "alternierendes Quadratisches Sondieren";
+    private static final String NAME = "alternierendes Quadratisches Sondieren";
 
     public AlternierendesQuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
@@ -150,6 +150,6 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
     @Override
     public String getName()
     {
-        return name;
+        return NAME;
     }
 }

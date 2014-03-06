@@ -11,7 +11,7 @@ public class LinearesSondieren extends Sondieren
 
     private int arrayLaenge;
 
-    private static final String name = "lineares Sondieren";
+    private static final String NAME = "lineares Sondieren";
 
     public LinearesSondieren(ArrayModel arrayModel, LogView logView)
     {
@@ -99,6 +99,6 @@ public class LinearesSondieren extends Sondieren
     @Override
     public String getName()
     {
-        return name;
+        return NAME;
     }
 }
