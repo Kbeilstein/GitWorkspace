@@ -1,7 +1,10 @@
 package teamprojekt.view;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -14,19 +17,32 @@ public class HashingView extends JFrame
         super("Hasing");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        setLayout(new BorderLayout());
+        setLayout(new GridBagLayout());
         // Neue Views HIER anmelden
 
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(10, 10, 10, 0);
+
         MainView panel = new MainView();
-        add(new ComboView(panel), BorderLayout.WEST);
-        add(panel, BorderLayout.CENTER);
+        add(new ComboView(panel), constraints);
+        setBackground(Color.white);        
+        constraints.gridx = 1; // GridBagConstraints.RELATIVE;
+        constraints.gridheight = 3;
+        constraints.insets = new Insets(10, 10, 10, 10);
+        constraints.ipadx = 700;
+        constraints.ipady = 440;
+        add(panel, constraints);
 
         // Variable um die Bildschirmbreite abzuspeichern
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setMinimumSize(new Dimension(990, 500));
 
         // Fenstergröße dem Bildschirm entsprechend anpassen (Breite - 400, Höhe
         // - 200)
-        setSize((int) (screenSize.getWidth() - 400), (int) (screenSize.getHeight() - 200));
+        // setSize((int) (screenSize.getWidth() - 400), (int)
+        // (screenSize.getHeight() - 200));
         // Hauptfenster zentriert positionieren
         setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2));
         setVisible(true);
