@@ -21,6 +21,8 @@ public abstract class Sondieren
 
     public abstract void delete(int value);
 
+    public abstract String getName();
+
     protected void insArrayEintragen(int arrayPosition, int value)
     {
         // Ausgabe in die LogView

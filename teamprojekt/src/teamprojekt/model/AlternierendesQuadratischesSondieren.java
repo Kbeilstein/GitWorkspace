@@ -10,6 +10,8 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
     private LogView logView;
 
     private int arrayLaenge;
+    
+    private static final String name = "alternierendes Quadratisches Sondieren";
 
     public AlternierendesQuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
@@ -121,7 +123,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
             // wenn i und j gleich sind, wird + gerechnet
             if (i == j)
             {
-                logView.colQSi(wert, arrayPosition, arrayPosition, i);
+                logView.colQSi(wert, arrayPosition, arrayLaenge, i);
                 arrayPosition = ((wert % arrayLaenge) + i * i) % arrayLaenge;
                 i++;
             }
@@ -131,7 +133,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
             // naechsten Durchlauf wieder mit + gerechnet wird
             else
             {
-                logView.colQSj(wert, arrayPosition, arrayPosition, j);
+                logView.colQSj(wert, arrayPosition, arrayLaenge, j);
                 // Loesung um ein "-" bei modulo abzufangen
                 // (a % b + b) % b
                 arrayPosition = (((wert % arrayLaenge) - j * j) % arrayLaenge + arrayLaenge) % arrayLaenge;
@@ -143,5 +145,11 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
             arrayPosition = -1;
         }
         return arrayPosition;
+    }
+
+    @Override
+    public String getName()
+    {
+        return name;
     }
 }

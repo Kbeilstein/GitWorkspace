@@ -13,6 +13,8 @@ public class VerallgLinearesSondieren extends Sondieren
 
     private int c;
 
+    private static final String name = "Verallgemeinertes Lineares Sondieren";
+
     public VerallgLinearesSondieren(ArrayModel arrayModel, LogView logView)
     {
         super(arrayModel, logView);
@@ -111,5 +113,11 @@ public class VerallgLinearesSondieren extends Sondieren
             i++;
         }
         return arrayPosition;
+    }
+
+    @Override
+    public String getName()
+    {
+        return name;
     }
 }

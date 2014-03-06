@@ -10,6 +10,8 @@ public class DoppelHashing extends Sondieren
     private LogView logView;
 
     private int arrayLaenge;
+    
+    private static final String name = "Doppel Hashing";
 
     public DoppelHashing(ArrayModel arrayModel, LogView logView)
     {
@@ -117,5 +119,11 @@ public class DoppelHashing extends Sondieren
             arrayPosition = -1;
         }
         return arrayPosition;
+    }
+
+    @Override
+    public String getName()
+    {
+        return name;
     }
 }

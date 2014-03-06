@@ -16,7 +16,7 @@ import teamprojekt.control.StartButtonHandler;
 public class ComboView extends JPanel
 {
     final private String[] verfahren =
-    { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "altanierendes Quad. Sondieren", "Doppelthashing" };
+    { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "alternierendes Quad. Sondieren", "Doppelhashing" };
 
     public ComboView(MainView panel)
     {

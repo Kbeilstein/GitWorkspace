@@ -22,6 +22,16 @@ public class MainView extends JPanel
      */
     private static final long serialVersionUID = 1L;
 
+    private static final int firstRowHeight = 100;
+
+    private static final int secondRowHeight = 30;
+
+    private static final int firstRow = 15;
+
+    private static final int secondRow = firstRowHeight;
+
+    private static final int thirdRow = firstRowHeight + secondRowHeight;
+
     public MainView()
     {
     }
@@ -34,7 +44,7 @@ public class MainView extends JPanel
         arrayModel.addListener(new ArrayViewListener(aView));
 
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
-        Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Array");
+        Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, sond.getName() + " " + Character.toString('\u2013') + " Arraygröße " + arrayModel.getLength());
 
         JButton addButton = new JButton("hinzuf\u00FCgen");
         JButton deleteButton = new JButton("l\u00f6schen");
@@ -64,12 +74,12 @@ public class MainView extends JPanel
         setBorder(titleBorder1);
 
         Insets insets = getInsets();
-        aView.setBounds(40, 15, 600, 50);
-        textBoxLabel.setBounds(35, 60 + insets.top, 50, 20);
-        textBox.setBounds(95, 60 + insets.top, 50, 20);
-        addButton.setBounds(75, 90 + insets.top, 100, 20);
-        deleteButton.setBounds(185, 90 + insets.top, 80, 20);
-        sp.setBounds(5 + insets.left, 130 + insets.top, 410, 200);
+        aView.setBounds(10, firstRow, 620, firstRowHeight);
+        textBoxLabel.setBounds(30, secondRow + insets.top, 50, 20);
+        textBox.setBounds(90, secondRow + insets.top, 50, 20);
+        addButton.setBounds(155, secondRow + insets.top, 100, 20);
+        deleteButton.setBounds(265, secondRow + insets.top, 80, 20);
+        sp.setBounds(5 + insets.left, thirdRow + insets.top, 410, 200);
         updateUI();
     }
 }
