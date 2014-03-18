@@ -8,7 +8,7 @@ public class LogView extends JTextArea
     public LogView()
     {
         super();
-        setRows(12);
+        setRows(10);
     }
 
     public void write(String text)

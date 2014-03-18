@@ -30,9 +30,7 @@ class UndoRedoModel
     private Animator animThread;
 
     public UndoRedoModel()
-    {
-        start = 60;
-        end = 360;
+    {        
         this.listeners = new ArrayList<UndoRedoModelChangeListener>();
     }
 
@@ -46,23 +44,23 @@ class UndoRedoModel
         return end;
     }
 
-    public void setF(int start, int end)
+    public void setF(int startVal, int endVal)
     {
-        this.start = start;
-        this.end = end;
+        start = startVal;
+        end = endVal;
         for (UndoRedoModelChangeListener l : listeners)
         {
-            l.changedF(start, end);
+            l.changedF(startVal, endVal);
         }
     }
 
-    public void setF(int start, int end, boolean undo)
+    public void setF(int startVal, int endVal, boolean undo)
     {
-        this.start = start;
-        this.end = end;
+        start = startVal;
+        end = endVal;
         for (UndoRedoModelChangeListener l : listeners)
         {
-            l.changedF(start, end, undo);
+            l.changedF(startVal, endVal, undo);
         }
     }
 
@@ -76,9 +74,9 @@ class UndoRedoModel
         return animThread;
     }
 
-    public void addThread(Animator animThread)
+    public void addThread(Animator animThreadVal)
     {
-        this.animThread = animThread;
+        animThread = animThreadVal;
     }
 }
 
@@ -203,7 +201,7 @@ class UndoRedoSetAnimation extends UndoRedoSetAnimationX
 
     public void redo() throws CannotRedoException
     {
-        System.out.println("Undo: Start " + newStart + " End " + newEnd);
+        System.out.println("Redo: Start " + newStart + " End " + newEnd);
         model.setF(newStart, newEnd);
     }
 }
@@ -244,9 +242,11 @@ class UndoRedoListener extends XController implements ActionListener
         {
             int start = (int) (Math.random() * 1000 % 360);
             int end = (int) (Math.random() * 1000 % 360);
+            
+            System.out.println("Redo: Start " + start + " End " + end);
+            model.setF(start, end);
             UndoRedoSetAnimation command = new UndoRedoSetAnimation(model, start, end);
             manager.addEdit(command);
-            model.setF(start, end);
         }
         update();
     }
@@ -259,6 +259,8 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
 
     private int y = 50;
 
+    private int start;
+
     private int end;
 
     private boolean done;
@@ -266,8 +268,6 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
     private UndoRedoModel model;
 
     private boolean undo;
-
-    private int start;
 
     // private Color buttonBkgColor;
     //
@@ -343,27 +343,27 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
         done = false;
     }
 
-    public void setValues(int start, int end)
+    public void setValues(int startVal, int endVal)
     {
-        this.start = start;
-        this.xMotion = start;
-        this.end = end;
+        start = startVal;
+        xMotion = startVal;
+        end = endVal;
     }
 
     @Override
-    public void changedF(int start, int end)
+    public void changedF(int startVal, int endVal)
     {
-        this.undo = false;
-        change(start, end);
+        undo = false;
+        change(startVal, endVal);
     }
 
-    public void changedF(int start, int end, boolean undo)
+    public void changedF(int startVal, int endVal, boolean undoVal)
     {
-        this.undo = undo;
-        change(start, end);
+        undo = undoVal;
+        change(startVal, endVal);
     }
 
-    private void change(int start, int end)
+    private void change(int startVal, int endVal)
     {
         if (model.getThread() != null && model.getThread().isAlive())
         {
@@ -371,9 +371,9 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
         }
         Animator animThread = new Animator(this);
         model.addThread(animThread);
-        this.start = start;
-        this.xMotion = start;
-        this.end = end;
+        start = startVal;
+        xMotion = startVal;
+        end = endVal;
         animThread.start();
     }
 }
