@@ -4,41 +4,29 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
+import teamprojekt.model.Sondieren;
 import teamprojekt.view.ControlButtonsView;
 
 public class ControlButtonsListener implements MouseInputListener
 {
     private ControlButtonsView button;
 
-    public ControlButtonsListener(ControlButtonsView b)
+    private boolean backClicked;
+
+    private boolean playClicked;
+
+    private boolean nextClicked;
+
+    private Sondieren sondieren;
+
+    public ControlButtonsListener(ControlButtonsView b, Sondieren sond)
     {
-        this.button = b;
+        button = b;
+        sondieren = sond;
     }
 
     public void mouseClicked(MouseEvent e)
     {
-        // Clicked Back-Button
-        if (isBack(e))
-        {
-            System.out.println("Back");
-        }
-        // Clicked Play-Button
-        else if (isPlay(e))
-        {
-            System.out.println("Play/Stop");
-            button.setPlayOrStop();
-        }
-
-        // Clicked Next-Button
-        else if (isNext(e))
-        {
-            System.out.println("Next");
-        }
-        else
-        {
-            System.out.println("nein");
-        }
-
     }
 
     public void mouseEntered(MouseEvent e)
@@ -47,74 +35,104 @@ public class ControlButtonsListener implements MouseInputListener
 
     public void mouseExited(MouseEvent e)
     {
-        button.setBackColorButtonOff();
-        button.setPlayColorButtonOff();
-        button.setNextColorButtonOff();
+        button.setBackButtonOff();
+        button.setPlayButtonOff();
+        button.setNextButtonOff();
     }
 
     public void mousePressed(MouseEvent e)
     {
+        // Clicked Back-Button
+        if (isBack(e))
+        {
+            backClicked = true;
+            button.setBackButtonClicked();
+        }
+        // Clicked Play-Button
+        else if (isPlay(e))
+        {
+            playClicked = true;
+            button.setPlayOrStop();
+            button.setPlayButtonClicked();
+        }
+        // Clicked Next-Button
+        else if (isNext(e))
+        {
+            nextClicked = true;
+            sondieren.getArrayPosition(); 
+            button.setNextButtonClicked();
+        }
     }
 
     public void mouseReleased(MouseEvent e)
     {
+        backClicked = false;
+        playClicked = false;
+        nextClicked = false;
+        mouseMoved(e);
     }
 
     public void mouseDragged(MouseEvent e)
     {
-        // Clicked Back-Button Color
-        if (isBack(e))
-        {
-
-            button.setBackColorButtonOn();
-
-        }
-        // Clicked Play-Button Color
-        else if (isPlay(e))
-        {
-            button.setPlayColorButtonOn();
-        }
-
-        // Clicked Next-Button Color
-        else if (isNext(e))
-        {
-            button.setNextColorButtonOn();
-        }
-        // Set Buttons OFF
-        else
-        {
-            button.setBackColorButtonOff();
-            button.setPlayColorButtonOff();
-            button.setNextColorButtonOff();
-        }
+        mouseMoved(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e)
     {
         // Clicked Back-Button Color
-        if (isBack(e))
+        if (isBack(e) && backClicked)
         {
-            button.setBackColorButtonOn();
+            button.setBackButtonClicked();
+            button.setPlayButtonOff();
+            button.setNextButtonOff();
+        }
+        // Clicked Play-Button Color
+        else if (isPlay(e) && playClicked)
+        {
+            button.setPlayButtonClicked();
+            button.setBackButtonOff();
+            button.setNextButtonOff();
+        }
+
+        // Clicked Next-Button Color
+        else if (isNext(e) && nextClicked)
+        {
+            button.setNextButtonClicked();
+            button.setBackButtonOff();
+            button.setPlayButtonOff();
+        }
+
+        // Clicked Back-Button Color
+        else if (isBack(e))
+        {
+            button.setBackButtonOn();
+            button.setPlayButtonOff();
+            button.setNextButtonOff();
         }
         // Clicked Play-Button Color
         else if (isPlay(e))
         {
-            button.setPlayColorButtonOn();
+            button.setPlayButtonOn();
+            button.setBackButtonOff();
+            button.setNextButtonOff();
         }
 
         // Clicked Next-Button Color
         else if (isNext(e))
         {
-            button.setNextColorButtonOn();
+            button.setNextButtonOn();
+            button.setBackButtonOff();
+            button.setPlayButtonOff();
         }
         // Set Buttons OFF
         else
         {
-            button.setBackColorButtonOff();
-            button.setPlayColorButtonOff();
-            button.setNextColorButtonOff();
+            button.setBackButtonOff();
+            button.setPlayButtonOff();
+            button.setNextButtonOff();
         }
+
     }
 
     private boolean isBack(MouseEvent e)

@@ -120,4 +120,11 @@ public class VerallgLinearesSondieren extends Sondieren
     {
         return NAME;
     }
+
+    @Override
+    public int getArrayPosition()
+    {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }

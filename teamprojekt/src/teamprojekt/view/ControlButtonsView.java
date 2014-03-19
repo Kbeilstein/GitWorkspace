@@ -74,9 +74,9 @@ public class ControlButtonsView extends JPanel
     public ControlButtonsView()
     {
         playOrStop = true;
-        setBackColorButtonOff();
-        setPlayColorButtonOff();
-        setNextColorButtonOff();
+        setBackButtonOff();
+        setPlayButtonOff();
+        setNextButtonOff();
     }
 
     public void paintComponent(Graphics g)
@@ -133,49 +133,68 @@ public class ControlButtonsView extends JPanel
         {
             playOrStop = true;
         }
-        repaint();
     }
 
-    public void setBackColorButtonOn()
+    public void setBackButtonOn()
     {
         backButtonBackground = Color.LIGHT_GRAY;
         backButtonForeground = Color.white;
         repaint();
     }
 
-    public void setBackColorButtonOff()
+    public void setBackButtonOff()
     {
         backButtonBackground = Color.white;
         backButtonForeground = Color.LIGHT_GRAY;
         repaint();
     }
 
-    public void setPlayColorButtonOn()
+    public void setBackButtonClicked()
+    {
+        backButtonBackground = Color.gray;
+        backButtonForeground = Color.white;
+        repaint();
+    }
+
+    public void setPlayButtonOn()
     {
         playButtonBackground = Color.LIGHT_GRAY;
         playButtonForeground = Color.white;
         repaint();
     }
 
-    public void setPlayColorButtonOff()
+    public void setPlayButtonOff()
     {
         playButtonBackground = Color.white;
         playButtonForeground = Color.LIGHT_GRAY;
         repaint();
     }
 
-    public void setNextColorButtonOn()
+    public void setPlayButtonClicked()
+    {
+        playButtonBackground = Color.gray;
+        playButtonForeground = Color.white;
+        repaint();
+    }
+
+    public void setNextButtonOn()
     {
         nextButtonBackground = Color.LIGHT_GRAY;
         nextButtonForeground = Color.white;
         repaint();
     }
 
-    public void setNextColorButtonOff()
+    public void setNextButtonOff()
     {
         nextButtonBackground = Color.white;
         nextButtonForeground = Color.LIGHT_GRAY;
         repaint();
     }
 
+    public void setNextButtonClicked()
+    {
+        nextButtonBackground = Color.gray;
+        nextButtonForeground = Color.white;
+        repaint();
+    }
 }

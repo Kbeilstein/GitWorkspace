@@ -14,7 +14,7 @@ public class HashingView extends JFrame
 {
     public HashingView()
     {
-        super("Hasing");
+        super("Hashing");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setLayout(new GridBagLayout());
@@ -40,7 +40,7 @@ public class HashingView extends JFrame
 
         // Variable um die Bildschirmbreite abzuspeichern
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setMinimumSize(new Dimension(990, 530));
+        setMinimumSize(new Dimension(1280, 720));
         setLocationRelativeTo(panel);
 
         // Fenstergröße dem Bildschirm entsprechend anpassen (Breite - 400, Höhe

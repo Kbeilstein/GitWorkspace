@@ -23,6 +23,8 @@ public abstract class Sondieren
 
     public abstract String getName();
 
+    public abstract int getArrayPosition();
+
     protected void insArrayEintragen(int arrayPosition, int value)
     {
         // Ausgabe in die LogView
@@ -48,21 +50,17 @@ public abstract class Sondieren
     // kontrollfunktion, ob das Array noch freie Plätze enthält
     public boolean isFull()
     {
-        boolean full = false;
+        boolean full = true;
 
-        // das Array wird durchlaufen bis zum Ende und full auf "true" gesetzt
-        // oder der value 0 auftritt, welcher ein noch leere Arrayposition
-        // kennzeichnet
+        // das Array wird bis zum Ende durchlaufen, falls der Wert 0 oder -1
+        // auftritt, welcher eine noch leere Arrayposition kennzeichnet bricht
+        // die Schleife ab und full wird auf false gesetzt
         for (int value : array.getArray())
         {
             if (value == 0 || value == -1)
             {
                 full = false;
                 break;
-            }
-            else
-            {
-                full = true;
             }
         }
 

@@ -30,7 +30,7 @@ class UndoRedoModel
     private Animator animThread;
 
     public UndoRedoModel()
-    {        
+    {
         this.listeners = new ArrayList<UndoRedoModelChangeListener>();
     }
 
@@ -74,7 +74,7 @@ class UndoRedoModel
         return animThread;
     }
 
-    public void addThread(Animator animThreadVal)
+    public void setThread(Animator animThreadVal)
     {
         animThread = animThreadVal;
     }
@@ -216,17 +216,6 @@ class UndoRedoListener extends XController implements ActionListener
         this.model = model;
     }
 
-    /*
-     * public void actionPerformed(ActionEvent event) {
-     * if(event.getActionCommand().startsWith("Undo")) { if(manager.canUndo()) {
-     * manager.undo(); update(); } else { JOptionPane.showMessageDialog(null,
-     * "Kein Undo mehr möglich", "Warnung", JOptionPane.WARNING_MESSAGE); } }
-     * else if(event.getActionCommand().startsWith("Redo")) {
-     * if(manager.canRedo()) { manager.redo(); update(); } else {
-     * JOptionPane.showMessageDialog(null, "Kein Redo mehr möglich", "Warnung",
-     * JOptionPane.WARNING_MESSAGE); } } }
-     */
-
     public void actionPerformed(ActionEvent event)
     {
         JButton button = (JButton) event.getSource();
@@ -242,7 +231,7 @@ class UndoRedoListener extends XController implements ActionListener
         {
             int start = (int) (Math.random() * 1000 % 360);
             int end = (int) (Math.random() * 1000 % 360);
-            
+
             System.out.println("Redo: Start " + start + " End " + end);
             model.setF(start, end);
             UndoRedoSetAnimation command = new UndoRedoSetAnimation(model, start, end);
@@ -276,9 +265,6 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
     public AnimationPanel(UndoRedoModel model)
     {
         this.model = model;
-        start = 60;
-        xMotion = start;
-        end = xMotion;
         done = false;
         // nextButtonOff();
     }
@@ -296,6 +282,12 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
             g.drawLine(xMotion + 10, y - 5, end, y - 5);
             g.drawLine(end, y - 5, end, y - 15);
         }
+        // bei undo muss "rückwärts" gezeichnet werden
+        else if (start < end && undo && xMotion > start + 10)
+        {
+            g.drawLine(start, y - 5, xMotion - 10, y - 5);
+            g.drawLine(start, y - 5, start, y - 15);
+        }
 
         // von rechts nach links animieren
         else if (xMotion > end + 10 && !undo)
@@ -303,19 +295,22 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
             g.drawLine(xMotion - 10, y - 5, end, y - 5);
             g.drawLine(end, y - 5, end, y - 15);
         }
+        // bei undo muss "rückwärts" gezeichnet werden
         else if (start > end && undo && xMotion < start - 10)
         {
             g.drawLine(start, y - 5, xMotion + 10, y - 5);
             g.drawLine(start, y - 5, start, y - 15);
         }
-        else if (start < end && undo && xMotion > start + 10)
+
+        // Anfangs soll nichts gezeichnet werden
+        if (xMotion != 0)
         {
-            g.drawLine(start, y - 5, xMotion - 10, y - 5);
-            g.drawLine(start, y - 5, start, y - 15);
+            g.drawString("4", xMotion - 5, y);
         }
-        g.drawString("4", xMotion - 5, y);
     }
 
+    // Das eigentliche Animieren, von dem Thread wird diese Methode aufgerufen,
+    // solange bis die Endposition erreicht ist und done true ist
     public synchronized void next()
     {
         if (xMotion < end)
@@ -333,16 +328,20 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
         repaint();
     }
 
+    // gibt den Wert von done zurück, dient zur Kennzeichnung, ob eine Animation
+    // fertig ist
     public synchronized boolean done()
     {
         return done;
     }
 
+    // wird beim ersten Aufruf einer Animation aufgerufen
     public synchronized void setDoneFalse()
     {
         done = false;
     }
 
+    // Übergabe neuer Werte, die bei der Animation verwendet werden
     public void setValues(int startVal, int endVal)
     {
         start = startVal;
@@ -350,13 +349,16 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
         end = endVal;
     }
 
-    @Override
+    // wird vom ActionListener bei Änderungen ausgeführt, wenn redo oder next
+    // aufgerufen wurde
     public void changedF(int startVal, int endVal)
     {
         undo = false;
         change(startVal, endVal);
     }
 
+    // wird vom ActionListener bei Änderungen ausgeführt, wenn undo aufgerufen
+    // wurde
     public void changedF(int startVal, int endVal, boolean undoVal)
     {
         undo = undoVal;
@@ -370,7 +372,7 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
             model.getThread().interrupt();
         }
         Animator animThread = new Animator(this);
-        model.addThread(animThread);
+        model.setThread(animThread);
         start = startVal;
         xMotion = startVal;
         end = endVal;

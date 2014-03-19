@@ -9,7 +9,15 @@ public class LinearesSondieren extends Sondieren
 
     private LogView logView;
 
-    private int arrayLaenge;
+    private int arrayLength;
+
+    private int arrayPosition;
+
+    private int i;
+
+    private int[] array;
+
+    private int value;
 
     private static final String NAME = "lineares Sondieren";
 
@@ -18,13 +26,16 @@ public class LinearesSondieren extends Sondieren
         super(arrayModel, logView);
         this.arrayModel = arrayModel;
         this.logView = logView;
-        this.arrayLaenge = arrayModel.getLength();
+        this.arrayLength = arrayModel.getLength();
+        arrayPosition = -1;
     }
 
     public void add(int wert)
     {
         // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
         // freie Plaetze enthaelt
+        value = wert;
+
         if (isFull())
         {
             logView.full();
@@ -35,7 +46,16 @@ public class LinearesSondieren extends Sondieren
         }
         else
         {
-            insArrayEintragen(getAddPosition(wert), wert);
+            // Animation "starten"
+
+            // Anfangsposition des Hashwertes
+            arrayPosition = wert % arrayLength;
+            // Wert um den "verschoben" wird
+            i = 1;
+
+            array = arrayModel.getArray();
+
+            // nextArrayPosition();
         }
         logView.write("");
     }
@@ -49,17 +69,17 @@ public class LinearesSondieren extends Sondieren
         int index = -1;
 
         // Anfangsposition des Hashwertes
-        int arrayPosition = wert % arrayLaenge;
+        arrayPosition = wert % arrayLength;
         // Wert um den "verschoben" wird
-        int i = 1;
+        i = 1;
 
-        int[] array = arrayModel.getArray();
+        array = arrayModel.getArray();
 
         // solange nicht der Wert oder ein leere Platz (mit 0 gekennzeichnet)
         // auftritt läuft die while Schleife das ganze Array einmal durch
-        while (i < arrayLaenge && array[arrayPosition] != wert && array[arrayPosition] != 0 && array[arrayPosition] != wert)
+        while (i < arrayLength && array[arrayPosition] != wert && array[arrayPosition] != 0 && array[arrayPosition] != wert)
         {
-            arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
+            arrayPosition = ((wert % arrayLength) + i) % arrayLength;
             i++;
         }
 
@@ -76,29 +96,33 @@ public class LinearesSondieren extends Sondieren
         deleted(search(wert), wert);
     }
 
-    private int getAddPosition(int wert)
-    {
-        // Anfangsposition des Hashwertes
-        int arrayPosition = wert % arrayLaenge;
-        // Wert um den "verschoben" wird
-        int i = 1;
-
-        int[] array = arrayModel.getArray();
-
-        // freie Arraypositionen sind mit dem int Wert 0 und -1
-        // gekennzeichnet
-        while (array[arrayPosition] != 0 && array[arrayPosition] != -1)
-        {
-            logView.colLS(wert, arrayPosition, arrayLaenge, i);
-            arrayPosition = ((wert % arrayLaenge) + i) % arrayLaenge;
-            i++;
-        }
-        return arrayPosition;
-    }
-
     @Override
     public String getName()
     {
         return NAME;
+    }
+
+    public int getArrayPosition()
+    {
+        if (arrayPosition != -1)
+        {
+            nextArrayPosition();
+        }
+        return arrayPosition;
+    }
+
+    private void nextArrayPosition()
+    {
+        if (array[arrayPosition] != 0 && array[arrayPosition] != -1)
+        {
+            logView.colLS(value, arrayPosition, arrayLength, i);
+            arrayPosition = ((value % arrayLength) + i) % arrayLength;
+            i++;
+        }
+        else
+        {
+            insArrayEintragen(arrayPosition, value);
+            arrayPosition = -1;
+        }
     }
 }
