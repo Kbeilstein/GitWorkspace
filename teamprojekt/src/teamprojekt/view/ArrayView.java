@@ -119,8 +119,18 @@ public class ArrayView extends JPanel
 
     private void animation(Graphics g)
     {
+        
+    }
+    
+    public void start()
+    {
         updateValues();
-
+        animation = false;
+    }
+    
+    public boolean getAnimationDone()
+    {
+        return animation;
     }
 
     private void updateValues()
