@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import teamprojekt.model.Animator;
 import teamprojekt.model.ArrayModel;
 import teamprojekt.model.Sondieren;
 
@@ -14,8 +15,6 @@ import teamprojekt.model.Sondieren;
 public class ArrayView extends JPanel
 {
     private int[] array;
-
-    // private String title;
 
     private int length;
 
@@ -29,9 +28,27 @@ public class ArrayView extends JPanel
 
     private ArrayModel model;
 
+    // benötigt um die Animation auf der X-Achse zu steuern
     private int xMotion;
 
-    private boolean animation;
+    // Variable um dem Thread zu melden, das die Animation fertig ist
+    private boolean animationDone;
+
+    // um bei einer Animation ein spezielles Index-Feld rot zu zeichnen
+    private int collisionIndex;
+
+    // um bei einer Animation ein spezielles Index-Feld grün zu zeichnen
+    private int insertIndex;
+
+    private int endX;
+
+    private boolean isInsertPossible;
+
+    private boolean insertionDone;
+
+    private static final Color GREEN = new Color(90, 200, 100);
+
+    private static final Color RED = new Color(220, 70, 50);
 
     private static final Font INHALT_FONT = new Font("Verdana", Font.BOLD, 14);
 
@@ -49,6 +66,11 @@ public class ArrayView extends JPanel
         this.model = model;
         length = model.getLength();
 
+        collisionIndex = -1;
+        insertIndex = -1;
+
+        insertionDone = true;
+        animationDone = true;
     }
 
     public void paintComponent(Graphics g)
@@ -60,10 +82,6 @@ public class ArrayView extends JPanel
         int paddingX = startPaddingX;
 
         g2d.setColor(Color.BLACK);
-        // g.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
-        // g.setFont(new Font("Verdana", Font.BOLD, 12));
-        // g.drawString(title + " " + Character.toString('\u2013') +
-        // " Arraygröße " + length, 5, 17);
         g2d.setFont(INDEX_FONT);
         g2d.drawString("Index:", paddingX - 40, TOP_PADDING - 10);
 
@@ -85,7 +103,15 @@ public class ArrayView extends JPanel
             g2d.drawRect(paddingX, TOP_PADDING, 30, 30);
             // falls das Feld mit -1 gekennzeichnet ist, wird der Hintergrund
             // Orange gezeichnet ansonsten wird ein weißer Hintergrund verwendet
-            if (-1 == array[i])
+            if (i == insertIndex)
+            {
+                g2d.setColor(GREEN);
+            }
+            else if (i == collisionIndex)
+            {
+                g2d.setColor(RED);
+            }
+            else if (-1 == array[i])
             {
                 g2d.setColor(Color.ORANGE);
             }
@@ -111,38 +137,105 @@ public class ArrayView extends JPanel
             paddingX += 30;
         }
 
-        if (animation)
+        // bei Animation muss das zu Animierende Objekt gezeichnet werden
+        if (!insertionDone)
         {
             g.drawString(Integer.toString(value), xMotion, TOP_PADDING + 55);
         }
     }
 
-    private void animation(Graphics g)
+    public synchronized void animationNext()
     {
-        
+        if (xMotion < endX)
+        {
+            xMotion++;
+        }
+        else if (xMotion > endX)
+        {
+            xMotion--;
+        }
+        else
+        {
+            animationDone = true;
+            if (isInsertPossible)
+            {
+                insertIndex = endIndex;
+                collisionIndex = -1;
+            }
+            else
+            {
+                insertIndex = -1;
+                collisionIndex = endIndex;
+            }
+        }
+        repaint();
     }
-    
-    public void start()
+
+    public synchronized void animationInsert()
+    {
+        update();
+        if (isInsertPossible)
+        {
+            insertIndex = endIndex;
+            collisionIndex = -1;
+        }
+        else
+        {
+            insertIndex = -1;
+            collisionIndex = endIndex;
+        }
+        repaint();
+    }
+
+    public synchronized void animationUndo()
+    {
+
+    }
+
+    public synchronized void startAnimation()
+    {
+        update();
+        if (model.getThread() == null || !model.getThread().isAlive())
+        {
+            Animator animThread = new Animator(this);
+            model.setThread(animThread);
+            animThread.start();
+        }
+    }
+
+    private void update()
     {
         updateValues();
-        animation = false;
+        insertionDone = false;
+        animationDone = false;
+        repaint();
     }
-    
-    public boolean getAnimationDone()
+
+    public synchronized void animationDone()
     {
-        return animation;
+        insertionDone = true;
+        animationDone = true;
+        insertIndex = -1;
+        collisionIndex = -1;
+    }
+
+    public synchronized boolean getAnimationDone()
+    {
+        return animationDone;
     }
 
     private void updateValues()
     {
-        startIndex = model.getStart();
-        xMotion = getStartX();
-        endIndex = model.getEnd();
         value = model.getValue();
+        startIndex = model.getStart();
+        xMotion = getXPosition(startIndex);
+        endIndex = model.getEnd();
+        endX = getXPosition(endIndex);
+        isInsertPossible = model.getInsertPossible();
     }
 
-    private int getStartX()
+    private int getXPosition(int val)
     {
-        return (startIndex == 0 ? startIndex : startIndex * 30) + (value < 10 ? SPACE_SINGLE : SPACE) + startPaddingX;
+        return (val * 30 + (value < 10 ? SPACE_SINGLE : SPACE) + startPaddingX);
     }
 }

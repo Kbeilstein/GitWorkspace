@@ -2,6 +2,7 @@ package teamprojekt.model;
 
 import java.util.ArrayList;
 
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class ArrayModel
@@ -15,6 +16,10 @@ public class ArrayModel
     private int value;
 
     private ArrayList<ChangeListener> listeners;
+
+    private Thread animThread;
+
+    private boolean isInsertPossible;
 
     public ArrayModel(int length)
     {
@@ -43,14 +48,14 @@ public class ArrayModel
 
     public void setValueAt(int index, int val)
     {
-        array[index] = value;
-        fireAll();
+        array[index] = val;
+        fireAll("inserted");
     }
 
     public void delete(int index)
     {
         array[index] = -1;
-        fireAll();
+        fireAll("deleted");
     }
 
     public void addListener(ChangeListener l)
@@ -58,19 +63,38 @@ public class ArrayModel
         listeners.add(l);
     }
 
-    private void fireAll()
+    private void fireAll(String event)
     {
         for (ChangeListener listener : listeners)
         {
-            listener.stateChanged(null);
+            listener.stateChanged(new ChangeEvent(event));
         }
     }
 
-    public void setValues(int start, int end, int val)
+    public void setValues(int start, int end, int val, boolean insertPos)
     {
         startIndex = start;
         endIndex = end;
         value = val;
+        isInsertPossible = insertPos;
+        if (end == start)
+        {
+            fireAll("insert");
+        }
+        else
+        {
+            fireAll("animation");
+        }
+    }
+
+    public void setThread(Thread thread)
+    {
+        animThread = thread;
+    }
+
+    public Thread getThread()
+    {
+        return animThread;
     }
 
     public int getValue()
@@ -86,5 +110,10 @@ public class ArrayModel
     public int getEnd()
     {
         return endIndex;
+    }
+
+    public boolean getInsertPossible()
+    {
+        return isInsertPossible;
     }
 }

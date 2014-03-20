@@ -54,10 +54,9 @@ public class LinearesSondieren extends Sondieren
             i = 1;
 
             array = arrayModel.getArray();
-
+            arrayModel.setValues(arrayPosition, arrayPosition, wert, isInsertPossible());
             // nextArrayPosition();
         }
-        logView.write("");
     }
 
     // Durchsucht das Array, ob der Wert enthalten ist und gibt den Index zurück
@@ -87,6 +86,7 @@ public class LinearesSondieren extends Sondieren
         {
             index = arrayPosition;
         }
+        arrayPosition = -1;
         return index;
     }
 
@@ -104,25 +104,28 @@ public class LinearesSondieren extends Sondieren
 
     public int getArrayPosition()
     {
-        if (arrayPosition != -1)
-        {
-            nextArrayPosition();
-        }
         return arrayPosition;
     }
 
-    private void nextArrayPosition()
+    public void nextArrayPosition()
     {
-        if (array[arrayPosition] != 0 && array[arrayPosition] != -1)
-        {
-            logView.colLS(value, arrayPosition, arrayLength, i);
-            arrayPosition = ((value % arrayLength) + i) % arrayLength;
-            i++;
-        }
-        else
+        if (isInsertPossible())
         {
             insArrayEintragen(arrayPosition, value);
             arrayPosition = -1;
         }
+        else
+        {
+            int oldArrayPosition = arrayPosition;
+            logView.colLS(value, arrayPosition, arrayLength, i);
+            arrayPosition = ((value % arrayLength) + i) % arrayLength;
+            i++;
+            arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
+        }
+    }
+
+    public boolean isInsertPossible()
+    {
+        return !(array[arrayPosition] != 0 && array[arrayPosition] != -1);
     }
 }

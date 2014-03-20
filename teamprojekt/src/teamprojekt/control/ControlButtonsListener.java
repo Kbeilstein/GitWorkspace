@@ -59,7 +59,10 @@ public class ControlButtonsListener implements MouseInputListener
         else if (isNext(e))
         {
             nextClicked = true;
-            sondieren.getArrayPosition(); 
+            if (sondieren.getArrayPosition() != -1)
+            {
+                sondieren.nextArrayPosition();
+            } 
             button.setNextButtonClicked();
         }
     }

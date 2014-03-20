@@ -17,6 +17,22 @@ public class ArrayViewListener implements ChangeListener
     @Override
     public void stateChanged(ChangeEvent e)
     {
+        String eventText = (String) e.getSource();
+        if (eventText.equals("insert"))
+        {
+            aView.animationInsert();
+        }
+        else if (eventText.equals("inserted"))
+        {
+            aView.animationDone();
+        }
+        else if (eventText.equals("deleted"))
+        {
+        }
+        else if (eventText.equals("animation"))
+        {
+            aView.startAnimation();
+        }
         aView.repaint();
     }
 }

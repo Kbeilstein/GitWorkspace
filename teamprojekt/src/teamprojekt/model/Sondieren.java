@@ -44,7 +44,6 @@ public abstract class Sondieren
         {
             logView.unAvailable(value);
         }
-        logView.write("");
     }
 
     // kontrollfunktion, ob das Array noch freie Plätze enthält
@@ -65,5 +64,11 @@ public abstract class Sondieren
         }
 
         return full;
+    }
+
+    public void nextArrayPosition()
+    {
+        // TODO Auto-generated method stub
+        
     }
 }

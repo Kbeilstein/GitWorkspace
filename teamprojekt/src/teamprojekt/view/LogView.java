@@ -18,37 +18,37 @@ public class LogView extends JTextArea
 
     public void added(int value, int arrayPosition)
     {
-        write(value + " an Stelle " + arrayPosition + " vom Feld geschrieben");
+        write(value + " an Stelle " + arrayPosition + " vom Feld geschrieben\n");
     }
 
     public void deleted(int index, int value)
     {
-        write(value + " an Stelle " + index + " vom Feld gelöscht");
+        write(value + " an Stelle " + index + " vom Feld gelöscht\n");
     }
 
     public void available(int wert)
     {
-        write(wert + " schon im Array vorhanden");
+        write(wert + " schon im Array vorhanden\n");
     }
 
     public void unAvailable(int value)
     {
-        write(value + " im Array nicht vorhanden");
+        write(value + " im Array nicht vorhanden\n");
     }
 
     public void full()
     {
-        write("Array voll");
+        write("Array voll\n");
     }
 
     public void error()
     {
-        write("FEHLER - Wert kann nicht eingefügt werden");
+        write("FEHLER - Wert kann nicht eingefügt werden\n");
     }
 
     public void choosenC(int c)
     {
-        write("Fuer c wird " + c + " gewaehlt");
+        write("Fuer c wird " + c + " gewaehlt\n");
     }
 
     public void colLS(int wert, int arrayPosition, int arrayLaenge, int i)

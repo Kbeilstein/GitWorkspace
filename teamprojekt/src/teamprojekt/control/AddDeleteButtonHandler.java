@@ -24,7 +24,7 @@ public class AddDeleteButtonHandler implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         JButton button = (JButton) e.getSource();
-        if (!textBox.getText().isEmpty())
+        if (!textBox.getText().isEmpty() && sondieren.getArrayPosition() == -1)
         {
             if (button.getText().equals("hinzuf\u00fcgen"))
             {
