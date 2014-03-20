@@ -34,7 +34,7 @@ public class HashingView extends JFrame
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         constraints.gridheight = 3;
         constraints.insets = new Insets(10, 10, 10, 10);
-        constraints.ipadx = 700;
+        constraints.ipadx = 980;
         constraints.ipady = 520;
         add(panel, constraints);
 

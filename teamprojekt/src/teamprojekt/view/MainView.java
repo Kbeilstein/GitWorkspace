@@ -19,7 +19,7 @@ import teamprojekt.model.Sondieren;
 @SuppressWarnings("serial")
 public class MainView extends JPanel
 {
-    private static final int FIRST_ROW_HEIGHT = 140;
+    private static final int FIRST_ROW_HEIGHT = 160;
 
     private static final int SECOND_ROW_HEIGHT = 30;
 
@@ -107,7 +107,7 @@ public class MainView extends JPanel
         setBorder(titleBorder1);
 
         Insets insets = getInsets();
-        aView.setBounds((this.getWidth() - 10 - 660) / 2, FIRST_ROW, 660, FIRST_ROW_HEIGHT);
+        aView.setBounds((this.getWidth() - 10 - 900) / 2, FIRST_ROW, 900, FIRST_ROW_HEIGHT);
         cbView.setBounds((this.getWidth() - 10 - 150) / 2, SECOND_ROW - 10, 150, 50);
         pane.setBounds((this.getWidth() - 10 - 400) / 2, SECOND_ROW + 60, 400, 20);
         textBoxLabel.setBounds(24, 0, 50, 20);

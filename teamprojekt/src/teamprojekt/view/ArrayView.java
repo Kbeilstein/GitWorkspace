@@ -50,15 +50,19 @@ public class ArrayView extends JPanel
 
     private static final Color RED = new Color(220, 70, 50);
 
-    private static final Font INHALT_FONT = new Font("Verdana", Font.BOLD, 14);
+    private static final Font INHALT_FONT = new Font("Verdana", Font.BOLD, 16);
 
-    private static final Font INDEX_FONT = new Font("Verdana", Font.PLAIN, 12);
+    private static final Font INDEX_FONT = new Font("Verdana", Font.PLAIN, 14);
 
-    private static final int SPACE = 5;
+    private static final int SPACE = 9;
 
-    private static final int SPACE_SINGLE = SPACE + 5;
+    private static final int SPACE_SINGLE = SPACE + 7;
 
     private static final int TOP_PADDING = 60;
+
+    private static final int RECT_PADDING = 40;
+
+    private static final int RECT_SIZE = 40;
 
     public ArrayView(ArrayModel model, Sondieren sond)
     {
@@ -78,12 +82,12 @@ public class ArrayView extends JPanel
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        startPaddingX = this.getWidth() / 2 - (length * 15);
+        startPaddingX = this.getWidth() / 2 - (length * RECT_SIZE / 2);
         int paddingX = startPaddingX;
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(INDEX_FONT);
-        g2d.drawString("Index:", paddingX - 40, TOP_PADDING - 10);
+        g2d.drawString("Index:", paddingX - 50, TOP_PADDING - 10);
 
         for (int i = 0; i < array.length; i++)
         {
@@ -100,7 +104,7 @@ public class ArrayView extends JPanel
             g2d.setFont(INHALT_FONT);
 
             // Rechtecke zeichnen, schwarzer Rand
-            g2d.drawRect(paddingX, TOP_PADDING, 30, 30);
+            g2d.drawRect(paddingX, TOP_PADDING, RECT_SIZE, RECT_SIZE);
             // falls das Feld mit -1 gekennzeichnet ist, wird der Hintergrund
             // Orange gezeichnet ansonsten wird ein weißer Hintergrund verwendet
             if (i == insertIndex)
@@ -119,28 +123,28 @@ public class ArrayView extends JPanel
             {
                 g2d.setColor(Color.WHITE);
             }
-            g2d.fillRect(paddingX + 1, TOP_PADDING + 1, 29, 29);
+            g2d.fillRect(paddingX + 1, TOP_PADDING + 1, RECT_SIZE - 1, RECT_SIZE - 1);
             g2d.setColor(Color.BLACK);
 
             // Unterscheidung ob die einzufügende Zahl einstellig oder
             // zweistellig ist um eine mittige Positionierung zu erreichen
             if (0 < array[i] && array[i] < 10)
             {
-                g2d.drawString(Integer.toString(array[i]), SPACE_SINGLE + paddingX, TOP_PADDING + 20);
+                g2d.drawString(Integer.toString(array[i]), SPACE_SINGLE + paddingX, TOP_PADDING + 26);
 
             }
             else if (9 < array[i] && array[i] < 100)
             {
-                g2d.drawString(Integer.toString(array[i]), SPACE + paddingX, TOP_PADDING + 20);
+                g2d.drawString(Integer.toString(array[i]), SPACE + paddingX, TOP_PADDING + 26);
             }
 
-            paddingX += 30;
+            paddingX += RECT_PADDING;
         }
 
         // bei Animation muss das zu Animierende Objekt gezeichnet werden
         if (!insertionDone)
         {
-            g.drawString(Integer.toString(value), xMotion, TOP_PADDING + 55);
+            g.drawString(Integer.toString(value), xMotion, TOP_PADDING + 70);
         }
     }
 
@@ -236,6 +240,6 @@ public class ArrayView extends JPanel
 
     private int getXPosition(int val)
     {
-        return (val * 30 + (value < 10 ? SPACE_SINGLE : SPACE) + startPaddingX);
+        return (val * RECT_PADDING + (value < 10 ? SPACE_SINGLE : SPACE) + startPaddingX);
     }
 }
