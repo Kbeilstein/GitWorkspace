@@ -32,7 +32,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
         {
             logView.full();
         }
-        else if (search(wert) != -1)
+        else if (arrayModel.isAvailable(wert))
         {
             logView.available(wert);
         }
@@ -53,7 +53,7 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
     }
 
     @Override
-    public int search(int wert)
+    public void search(int wert)
     {
         // mit -1 initialisiert, kennzeichnet "nicht gefunden"
         int index = -1;
@@ -95,13 +95,12 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
         {
             index = arrayPosition;
         }
-        return index;
     }
 
     @Override
     public void delete(int wert)
     {
-        deleted(search(wert), wert);
+        // deleted(search(wert), wert);
     }
 
     private int getAddPosition(int wert)

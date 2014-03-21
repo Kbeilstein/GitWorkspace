@@ -19,6 +19,8 @@ public class LinearesSondieren extends Sondieren
 
     private int value;
 
+    private int index;
+
     private static final String NAME = "lineares Sondieren";
 
     public LinearesSondieren(ArrayModel arrayModel, LogView logView)
@@ -30,71 +32,103 @@ public class LinearesSondieren extends Sondieren
         arrayPosition = -1;
     }
 
-    public void add(int wert)
+    public void add(int val)
     {
         // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
         // freie Plaetze enthaelt
-        value = wert;
+        value = val;
 
         if (isFull())
         {
             logView.full();
         }
-        else if (search(wert) != -1)
+        else if (arrayModel.isAvailable(value))
         {
-            logView.available(wert);
+            logView.available(value);
         }
         else
         {
             // Animation "starten"
 
             // Anfangsposition des Hashwertes
-            arrayPosition = wert % arrayLength;
+            arrayPosition = val % arrayLength;
             // Wert um den "verschoben" wird
             i = 1;
 
             array = arrayModel.getArray();
-            arrayModel.setValues(arrayPosition, arrayPosition, wert, isInsertPossible());
+            arrayModel.setValues(arrayPosition, arrayPosition, value, isInsertPossible());
             // nextArrayPosition();
-            logView.write(wert + " soll auf Arrayposition " + arrayPosition + " eingefügt werden");
+            logView.write(value + " soll auf Arrayposition " + arrayPosition + " eingefügt werden");
         }
     }
 
     // Durchsucht das Array, ob der Wert enthalten ist und gibt den Index zurück
     // falls nicht enthalten wird -1 zurück gegeben
     @Override
-    public int search(int wert)
+    public void search(int val)
     {
         // mit -1 initialisiert, kennzeichnet "nicht gefunden"
-        int index = -1;
+        index = -1;
+        value = val;
 
         // Anfangsposition des Hashwertes
-        arrayPosition = wert % arrayLength;
+        arrayPosition = val % arrayLength;
         // Wert um den "verschoben" wird
         i = 1;
 
         array = arrayModel.getArray();
 
+        arrayModel.setValuesSearch(arrayPosition, arrayPosition, value, isFound());
+        logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
+
         // solange nicht der Wert oder ein leere Platz (mit 0 gekennzeichnet)
         // auftritt läuft die while Schleife das ganze Array einmal durch
-        while (i < arrayLength && array[arrayPosition] != wert && array[arrayPosition] != 0 && array[arrayPosition] != wert)
-        {
-            arrayPosition = ((wert % arrayLength) + i) % arrayLength;
-            i++;
-        }
 
-        if (array[arrayPosition] == wert)
+    }
+
+    public void nextSearchPosition()
+    {
+        if (isFound())
         {
             index = arrayPosition;
+            arrayModel.valueFound();
+            logView.write(value + " an Arrayposition " + arrayPosition + "  gefunden\n");
+            arrayPosition = -1;
+            if (super.getInsertSearchDelete().equals("delete"))
+            {
+                deleted(index, value);
+            }
         }
-        arrayPosition = -1;
-        return index;
+        else if (!isFound() && i < arrayLength && array[arrayPosition] != 0)
+        {
+            int oldArrayPosition = arrayPosition;
+            arrayPosition = ((value % arrayLength) + i) % arrayLength;
+            // logView.collisionLinearesSondieren(value, arrayPosition,
+            // arrayLength, i);
+            i++;
+            logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
+            arrayModel.setValuesSearch(oldArrayPosition, arrayPosition, value, isFound());
+        }
+        else
+        {
+            arrayModel.valueNotFound();
+            if (array[arrayPosition] == 0)
+            {
+                logView.write(value + " nicht gefunden\n");
+            }
+            else
+            {
+                logView.write(value + " nicht gefunden, aber einmal durchlaufen\n");
+            }
+            index = -1;
+            arrayPosition = -1;
+        }
     }
 
     @Override
-    public void delete(int wert)
+    public void delete(int val)
     {
-        deleted(search(wert), wert);
+        search(val);// deleted(search(wert), wert);;
     }
 
     @Override
@@ -108,7 +142,7 @@ public class LinearesSondieren extends Sondieren
         return arrayPosition;
     }
 
-    public void nextArrayPosition()
+    public void nextInsertPosition()
     {
         if (isInsertPossible())
         {
@@ -118,8 +152,8 @@ public class LinearesSondieren extends Sondieren
         else
         {
             int oldArrayPosition = arrayPosition;
-            logView.colLinSond(value, arrayPosition, arrayLength, i);
             arrayPosition = ((value % arrayLength) + i) % arrayLength;
+            logView.collisionLinearesSondieren(value, arrayPosition, arrayLength, i);
             i++;
             arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
         }
@@ -129,4 +163,10 @@ public class LinearesSondieren extends Sondieren
     {
         return !(array[arrayPosition] != 0 && array[arrayPosition] != -1);
     }
+
+    public boolean isFound()
+    {
+        return (array[arrayPosition] == value);
+    }
+
 }

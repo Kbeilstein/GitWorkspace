@@ -18,21 +18,35 @@ public class ArrayViewListener implements ChangeListener
     public void stateChanged(ChangeEvent e)
     {
         String eventText = (String) e.getSource();
+        // beim hinzufügen wird als erstes das aktuelle Feld "geprüft"
         if (eventText.equals("insert"))
         {
             aView.animationInsert();
         }
-        else if (eventText.equals("inserted"))
+        else if (eventText.equals("deleted"))
         {
             aView.animationDone();
         }
-        else if (eventText.equals("deleted"))
+        // startet die Animation des Wertes unterhalb des Arrays
+        else if (eventText.equals("animationInsert"))
         {
+            aView.startAnimation("insert");
         }
-        else if (eventText.equals("animation"))
+        else if (eventText.equals("animationSearch"))
         {
-            aView.startAnimation();
+            aView.startAnimation("search");
         }
+        else if (eventText.equals("search"))
+        {
+            aView.animationSearch();
+        }
+        // Wert wurde eingefügt, alle Animationen werden "gestoppt" und die
+        // Werte zur Animationssteuerung zurückgesetzt
+        else
+        {
+            aView.animationDone();
+        }
+
         aView.repaint();
     }
 }

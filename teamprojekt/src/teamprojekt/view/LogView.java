@@ -48,12 +48,12 @@ public class LogView extends JTextArea
 
     public void choosenC(int c)
     {
-        write("Fuer c wird " + c + " gewaehlt\n");
+        write("Fuer c wird " + c + " gewählt\n");
     }
 
-    public void colLinSond(int wert, int arrayPosition, int arrayLaenge, int i)
+    public void collisionLinearesSondieren(int wert, int arrayPosition, int arrayLaenge, int i)
     {
-        write("Kollision \u2192 Lineares Sondieren " + wert + " auf Feldposition " + arrayPosition + " " + (wert % arrayLaenge) + " + " + i);
+        write("Kollision \u2192 Lineares Sondieren (Formel): " + (wert % arrayLaenge) + " + " + i + " mod " + arrayLaenge + " = " + arrayPosition + " \u2192 " + wert + " soll auf Feldposition " + arrayPosition + " eingefügt werden");
     }
 
     public void colErwLS(int wert, int arrayPosition, int arrayLaenge, int c, int i)

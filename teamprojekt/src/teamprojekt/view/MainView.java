@@ -43,6 +43,7 @@ public class MainView extends JPanel
         arrayModel.addListener(new ArrayViewListener(aView));
 
         JButton addButton = new JButton("hinzuf\u00FCgen");
+        JButton searchButton = new JButton("suchen");
         JButton deleteButton = new JButton("l\u00f6schen");
 
         JLabel textBoxLabel = new JLabel();
@@ -50,9 +51,10 @@ public class MainView extends JPanel
         TextBoxView textBox = new TextBoxView();
         AddDeleteButtonHandler nextBHandler = new AddDeleteButtonHandler(textBox, sond);
         addButton.addActionListener(nextBHandler);
+        searchButton.addActionListener(nextBHandler);
         deleteButton.addActionListener(nextBHandler);
         lv.setEditable(false);
-        lv.setAutoscrolls(true);
+        lv.setAutoscrolls(true);        
 
         // setLayout(null);
         // GridBagConstraints constraints = new GridBagConstraints();
@@ -69,6 +71,7 @@ public class MainView extends JPanel
         // constraints.ipady = 180;
 
         JScrollPane sp = new JScrollPane(lv);
+        sp.setAutoscrolls(true);
         add(aView);
         // add(aView, constraints);
         // constraints = new GridBagConstraints();
@@ -84,6 +87,7 @@ public class MainView extends JPanel
         // add(textBox, constraints);
         // constraints.gridx = 3;
         pane.add(addButton);
+        pane.add(searchButton);
         // add(addButton, constraints);
         // constraints.gridx = 4;
         pane.add(deleteButton);
@@ -109,11 +113,12 @@ public class MainView extends JPanel
         Insets insets = getInsets();
         aView.setBounds((this.getWidth() - 10 - 900) / 2, FIRST_ROW, 900, FIRST_ROW_HEIGHT);
         cbView.setBounds((this.getWidth() - 10 - 150) / 2, SECOND_ROW - 10, 150, 50);
-        pane.setBounds((this.getWidth() - 10 - 400) / 2, SECOND_ROW + 60, 400, 20);
+        pane.setBounds((this.getWidth() - 10 - 500) / 2, SECOND_ROW + 60, 500, 20);
         textBoxLabel.setBounds(24, 0, 50, 20);
         textBox.setBounds(80, 1, 50, 20);
         addButton.setBounds(155, 0, 100, 20);
-        deleteButton.setBounds(265, 0, 80, 20);
+        searchButton.setBounds(265,0,80,20);
+        deleteButton.setBounds(355, 0, 80, 20);
         sp.setBounds((this.getWidth() - 10 - (this.getWidth() - 40)) / 2 + insets.left, THIRD_ROW + insets.top + 55, this.getWidth() - 40, 190);
         updateUI();
     }

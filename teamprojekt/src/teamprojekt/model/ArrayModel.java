@@ -21,6 +21,8 @@ public class ArrayModel
 
     private boolean isInsertPossible;
 
+    private boolean valueFound;
+
     public ArrayModel(int length)
     {
         array = new int[length];
@@ -83,8 +85,34 @@ public class ArrayModel
         }
         else
         {
-            fireAll("animation");
+            fireAll("animationInsert");
         }
+    }
+
+    public void setValuesSearch(int start, int end, int val, boolean found)
+    {
+        startIndex = start;
+        endIndex = end;
+        value = val;
+        valueFound = found;
+        if (end == start)
+        {
+            fireAll("search");
+        }
+        else
+        {
+            fireAll("animationSearch");
+        }
+    }
+
+    public void valueFound()
+    {
+        fireAll("found");
+    }
+
+    public void valueNotFound()
+    {
+        fireAll("not found");
     }
 
     public void setThread(Thread thread)
@@ -115,5 +143,34 @@ public class ArrayModel
     public boolean getInsertPossible()
     {
         return isInsertPossible;
+    }
+
+    public boolean getValueFound()
+    {
+        return valueFound;
+    }
+
+    public int getValueAt(int index)
+    {
+        int dummy = 100;
+        if (index < array.length)
+        {
+            dummy = array[index];
+        }
+        return dummy;
+    }
+
+    public boolean isAvailable(int val)
+    {
+        boolean dummy = false;
+        for (int arrayVal : array)
+        {
+            if (arrayVal == val)
+            {
+                dummy = true;
+                break;
+            }
+        }
+        return dummy;
     }
 }

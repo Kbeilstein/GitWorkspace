@@ -9,6 +9,8 @@ public abstract class Sondieren
 
     private LogView logView;
 
+    private String insertSearchDelete;
+
     public Sondieren(ArrayModel arrayModel, LogView logView)
     {
         this.array = arrayModel;
@@ -17,7 +19,7 @@ public abstract class Sondieren
 
     public abstract void add(int value);
 
-    public abstract int search(int value);
+    public abstract void search(int value);
 
     public abstract void delete(int value);
 
@@ -25,7 +27,7 @@ public abstract class Sondieren
 
     public abstract int getArrayPosition();
 
-    protected void insArrayEintragen(int arrayPosition, int value)
+    public void insArrayEintragen(int arrayPosition, int value)
     {
         // Ausgabe in die LogView
         logView.added(value, arrayPosition);
@@ -66,9 +68,25 @@ public abstract class Sondieren
         return full;
     }
 
-    public void nextArrayPosition()
+    public void nextInsertPosition()
     {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    public void setInsertSearchDelete(String newVal)
+    {
+        insertSearchDelete = newVal;
+    }
+
+    public String getInsertSearchDelete()
+    {
+        return insertSearchDelete;
+    }
+
+    public void nextSearchPosition()
+    {
+        // TODO Auto-generated method stub
+
     }
 }

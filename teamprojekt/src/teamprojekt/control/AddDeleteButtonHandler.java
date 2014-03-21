@@ -28,10 +28,19 @@ public class AddDeleteButtonHandler implements ActionListener
         {
             if (button.getText().equals("hinzuf\u00fcgen"))
             {
+                sondieren.setInsertSearchDelete("insert");
                 sondieren.add(Integer.parseInt(textBox.getText()));
             }
+            
+            if (button.getText().equals("suchen"))
+            {
+                sondieren.setInsertSearchDelete("search");
+                sondieren.search(Integer.parseInt(textBox.getText()));                
+            }
+            
             if (button.getText().equals("l\u00f6schen"))
             {
+                sondieren.setInsertSearchDelete("delete");
                 sondieren.delete(Integer.parseInt(textBox.getText()));
             }
         }

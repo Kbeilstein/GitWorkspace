@@ -46,6 +46,16 @@ public class ArrayView extends JPanel
 
     private boolean insertionDone;
 
+    private String insertSearchDelete;
+
+    private int foundIndex;
+
+    private boolean isFound;
+
+    private boolean searchDone;
+
+    private int notFoundIndex;
+
     private static final Color GREEN = new Color(90, 200, 100);
 
     private static final Color RED = new Color(220, 70, 50);
@@ -72,7 +82,10 @@ public class ArrayView extends JPanel
 
         collisionIndex = -1;
         insertIndex = -1;
+        foundIndex = -1;
+        notFoundIndex = -1;
 
+        searchDone = true;
         insertionDone = true;
         animationDone = true;
     }
@@ -114,6 +127,14 @@ public class ArrayView extends JPanel
             else if (i == collisionIndex)
             {
                 g2d.setColor(RED);
+            }
+            else if (i == foundIndex)
+            {
+                g2d.setColor(GREEN);// REDColor.CYAN);
+            }
+            else if (i == notFoundIndex)
+            {
+                g2d.setColor(RED);// Color.MAGENTA);
             }
             else if (-1 == array[i])
             {
@@ -160,17 +181,35 @@ public class ArrayView extends JPanel
         }
         else
         {
-            animationDone = true;
-            if (isInsertPossible)
+            animationDone = true;            
+            if (insertSearchDelete.equals("insert"))
             {
-                insertIndex = endIndex;
-                collisionIndex = -1;
+                if (isInsertPossible)
+                {
+                    insertIndex = endIndex;
+                    collisionIndex = -1;
+                }
+                else
+                {
+                    insertIndex = -1;
+                    collisionIndex = endIndex;
+                }
+
             }
-            else
+            else if (insertSearchDelete.equals("search"))
             {
-                insertIndex = -1;
-                collisionIndex = endIndex;
+                if (isFound)
+                {
+                    foundIndex = endIndex;
+                    notFoundIndex = -1;
+                }
+                else
+                {
+                    foundIndex = -1;
+                    notFoundIndex = endIndex;
+                }
             }
+
         }
         repaint();
     }
@@ -196,8 +235,9 @@ public class ArrayView extends JPanel
 
     }
 
-    public synchronized void startAnimation()
+    public synchronized void startAnimation(String insSearchDel)
     {
+        insertSearchDelete = insSearchDel;
         update();
         if (model.getThread() == null || !model.getThread().isAlive())
         {
@@ -212,15 +252,20 @@ public class ArrayView extends JPanel
         updateValues();
         insertionDone = false;
         animationDone = false;
+        searchDone = false;
         repaint();
     }
 
     public synchronized void animationDone()
     {
         insertionDone = true;
+        searchDone = true;
         animationDone = true;
         insertIndex = -1;
         collisionIndex = -1;
+        foundIndex = -1;
+        notFoundIndex = -1;
+        repaint();
     }
 
     public synchronized boolean getAnimationDone()
@@ -236,10 +281,26 @@ public class ArrayView extends JPanel
         endIndex = model.getEnd();
         endX = getXPosition(endIndex);
         isInsertPossible = model.getInsertPossible();
+        isFound = model.getValueFound();
     }
 
     private int getXPosition(int val)
     {
         return (val * RECT_PADDING + (value < 10 ? SPACE_SINGLE : SPACE) + startPaddingX);
+    }
+
+    public synchronized void animationSearch()
+    {
+        update();
+        if (isFound)
+        {
+            foundIndex = endIndex;
+            notFoundIndex = -1;
+        }
+        else
+        {
+            foundIndex = -1;
+            notFoundIndex = endIndex;
+        }
     }
 }
