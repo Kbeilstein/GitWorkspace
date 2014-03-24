@@ -7,9 +7,10 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import teamprojekt.model.Animator;
+import teamprojekt.model.AnimatorThread;
 import teamprojekt.model.ArrayModel;
 import teamprojekt.model.Sondieren;
+import teamprojekt.model.StartNextThread;
 
 @SuppressWarnings("serial")
 public class ArrayView extends JPanel
@@ -56,6 +57,8 @@ public class ArrayView extends JPanel
 
     private int notFoundIndex;
 
+    private Sondieren sond;
+
     private static final Color GREEN = new Color(90, 200, 100);
 
     private static final Color RED = new Color(220, 70, 50);
@@ -76,6 +79,7 @@ public class ArrayView extends JPanel
 
     public ArrayView(ArrayModel model, Sondieren sond)
     {
+        this.sond = sond;
         array = model.getArray();
         this.model = model;
         length = model.getLength();
@@ -181,7 +185,7 @@ public class ArrayView extends JPanel
         }
         else
         {
-            animationDone = true;            
+            animationDone = true;
             if (insertSearchDelete.equals("insert"))
             {
                 if (isInsertPossible)
@@ -228,6 +232,13 @@ public class ArrayView extends JPanel
             collisionIndex = endIndex;
         }
         repaint();
+        startNext();
+    }
+
+    public void animationSetInserted()
+    {
+        insertionDone = true;
+        animationDone();
     }
 
     public synchronized void animationUndo()
@@ -239,12 +250,14 @@ public class ArrayView extends JPanel
     {
         insertSearchDelete = insSearchDel;
         update();
-        if (model.getThread() == null || !model.getThread().isAlive())
+        AnimatorThread animThread = (AnimatorThread) model.getThread();
+        if (animThread != null && animThread.isAlive())
         {
-            Animator animThread = new Animator(this);
-            model.setThread(animThread);
-            animThread.start();
+            animThread.interrupt();
         }
+        animThread = new AnimatorThread(this);
+        model.setThread(animThread);
+        animThread.start();
     }
 
     private void update()
@@ -258,7 +271,7 @@ public class ArrayView extends JPanel
 
     public synchronized void animationDone()
     {
-        insertionDone = true;
+        // insertionDone = true;
         searchDone = true;
         animationDone = true;
         insertIndex = -1;
@@ -266,6 +279,7 @@ public class ArrayView extends JPanel
         foundIndex = -1;
         notFoundIndex = -1;
         repaint();
+        startNext();
     }
 
     public synchronized boolean getAnimationDone()
@@ -301,6 +315,15 @@ public class ArrayView extends JPanel
         {
             foundIndex = -1;
             notFoundIndex = endIndex;
+        }
+    }
+
+    public synchronized void startNext()
+    {
+        if (!insertionDone)
+        {
+            new StartNextThread(sond);
+            // sond.listenerNext();
         }
     }
 }

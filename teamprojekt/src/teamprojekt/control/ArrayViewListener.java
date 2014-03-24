@@ -42,6 +42,10 @@ public class ArrayViewListener implements ChangeListener
         }
         // Wert wurde eingefügt, alle Animationen werden "gestoppt" und die
         // Werte zur Animationssteuerung zurückgesetzt
+        else if (eventText.equals("inserted"))
+        {
+            aView.animationSetInserted();            
+        }
         else
         {
             aView.animationDone();

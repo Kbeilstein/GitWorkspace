@@ -31,7 +31,7 @@ public class ControlButtonsView extends JPanel
     private int yPolyNext[] =
     { 16, 26, 21 };
 
-    private boolean playOrStop = false;
+    private boolean playButtonIsOnStop = false;
 
     private Color borderColor = Color.darkGray;
 
@@ -73,7 +73,7 @@ public class ControlButtonsView extends JPanel
 
     public ControlButtonsView()
     {
-        playOrStop = true;
+        playButtonIsOnStop = true;
         setBackButtonOff();
         setPlayButtonOff();
         setNextButtonOff();
@@ -112,7 +112,7 @@ public class ControlButtonsView extends JPanel
 
         // Paint in Play/Stop Button a Polygon or a Rect
         g2d.setColor(playButtonForeground);
-        if (playOrStop)
+        if (playButtonIsOnStop)
         {
             g2d.fillPolygon(xPolyPlay, yPolyPlay, 3);
         }
@@ -123,15 +123,15 @@ public class ControlButtonsView extends JPanel
     }
 
     // Change from Play to Stop Button
-    public void setPlayOrStop()
+    public void setSwitchPlayStop()
     {
-        if (playOrStop)
+        if (playButtonIsOnStop)
         {
-            playOrStop = false;
+            playButtonIsOnStop = false;
         }
         else
         {
-            playOrStop = true;
+            playButtonIsOnStop = true;
         }
     }
 

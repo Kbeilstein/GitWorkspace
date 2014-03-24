@@ -56,9 +56,9 @@ public class LinearesSondieren extends Sondieren
             i = 1;
 
             array = arrayModel.getArray();
+            logView.write(value + " soll auf Arrayposition " + arrayPosition + " eingefügt werden");
             arrayModel.setValues(arrayPosition, arrayPosition, value, isInsertPossible());
             // nextArrayPosition();
-            logView.write(value + " soll auf Arrayposition " + arrayPosition + " eingefügt werden");
         }
     }
 

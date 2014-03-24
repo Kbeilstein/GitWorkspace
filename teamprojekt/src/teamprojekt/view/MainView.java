@@ -54,7 +54,7 @@ public class MainView extends JPanel
         searchButton.addActionListener(nextBHandler);
         deleteButton.addActionListener(nextBHandler);
         lv.setEditable(false);
-        lv.setAutoscrolls(true);        
+        lv.setAutoscrolls(true);
 
         // setLayout(null);
         // GridBagConstraints constraints = new GridBagConstraints();
@@ -101,6 +101,7 @@ public class MainView extends JPanel
         ControlButtonsListener ml = new ControlButtonsListener(cbView, sond);
         cbView.addMouseListener(ml);
         cbView.addMouseMotionListener(ml);
+        sond.addListener(ml);
 
         add(cbView);
         add(pane);
@@ -117,7 +118,7 @@ public class MainView extends JPanel
         textBoxLabel.setBounds(24, 0, 50, 20);
         textBox.setBounds(80, 1, 50, 20);
         addButton.setBounds(155, 0, 100, 20);
-        searchButton.setBounds(265,0,80,20);
+        searchButton.setBounds(265, 0, 80, 20);
         deleteButton.setBounds(355, 0, 80, 20);
         sp.setBounds((this.getWidth() - 10 - (this.getWidth() - 40)) / 2 + insets.left, THIRD_ROW + insets.top + 55, this.getWidth() - 40, 190);
         updateUI();

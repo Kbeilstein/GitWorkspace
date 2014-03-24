@@ -2,14 +2,14 @@ package teamprojekt.model;
 
 import teamprojekt.view.ArrayView;
 
-public class Animator extends Thread
+public class AnimatorThread extends Thread
 {
 
     private ArrayView animPanel;
 
     private int speed;
 
-    public Animator(ArrayView animPanel)
+    public AnimatorThread(ArrayView animPanel)
     {
         this.animPanel = animPanel;
         speed = 20;
@@ -27,8 +27,9 @@ public class Animator extends Thread
             catch (InterruptedException e)
             {
                 break;
-            }
+            }            
         }
+        animPanel.startNext();
     }
 
     public void setSpeed(int value)

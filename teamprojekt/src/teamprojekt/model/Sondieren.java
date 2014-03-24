@@ -1,5 +1,8 @@
 package teamprojekt.model;
 
+import java.util.ArrayList;
+
+import teamprojekt.control.ControlButtonsListener;
 import teamprojekt.view.LogView;
 
 public abstract class Sondieren
@@ -11,10 +14,13 @@ public abstract class Sondieren
 
     private String insertSearchDelete;
 
+    private ArrayList<ControlButtonsListener> listeners;
+
     public Sondieren(ArrayModel arrayModel, LogView logView)
     {
         this.array = arrayModel;
         this.logView = logView;
+        this.listeners = new ArrayList<>();
     }
 
     public abstract void add(int value);
@@ -68,11 +74,7 @@ public abstract class Sondieren
         return full;
     }
 
-    public void nextInsertPosition()
-    {
-        // TODO Auto-generated method stub
-
-    }
+    abstract public void nextInsertPosition();
 
     public void setInsertSearchDelete(String newVal)
     {
@@ -87,6 +89,18 @@ public abstract class Sondieren
     public void nextSearchPosition()
     {
         // TODO Auto-generated method stub
+    }
 
+    public void addListener(ControlButtonsListener ml)
+    {
+        listeners.add(ml);
+    }
+
+    public void listenerNext()
+    {
+        for (ControlButtonsListener listener : listeners)
+        {
+            listener.nextButtonClicked();
+        }
     }
 }
