@@ -6,9 +6,9 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 @SuppressWarnings("serial")
-public class TextBoxView extends JTextField
+public class InsertValueTextBoxView extends JTextField
 {
-    public TextBoxView()
+    public InsertValueTextBoxView()
     {
         /*
          * 

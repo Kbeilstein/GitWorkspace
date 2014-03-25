@@ -48,13 +48,11 @@ public class MainView extends JPanel
 
         JLabel textBoxLabel = new JLabel();
         textBoxLabel.setText("Eingabe:");
-        TextBoxView textBox = new TextBoxView();
+        InsertValueTextBoxView textBox = new InsertValueTextBoxView();
         AddDeleteButtonHandler nextBHandler = new AddDeleteButtonHandler(textBox, sond);
         addButton.addActionListener(nextBHandler);
         searchButton.addActionListener(nextBHandler);
         deleteButton.addActionListener(nextBHandler);
-        lv.setEditable(false);
-        lv.setAutoscrolls(true);
 
         // setLayout(null);
         // GridBagConstraints constraints = new GridBagConstraints();

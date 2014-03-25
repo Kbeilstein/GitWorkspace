@@ -1,6 +1,7 @@
 package teamprojekt.view;
 
 import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
 
 @SuppressWarnings("serial")
 public class LogView extends JTextArea
@@ -8,6 +9,12 @@ public class LogView extends JTextArea
     public LogView()
     {
         super();
+        setEditable(false);
+        setAutoscrolls(true);
+        // damit bei einem neuen Eintrag in der Textarea automatisch weiter
+        // gescrollt wird
+        DefaultCaret caret = (DefaultCaret) this.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         setRows(10);
     }
 
