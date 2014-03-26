@@ -16,6 +16,8 @@ public abstract class Sondieren
 
     private ArrayList<ControlButtonsListener> listeners;
 
+    private boolean play;
+
     public Sondieren(ArrayModel arrayModel, LogView logView)
     {
         this.array = arrayModel;
@@ -98,9 +100,28 @@ public abstract class Sondieren
 
     public void listenerNext()
     {
+        // if (play)
+
         for (ControlButtonsListener listener : listeners)
         {
             listener.nextButtonClicked();
         }
+    }
+
+    public void setPlay()
+    {
+        if (play)
+        {
+            play = false;
+        }
+        else
+        {
+            play = true;
+        }
+    }
+
+    public boolean getPlay()
+    {
+        return play;
     }
 }

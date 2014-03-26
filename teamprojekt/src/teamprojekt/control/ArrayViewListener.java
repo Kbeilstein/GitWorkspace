@@ -23,10 +23,6 @@ public class ArrayViewListener implements ChangeListener
         {
             aView.animationInsert();
         }
-        else if (eventText.equals("deleted"))
-        {
-            aView.animationDone();
-        }
         // startet die Animation des Wertes unterhalb des Arrays
         else if (eventText.equals("animationInsert"))
         {
@@ -42,13 +38,9 @@ public class ArrayViewListener implements ChangeListener
         }
         // Wert wurde eingefügt, alle Animationen werden "gestoppt" und die
         // Werte zur Animationssteuerung zurückgesetzt
-        else if (eventText.equals("inserted"))
-        {
-            aView.animationSetInserted();            
-        }
         else
         {
-            aView.animationDone();
+            aView.animationSetPaintAnimationDone();
         }
 
         aView.repaint();

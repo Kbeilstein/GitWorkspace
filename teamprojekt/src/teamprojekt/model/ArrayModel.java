@@ -120,7 +120,7 @@ public class ArrayModel
         animThread = thread;
     }
 
-    public Thread getThread()
+    public synchronized Thread getThread()
     {
         return animThread;
     }

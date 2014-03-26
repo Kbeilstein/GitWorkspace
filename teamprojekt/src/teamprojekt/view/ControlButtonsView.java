@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 public class ControlButtonsView extends JPanel
 {
@@ -31,7 +32,7 @@ public class ControlButtonsView extends JPanel
     private int yPolyNext[] =
     { 16, 26, 21 };
 
-    private boolean playButtonIsOnStop = false;
+    private boolean play = false;
 
     private Color borderColor = Color.darkGray;
 
@@ -73,7 +74,7 @@ public class ControlButtonsView extends JPanel
 
     public ControlButtonsView()
     {
-        playButtonIsOnStop = true;
+        play = true;
         setBackButtonOff();
         setPlayButtonOff();
         setNextButtonOff();
@@ -112,7 +113,7 @@ public class ControlButtonsView extends JPanel
 
         // Paint in Play/Stop Button a Polygon or a Rect
         g2d.setColor(playButtonForeground);
-        if (playButtonIsOnStop)
+        if (play)
         {
             g2d.fillPolygon(xPolyPlay, yPolyPlay, 3);
         }
@@ -123,16 +124,21 @@ public class ControlButtonsView extends JPanel
     }
 
     // Change from Play to Stop Button
-    public void setSwitchPlayStop()
+    public void setPlay()
     {
-        if (playButtonIsOnStop)
+        if (play)
         {
-            playButtonIsOnStop = false;
+            play = false;
         }
         else
         {
-            playButtonIsOnStop = true;
+            play = true;
         }
+    }
+
+    public boolean getPlay()
+    {
+        return play;
     }
 
     public void setBackButtonOn()

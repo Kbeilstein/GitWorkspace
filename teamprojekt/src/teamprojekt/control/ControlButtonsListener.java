@@ -17,12 +17,12 @@ public class ControlButtonsListener implements MouseInputListener
 
     private boolean nextClicked;
 
-    private Sondieren sondieren;
+    private Sondieren sond;
 
     public ControlButtonsListener(ControlButtonsView b, Sondieren sond)
     {
         button = b;
-        sondieren = sond;
+        this.sond = sond;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -52,7 +52,16 @@ public class ControlButtonsListener implements MouseInputListener
         else if (isPlay(e))
         {
             playClicked = true;
-            button.setSwitchPlayStop();
+            button.setPlay();
+            sond.setPlay();
+            if (!button.getPlay())
+            {
+                sond.listenerNext();
+            }
+            else
+            {
+                // Thread-Pausieren
+            }
             button.setPlayButtonClicked();
         }
         // Clicked Next-Button
@@ -65,19 +74,19 @@ public class ControlButtonsListener implements MouseInputListener
     }
 
     public void nextButtonClicked()
-    {        
-        String insertSearchDelete = sondieren.getInsertSearchDelete();
-        if (sondieren.getArrayPosition() != -1 && insertSearchDelete.equals("insert"))
+    {
+        String insertSearchDelete = sond.getInsertSearchDelete();
+        if (sond.getArrayPosition() != -1 && insertSearchDelete.equals("insert"))
         {
-            sondieren.nextInsertPosition();
+            sond.nextInsertPosition();
         }
-        else if (sondieren.getArrayPosition() != -1 && insertSearchDelete.equals("search"))
+        else if (sond.getArrayPosition() != -1 && insertSearchDelete.equals("search"))
         {
-            sondieren.nextSearchPosition();
+            sond.nextSearchPosition();
         }
-        else if (sondieren.getArrayPosition() != -1 && insertSearchDelete.equals("delete"))
+        else if (sond.getArrayPosition() != -1 && insertSearchDelete.equals("delete"))
         {
-            sondieren.nextSearchPosition();
+            sond.nextSearchPosition();
         }
     }
 

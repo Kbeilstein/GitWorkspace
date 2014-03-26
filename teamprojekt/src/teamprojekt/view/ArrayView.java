@@ -45,7 +45,7 @@ public class ArrayView extends JPanel
 
     private boolean isInsertPossible;
 
-    private boolean insertionDone;
+    private boolean animationPaintDone;
 
     private String insertSearchDelete;
 
@@ -58,6 +58,8 @@ public class ArrayView extends JPanel
     private int notFoundIndex;
 
     private Sondieren sond;
+
+    private StartNextThread autoAnimationThread;
 
     private static final Color GREEN = new Color(90, 200, 100);
 
@@ -90,7 +92,7 @@ public class ArrayView extends JPanel
         notFoundIndex = -1;
 
         searchDone = true;
-        insertionDone = true;
+        animationPaintDone = true;
         animationDone = true;
     }
 
@@ -122,8 +124,14 @@ public class ArrayView extends JPanel
 
             // Rechtecke zeichnen, schwarzer Rand
             g2d.drawRect(paddingX, TOP_PADDING, RECT_SIZE, RECT_SIZE);
+
+            // if-Anweisung dient zum passenden einfärben des Feldes
             // falls das Feld mit -1 gekennzeichnet ist, wird der Hintergrund
             // Orange gezeichnet ansonsten wird ein weißer Hintergrund verwendet
+            // wenn jedoch bei der Animation (einfügen, suchen, löschen)
+            // entsprechende Felder "kurzzeitig" farblich gekenntzeichnet
+            // werden, geschieht dies auch an dieser Stelle, über den Index wird
+            // das Realisiert und einer entsprechenden Variable zu jedem Fall
             if (i == insertIndex)
             {
                 g2d.setColor(GREEN);
@@ -134,11 +142,11 @@ public class ArrayView extends JPanel
             }
             else if (i == foundIndex)
             {
-                g2d.setColor(GREEN);// REDColor.CYAN);
+                g2d.setColor(Color.CYAN);
             }
             else if (i == notFoundIndex)
             {
-                g2d.setColor(RED);// Color.MAGENTA);
+                g2d.setColor(Color.MAGENTA);
             }
             else if (-1 == array[i])
             {
@@ -167,7 +175,7 @@ public class ArrayView extends JPanel
         }
 
         // bei Animation muss das zu Animierende Objekt gezeichnet werden
-        if (!insertionDone)
+        if (!animationPaintDone)
         {
             g.drawString(Integer.toString(value), xMotion, TOP_PADDING + 70);
         }
@@ -198,7 +206,6 @@ public class ArrayView extends JPanel
                     insertIndex = -1;
                     collisionIndex = endIndex;
                 }
-
             }
             else if (insertSearchDelete.equals("search"))
             {
@@ -213,7 +220,6 @@ public class ArrayView extends JPanel
                     notFoundIndex = endIndex;
                 }
             }
-
         }
         repaint();
     }
@@ -235,9 +241,9 @@ public class ArrayView extends JPanel
         startNext();
     }
 
-    public void animationSetInserted()
+    public void animationSetPaintAnimationDone()
     {
-        insertionDone = true;
+        animationPaintDone = true;
         animationDone();
     }
 
@@ -263,7 +269,7 @@ public class ArrayView extends JPanel
     private void update()
     {
         updateValues();
-        insertionDone = false;
+        animationPaintDone = false;
         animationDone = false;
         searchDone = false;
         repaint();
@@ -316,13 +322,18 @@ public class ArrayView extends JPanel
             foundIndex = -1;
             notFoundIndex = endIndex;
         }
+        startNext();
     }
 
     public synchronized void startNext()
     {
-        if (!insertionDone)
+        // wird nur Ausgeführt um die Animation automatisch ablaufen zu lassen
+        if (!animationPaintDone && sond.getPlay())
         {
-            new StartNextThread(sond);
+            if (autoAnimationThread == null || !autoAnimationThread.isAlive())
+            {
+                autoAnimationThread = new StartNextThread(sond);
+            }
             // sond.listenerNext();
         }
     }

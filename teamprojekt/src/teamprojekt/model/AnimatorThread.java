@@ -27,7 +27,7 @@ public class AnimatorThread extends Thread
             catch (InterruptedException e)
             {
                 break;
-            }            
+            }
         }
         animPanel.startNext();
     }
@@ -36,5 +36,4 @@ public class AnimatorThread extends Thread
     {
         speed = value * -1;
     }
-
 }
