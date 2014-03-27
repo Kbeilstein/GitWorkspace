@@ -9,6 +9,8 @@ public class AnimatorThread extends Thread
 
     private int speed;
 
+    private boolean wait;
+
     public AnimatorThread(ArrayView animPanel)
     {
         this.animPanel = animPanel;
@@ -19,15 +21,19 @@ public class AnimatorThread extends Thread
     {
         while (!animPanel.getAnimationDone())
         {
-            animPanel.animationNext();
             try
             {
+                if (wait && !animPanel.getPlay())
+                {
+                    wait();
+                }
                 Thread.sleep(speed);
             }
             catch (InterruptedException e)
             {
                 break;
             }
+            animPanel.animationNext();
         }
         animPanel.startNext();
     }
@@ -35,5 +41,21 @@ public class AnimatorThread extends Thread
     public void setSpeed(int value)
     {
         speed = value * -1;
+    }
+
+    public void setWait()
+    {
+        wait = true;
+    }
+
+    public synchronized void wake()
+    {
+        wait = false;
+        notify();
+    }
+
+    public boolean getWait()
+    {
+        return wait;
     }
 }

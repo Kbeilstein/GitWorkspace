@@ -133,4 +133,11 @@ public class VerallgLinearesSondieren extends Sondieren
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public void nextSearchPosition()
+    {
+        // TODO Auto-generated method stub
+        
+    }
 }

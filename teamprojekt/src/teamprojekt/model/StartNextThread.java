@@ -14,11 +14,20 @@ public class StartNextThread extends Thread
     {
         try
         {
-            Thread.sleep(500);
+            sleep(500);
+            if (!sond.getPlay())
+            {
+                wait();
+            }
         }
         catch (InterruptedException e)
         {
         }
         sond.listenerNext();
+    }
+
+    public synchronized void wake()
+    {
+        notify();
     }
 }

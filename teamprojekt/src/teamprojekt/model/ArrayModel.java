@@ -23,6 +23,8 @@ public class ArrayModel
 
     private boolean valueFound;
 
+    private StartNextThread snThread;
+
     public ArrayModel(int length)
     {
         array = new int[length];
@@ -172,5 +174,15 @@ public class ArrayModel
             }
         }
         return dummy;
+    }
+
+    public void setAutoAnimationThread(StartNextThread autoAnimationThread)
+    {
+        snThread = autoAnimationThread;
+    }
+
+    public StartNextThread getAutoAnimationThread()
+    {
+        return snThread;
     }
 }

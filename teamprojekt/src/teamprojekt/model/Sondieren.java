@@ -35,6 +35,10 @@ public abstract class Sondieren
 
     public abstract int getArrayPosition();
 
+    public abstract void nextInsertPosition();
+
+    public abstract void nextSearchPosition();
+
     public void insArrayEintragen(int arrayPosition, int value)
     {
         // Ausgabe in die LogView
@@ -76,8 +80,6 @@ public abstract class Sondieren
         return full;
     }
 
-    abstract public void nextInsertPosition();
-
     public void setInsertSearchDelete(String newVal)
     {
         insertSearchDelete = newVal;
@@ -88,26 +90,23 @@ public abstract class Sondieren
         return insertSearchDelete;
     }
 
-    public void nextSearchPosition()
-    {
-        // TODO Auto-generated method stub
-    }
-
+    // Method um neue Listener anzumelden
     public void addListener(ControlButtonsListener ml)
     {
         listeners.add(ml);
     }
 
+    // alle angemeldeten Listener werden benachrichtig, ds der Next-Button
+    // geclicked wird
     public void listenerNext()
     {
-        // if (play)
-
         for (ControlButtonsListener listener : listeners)
         {
             listener.nextButtonClicked();
         }
     }
 
+    // Methode um den Play-Button von Play auf "Not"Play und umgekehrt zu setzen
     public void setPlay()
     {
         if (play)
@@ -120,8 +119,41 @@ public abstract class Sondieren
         }
     }
 
+    // gibt true zurück, wenn der Play button auf "play" steht, sonst false
     public boolean getPlay()
     {
         return play;
+    }
+
+    public void threadWait()
+    {
+        // beim drücken des Play Buttons zu Stop, wird der Thread der die
+        // Animation ausführt auf wait gesetzt
+        AnimatorThread dummy = (AnimatorThread) array.getThread();
+        if (dummy != null && dummy.isAlive())
+        {
+            dummy.setWait();
+        }
+    }
+
+    public void threadGo()
+    {
+        // Threads werden geweckt, dazu wird geschaut, welcher Thread aktiv ist
+        // und entsprechend mit der wake Methode geweckt
+        // falls kein Thread wartet, wird der nächste Schritt ausgeführt
+        StartNextThread snThread = (StartNextThread) array.getAutoAnimationThread();
+        AnimatorThread animThread = (AnimatorThread) array.getThread();
+        if (snThread != null && snThread.isAlive())
+        {
+            snThread.wake();
+        }
+        else if (animThread != null && animThread.isAlive())
+        {
+            animThread.wake();
+        }
+        else
+        {
+            listenerNext();
+        }
     }
 }

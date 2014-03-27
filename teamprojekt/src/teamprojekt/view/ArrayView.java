@@ -53,7 +53,7 @@ public class ArrayView extends JPanel
 
     private boolean isFound;
 
-    private boolean searchDone;
+    // private boolean searchDone;
 
     private int notFoundIndex;
 
@@ -91,7 +91,7 @@ public class ArrayView extends JPanel
         foundIndex = -1;
         notFoundIndex = -1;
 
-        searchDone = true;
+        // searchDone = true;
         animationPaintDone = true;
         animationDone = true;
     }
@@ -122,7 +122,7 @@ public class ArrayView extends JPanel
 
             g2d.setFont(INHALT_FONT);
 
-            // Rechtecke zeichnen, schwarzer Rand
+            // Rechtecke zeichnen für den schwarzen Rand
             g2d.drawRect(paddingX, TOP_PADDING, RECT_SIZE, RECT_SIZE);
 
             // if-Anweisung dient zum passenden einfärben des Feldes
@@ -259,6 +259,7 @@ public class ArrayView extends JPanel
         AnimatorThread animThread = (AnimatorThread) model.getThread();
         if (animThread != null && animThread.isAlive())
         {
+            System.out.println("ich bins");
             animThread.interrupt();
         }
         animThread = new AnimatorThread(this);
@@ -271,14 +272,14 @@ public class ArrayView extends JPanel
         updateValues();
         animationPaintDone = false;
         animationDone = false;
-        searchDone = false;
+        // searchDone = false;
         repaint();
     }
 
     public synchronized void animationDone()
     {
         // insertionDone = true;
-        searchDone = true;
+        // searchDone = true;
         animationDone = true;
         insertIndex = -1;
         collisionIndex = -1;
@@ -327,14 +328,20 @@ public class ArrayView extends JPanel
 
     public synchronized void startNext()
     {
-        // wird nur Ausgeführt um die Animation automatisch ablaufen zu lassen
+        // wird nur "betreten" um die Animation automatisch ablaufen zu lassen
         if (!animationPaintDone && sond.getPlay())
         {
             if (autoAnimationThread == null || !autoAnimationThread.isAlive())
             {
                 autoAnimationThread = new StartNextThread(sond);
+                model.setAutoAnimationThread(autoAnimationThread);
             }
             // sond.listenerNext();
         }
+    }
+
+    public synchronized boolean getPlay()
+    {
+        return sond.getPlay();
     }
 }

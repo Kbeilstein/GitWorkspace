@@ -56,11 +56,13 @@ public class ControlButtonsListener implements MouseInputListener
             sond.setPlay();
             if (!button.getPlay())
             {
-                sond.listenerNext();
+                sond.threadGo();
+                // sond.listenerNext();
             }
             else
             {
                 // Thread-Pausieren
+                sond.threadWait();
             }
             button.setPlayButtonClicked();
         }
