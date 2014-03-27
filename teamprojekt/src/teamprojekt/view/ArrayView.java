@@ -259,12 +259,17 @@ public class ArrayView extends JPanel
         AnimatorThread animThread = (AnimatorThread) model.getThread();
         if (animThread != null && animThread.isAlive())
         {
-            System.out.println("ich bins");
+            // System.out.println("interrupt");
+            // //animationNext();
             animThread.interrupt();
+            // animThread.wake();
         }
-        animThread = new AnimatorThread(this);
-        model.setThread(animThread);
-        animThread.start();
+        else
+        {
+            animThread = new AnimatorThread(this);
+            model.setThread(animThread);
+            animThread.start();
+        }
     }
 
     private void update()
@@ -272,7 +277,6 @@ public class ArrayView extends JPanel
         updateValues();
         animationPaintDone = false;
         animationDone = false;
-        // searchDone = false;
         repaint();
     }
 
@@ -343,5 +347,11 @@ public class ArrayView extends JPanel
     public synchronized boolean getPlay()
     {
         return sond.getPlay();
+    }
+
+    public void animationToEnd()
+    {
+        xMotion = endX;
+        animationNext();
     }
 }

@@ -96,7 +96,7 @@ public class MainView extends JPanel
         // constraints.gridwidth = GridBagConstraints.RELATIVE;
         // constraints.fill = GridBagConstraints.BOTH;
         ControlButtonsView cbView = new ControlButtonsView();
-        ControlButtonsListener ml = new ControlButtonsListener(cbView, sond);
+        ControlButtonsListener ml = new ControlButtonsListener(cbView, sond, arrayModel);
         cbView.addMouseListener(ml);
         cbView.addMouseMotionListener(ml);
         sond.addListener(ml);

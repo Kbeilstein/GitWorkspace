@@ -25,12 +25,16 @@ public class AnimatorThread extends Thread
             {
                 if (wait && !animPanel.getPlay())
                 {
+                    System.out.println("thread wartet");
                     wait();
+                    System.out.println("thread fertig gewartet");
                 }
                 Thread.sleep(speed);
             }
             catch (InterruptedException e)
             {
+                System.out.println("thread interrupted");
+                animPanel.animationToEnd();
                 break;
             }
             animPanel.animationNext();

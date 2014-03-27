@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
+import teamprojekt.model.AnimatorThread;
+import teamprojekt.model.ArrayModel;
 import teamprojekt.model.Sondieren;
 import teamprojekt.view.ControlButtonsView;
 
@@ -19,10 +21,13 @@ public class ControlButtonsListener implements MouseInputListener
 
     private Sondieren sond;
 
-    public ControlButtonsListener(ControlButtonsView b, Sondieren sond)
+    private ArrayModel model;
+
+    public ControlButtonsListener(ControlButtonsView b, Sondieren sond, ArrayModel model)
     {
         button = b;
         this.sond = sond;
+        this.model = model;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -78,7 +83,20 @@ public class ControlButtonsListener implements MouseInputListener
     public void nextButtonClicked()
     {
         String insertSearchDelete = sond.getInsertSearchDelete();
-        if (sond.getArrayPosition() != -1 && insertSearchDelete.equals("insert"))
+        AnimatorThread animThread = (AnimatorThread) model.getThread();
+
+        if (button.getPlay() && animThread != null && animThread.isAlive())
+        {
+            if (!animThread.getWait())
+            {
+                animThread.interrupt();
+            }
+            else
+            {
+                animThread.wake();
+            }
+        }
+        else if (sond.getArrayPosition() != -1 && insertSearchDelete.equals("insert"))
         {
             sond.nextInsertPosition();
         }

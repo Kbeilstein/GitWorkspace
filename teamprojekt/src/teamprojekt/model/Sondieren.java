@@ -156,4 +156,9 @@ public abstract class Sondieren
             listenerNext();
         }
     }
+    
+    public boolean isAnimationThreadAlive()
+    {
+        return array.getThread() != null && array.getThread().isAlive();        
+    }
 }
