@@ -5,13 +5,11 @@ import java.awt.Font;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
-import teamprojekt.control.AddDeleteButtonHandler;
 import teamprojekt.control.AddDeleteListener;
 import teamprojekt.control.ArrayViewListener;
 import teamprojekt.control.ControlButtonsListener;
@@ -33,7 +31,6 @@ public class MainView extends JPanel
 
     public MainView()
     {
-        // setLayout(new GridBagLayout());
         setLayout(null);
     }
 
@@ -44,76 +41,42 @@ public class MainView extends JPanel
         ArrayView aView = new ArrayView(arrayModel, sond);
         arrayModel.addListener(new ArrayViewListener(aView));
 
-        JButton addButton = new JButton("hinzuf\u00FCgen");
-        JButton searchButton = new JButton("suchen");
-        JButton deleteButton = new JButton("l\u00f6schen");
-
         JLabel textBoxLabel = new JLabel();
         textBoxLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
         textBoxLabel.setText("Eingabe:");
         textBoxLabel.setToolTipText("Zahlen von 1-99");
         InsertValueTextBoxView textBox = new InsertValueTextBoxView();
-        AddDeleteButtonHandler nextBHandler = new AddDeleteButtonHandler(textBox, sond);
-        addButton.addActionListener(nextBHandler);
-        searchButton.addActionListener(nextBHandler);
-        deleteButton.addActionListener(nextBHandler);
-
-        // setLayout(null);
-        // GridBagConstraints constraints = new GridBagConstraints();
-        // constraints.gridx = 0;
-        // constraints.gridy = 0;
-        // constraints.gridwidth = GridBagConstraints.RELATIVE;
-        // constraints.gridheight = 1;
-        // constraints.fill = GridBagConstraints.NONE;
-        // constraints.weightx = 0.0;
-        // constraints.weighty = 0.0;
-        // constraints.anchor = GridBagConstraints.CENTER;
-        // constraints.insets = new Insets(0, 0, 0, 0);
-        // constraints.ipadx = 660;
-        // constraints.ipady = 180;
 
         JScrollPane sp = new JScrollPane(lv);
         sp.setAutoscrolls(true);
-        add(aView);
-        // add(aView, constraints);
-        // constraints = new GridBagConstraints();
-        // constraints.gridx = 1;
-        // constraints.gridy = 1;
         textBox.setColumns(2);
-        JPanel pane = new JPanel();
-        pane.setLayout(null);
-        pane.add(textBoxLabel);
-        // add(textBoxLabel, constraints);
-        // constraints.gridx = 2;
-        pane.add(textBox);
-        // add(textBox, constraints);
-        // constraints.gridx = 3;
-        // pane.add(addButton);
-        // pane.add(searchButton);
-        // add(addButton, constraints);
-        // constraints.gridx = 4;
-        // pane.add(deleteButton);
+
         AddDeleteButtonView adbView = new AddDeleteButtonView();
         AddDeleteListener adl = new AddDeleteListener(adbView, textBox, sond);
+
         adbView.addMouseMotionListener(adl);
         adbView.addMouseListener(adl);
-        pane.add(adbView);
-        // add(deleteButton, constraints);
-        //
-        // constraints.gridx = 0;
-        // constraints.gridy = 2;
-        // constraints.gridwidth = GridBagConstraints.RELATIVE;
-        // constraints.fill = GridBagConstraints.BOTH;
+
         ControlButtonsView cbView = new ControlButtonsView();
         ControlButtonsListener ml = new ControlButtonsListener(cbView, sond, arrayModel);
         cbView.addMouseListener(ml);
         cbView.addMouseMotionListener(ml);
         sond.addListener(ml);
 
+        // Pane für Wert-Eingabe Feld und hinzufügen-suchen-löschen Buttons
+        JPanel pane = new JPanel();
+        pane.setLayout(null);
+        pane.add(textBoxLabel);
+        pane.add(textBox);
+        pane.add(adbView);
+
+        // alle angelegten Views werden zur "Hauptpane" hinzugefügt
+        add(aView);
         add(cbView);
         add(pane);
         add(sp);
-        // add(sp, constraints);
+
+        // Rahmen der den Pane umgibt und das aktuelle Sondierverfahren enthält
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, sond.getName() + " " + Character.toString('\u2013') + " Arraygröße " + arrayModel.getLength());
         setBorder(titleBorder1);
@@ -125,9 +88,6 @@ public class MainView extends JPanel
         textBoxLabel.setBounds(10, 2, 70, 20);
         textBox.setBounds(80, 1, 50, 24);
         adbView.setBounds(155, 1, 360, 30);
-        // addButton.setBounds(155, 0, 100, 20);
-        // searchButton.setBounds(265, 0, 80, 20);
-        // deleteButton.setBounds(355, 0, 80, 20);
         sp.setBounds((this.getWidth() - 10 - (this.getWidth() - 40)) / 2 + insets.left, THIRD_ROW + insets.top + 60, this.getWidth() - 40, 260);
         updateUI();
     }

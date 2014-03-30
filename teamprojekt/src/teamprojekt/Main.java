@@ -8,5 +8,6 @@ public class Main
     {
         // new Main();
         new HashingView();
+        // new LayoutConfig();
     }
 }

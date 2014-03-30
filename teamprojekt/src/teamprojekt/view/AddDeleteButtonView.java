@@ -42,7 +42,7 @@ public class AddDeleteButtonView extends JPanel
 
     private int heights = height - 1;
 
-    private int arcWidth = 2;
+    private int arcWidth = 4;
 
     private int arcHeight = arcWidth;
 

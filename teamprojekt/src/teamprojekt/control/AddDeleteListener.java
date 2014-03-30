@@ -60,7 +60,25 @@ public class AddDeleteListener implements MouseInputListener
 
     private void buttonReaction(String type)
     {
-        if (!textBox.getText().isEmpty() && sondieren.getArrayPosition() == -1)
+        String textBoxString = textBox.getText();
+        boolean possible = false;
+
+        // prüft beim drücken der Buttons zuerst, ob die Eingabe gültig ist
+        // muß zusätzlich zur Eingabebeschränkung gemacht werden, da falsche
+        // Werte die per Copy-Paste eingefügt werden sonst zu Fehler führen
+        for (int i = 0; i < textBoxString.length() && !textBoxString.equals("0"); i++)
+        {
+            if (textBoxString.charAt(i) >= '0' && textBoxString.charAt(i) <= '9' && i < 2)
+            {
+                possible = true;
+            }
+            else
+            {
+                possible = false;
+            }
+        }
+
+        if (possible && sondieren.getArrayPosition() == -1)
         {
             int typeToStart = Integer.parseInt(textBox.getText());
             sondieren.setInsertSearchDelete(type);
