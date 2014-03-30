@@ -7,11 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
-import teamprojekt.control.AddDeleteListener;
 
 @SuppressWarnings("serial")
 public class AddDeleteButtonView extends JPanel
@@ -46,15 +42,15 @@ public class AddDeleteButtonView extends JPanel
 
     private int heights = height - 1;
 
-    private int arcWidth = 10;
+    private int arcWidth = 2;
 
     private int arcHeight = arcWidth;
 
-    private String insertB = "hinzuf\u00fcgen";
+    private String insertButtonText = "hinzuf\u00fcgen";
 
-    private String searchB = "suchen";
+    private String searchButtonText = "suchen";
 
-    private String deleteB = "l\u00f6schen";
+    private String deleteButtonText = "l\u00f6schen";
 
     private int paddingB = width + 20;
 
@@ -74,24 +70,24 @@ public class AddDeleteButtonView extends JPanel
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setStroke(new BasicStroke(2));
+        g2d.setStroke(new BasicStroke(3));
         g2d.setFont(new Font("Verdana", Font.BOLD, 14));
 
         // Insert-Button
         g2d.setColor(borderColor);
-        g2d.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+        g2d.drawRoundRect(x, y, width + 10, height, arcWidth, arcHeight);
         g2d.setColor(insertBackground);
-        g2d.fillRoundRect(xs, ys, widths, heights, arcWidth, arcHeight);
+        g2d.fillRoundRect(xs, ys, widths + 10, heights, arcWidth, arcHeight);
         g2d.setColor(insertForeground);
-        g2d.drawString(insertB, x + paddingTexts, y + paddingText);
+        g2d.drawString(insertButtonText, x + paddingTexts + 5, y + paddingText);
 
         // Search-Button
         g2d.setColor(borderColor);
-        g2d.drawRoundRect(x + paddingB, y, width, height, arcWidth, arcHeight);
+        g2d.drawRoundRect(x + paddingB + 5, y, width, height, arcWidth, arcHeight);
         g2d.setColor(searchBackground);
-        g2d.fillRoundRect(xs + paddingB, ys, widths, heights, arcWidth, arcHeight);
+        g2d.fillRoundRect(xs + paddingB + 5, ys, widths, heights, arcWidth, arcHeight);
         g2d.setColor(searchForeground);
-        g2d.drawString(searchB, x + paddingB + paddingText + paddingTexts, y + paddingText);
+        g2d.drawString(searchButtonText, x + paddingB + paddingText + paddingTexts + 5, y + paddingText);
 
         // Delete-Button
         g2d.setColor(borderColor);
@@ -99,8 +95,7 @@ public class AddDeleteButtonView extends JPanel
         g2d.setColor(deleteBackground);
         g2d.fillRoundRect(xs + paddingB * 2, ys, widths, heights, arcWidth, arcHeight);
         g2d.setColor(deleteForeground);
-        g2d.drawString(deleteB, x + paddingB * 2 + paddingText + paddingTexts, y + paddingText);
-
+        g2d.drawString(deleteButtonText, x + paddingB * 2 + paddingText + paddingTexts, y + paddingText);
     }
 
     public void setInsertButtonOn()
@@ -112,7 +107,7 @@ public class AddDeleteButtonView extends JPanel
 
     public void setInsertButtonOff()
     {
-        insertForeground = Color.GRAY;
+        insertForeground = Color.DARK_GRAY;
         insertBackground = Color.WHITE;
         repaint();
     }
@@ -133,7 +128,7 @@ public class AddDeleteButtonView extends JPanel
 
     public void setSearchButtonOff()
     {
-        searchForeground = Color.GRAY;
+        searchForeground = Color.DARK_GRAY;
         searchBackground = Color.WHITE;
         repaint();
     }
@@ -154,7 +149,7 @@ public class AddDeleteButtonView extends JPanel
 
     public void setDeleteButtonOff()
     {
-        deleteForeground = Color.GRAY;
+        deleteForeground = Color.DARK_GRAY;
         deleteBackground = Color.WHITE;
         repaint();
     }
@@ -164,20 +159,5 @@ public class AddDeleteButtonView extends JPanel
         deleteForeground = Color.WHITE;
         deleteBackground = Color.GRAY;
         repaint();
-    }
-
-    public static void main(String[] agrs)
-    {
-        JFrame frame = new JFrame("test");
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        AddDeleteButtonView test = new AddDeleteButtonView();
-        AddDeleteListener addDel = new AddDeleteListener(test);
-        test.addMouseListener(addDel);
-        test.addMouseMotionListener(addDel);
-        frame.add(test);
-
-        frame.setSize(400, 200);
-        frame.setVisible(true);
-
     }
 }

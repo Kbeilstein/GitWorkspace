@@ -1,6 +1,7 @@
 package teamprojekt.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
@@ -11,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
 import teamprojekt.control.AddDeleteButtonHandler;
+import teamprojekt.control.AddDeleteListener;
 import teamprojekt.control.ArrayViewListener;
 import teamprojekt.control.ControlButtonsListener;
 import teamprojekt.model.ArrayModel;
@@ -47,7 +49,9 @@ public class MainView extends JPanel
         JButton deleteButton = new JButton("l\u00f6schen");
 
         JLabel textBoxLabel = new JLabel();
+        textBoxLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
         textBoxLabel.setText("Eingabe:");
+        textBoxLabel.setToolTipText("Zahlen von 1-99");
         InsertValueTextBoxView textBox = new InsertValueTextBoxView();
         AddDeleteButtonHandler nextBHandler = new AddDeleteButtonHandler(textBox, sond);
         addButton.addActionListener(nextBHandler);
@@ -84,11 +88,16 @@ public class MainView extends JPanel
         pane.add(textBox);
         // add(textBox, constraints);
         // constraints.gridx = 3;
-        pane.add(addButton);
-        pane.add(searchButton);
+        // pane.add(addButton);
+        // pane.add(searchButton);
         // add(addButton, constraints);
         // constraints.gridx = 4;
-        pane.add(deleteButton);
+        // pane.add(deleteButton);
+        AddDeleteButtonView adbView = new AddDeleteButtonView();
+        AddDeleteListener adl = new AddDeleteListener(adbView, textBox, sond);
+        adbView.addMouseMotionListener(adl);
+        adbView.addMouseListener(adl);
+        pane.add(adbView);
         // add(deleteButton, constraints);
         //
         // constraints.gridx = 0;
@@ -112,13 +121,14 @@ public class MainView extends JPanel
         Insets insets = getInsets();
         aView.setBounds((this.getWidth() - 10 - 900) / 2, FIRST_ROW, 900, FIRST_ROW_HEIGHT);
         cbView.setBounds((this.getWidth() - 10 - 150) / 2, SECOND_ROW - 10, 150, 50);
-        pane.setBounds((this.getWidth() - 10 - 500) / 2, SECOND_ROW + 60, 500, 20);
-        textBoxLabel.setBounds(24, 0, 50, 20);
-        textBox.setBounds(80, 1, 50, 20);
-        addButton.setBounds(155, 0, 100, 20);
-        searchButton.setBounds(265, 0, 80, 20);
-        deleteButton.setBounds(355, 0, 80, 20);
-        sp.setBounds((this.getWidth() - 10 - (this.getWidth() - 40)) / 2 + insets.left, THIRD_ROW + insets.top + 55, this.getWidth() - 40, 190);
+        pane.setBounds((this.getWidth() - 10 - 500) / 2, SECOND_ROW + 60, 500, 30);
+        textBoxLabel.setBounds(10, 2, 70, 20);
+        textBox.setBounds(80, 1, 50, 24);
+        adbView.setBounds(155, 1, 360, 30);
+        // addButton.setBounds(155, 0, 100, 20);
+        // searchButton.setBounds(265, 0, 80, 20);
+        // deleteButton.setBounds(355, 0, 80, 20);
+        sp.setBounds((this.getWidth() - 10 - (this.getWidth() - 40)) / 2 + insets.left, THIRD_ROW + insets.top + 60, this.getWidth() - 40, 260);
         updateUI();
     }
 }

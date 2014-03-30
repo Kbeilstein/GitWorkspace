@@ -2,13 +2,19 @@ package teamprojekt.control;
 
 import java.awt.event.MouseEvent;
 
+import javax.swing.JTextField;
 import javax.swing.event.MouseInputListener;
 
+import teamprojekt.model.Sondieren;
 import teamprojekt.view.AddDeleteButtonView;
 
 public class AddDeleteListener implements MouseInputListener
 {
     private AddDeleteButtonView button;
+
+    private JTextField textBox;
+
+    private Sondieren sondieren;
 
     private boolean insertClicked;
 
@@ -16,61 +22,82 @@ public class AddDeleteListener implements MouseInputListener
 
     private boolean deleteClicked;
 
-    public AddDeleteListener(AddDeleteButtonView b)
+    public AddDeleteListener(AddDeleteButtonView b, JTextField textBox, Sondieren sondieren)
     {
-        // TODO Auto-generated constructor stub
+        this.textBox = textBox;
+        this.sondieren = sondieren;
         this.button = b;
     }
 
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mousePressed(MouseEvent e)
     {
-        // TODO Auto-generated method stub
         if (isInsert(e))
         {
             insertClicked = true;
             button.setInsertButtonClicked();
-            ;
+            buttonReaction("insert");
         }
         else if (isSearch(e))
         {
             searchClicked = true;
             button.setSearchButtonClicked();
+            buttonReaction("search");
         }
         else if (isDelete(e))
         {
             deleteClicked = true;
             button.setDeleteButtonClicked();
+            buttonReaction("delete");
         }
+    }
+
+    private void buttonReaction(String type)
+    {
+        if (!textBox.getText().isEmpty() && sondieren.getArrayPosition() == -1)
+        {
+            int typeToStart = Integer.parseInt(textBox.getText());
+            sondieren.setInsertSearchDelete(type);
+            if (type.equals("insert"))
+            {
+                sondieren.add(typeToStart);
+            }
+            else if (type.equals("search"))
+            {
+                sondieren.search(typeToStart);
+            }
+            else
+            {
+                sondieren.delete(typeToStart);
+            }
+        }
+        textBox.setText("");
     }
 
     @Override
     public void mouseReleased(MouseEvent e)
     {
-        // TODO Auto-generated method stub
         insertClicked = false;
         searchClicked = false;
         deleteClicked = false;
+        mouseMoved(e);
     }
 
     @Override
     public void mouseEntered(MouseEvent e)
     {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseExited(MouseEvent e)
     {
-        // TODO Auto-generated method stub
         button.setInsertButtonOff();
         button.setSearchButtonOff();
         button.setDeleteButtonOff();
@@ -79,14 +106,12 @@ public class AddDeleteListener implements MouseInputListener
     @Override
     public void mouseDragged(MouseEvent e)
     {
-        // TODO Auto-generated method stub
         mouseMoved(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e)
     {
-        // TODO Auto-generated method stub
         if (isInsert(e) && insertClicked)
         {
             button.setInsertButtonClicked();

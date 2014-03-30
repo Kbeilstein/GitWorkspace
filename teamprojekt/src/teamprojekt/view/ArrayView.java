@@ -61,9 +61,15 @@ public class ArrayView extends JPanel
 
     private StartNextThread autoAnimationThread;
 
-    private static final Color GREEN = new Color(90, 200, 100);
+    private static final Color INSERT_FREE = new Color(90, 200, 100);
 
-    private static final Color RED = new Color(220, 70, 50);
+    private static final Color INSERT_COLLISION = new Color(220, 70, 50);
+
+    private static final Color SEARCH_NOT_FOUND = new Color(255, 150, 100);
+
+    private static final Color SEARCH_AND_FOUND = new Color(110, 180, 255);
+
+    private static final Color DELETE = Color.ORANGE;
 
     private static final Font INHALT_FONT = new Font("Verdana", Font.BOLD, 16);
 
@@ -134,23 +140,23 @@ public class ArrayView extends JPanel
             // das Realisiert und einer entsprechenden Variable zu jedem Fall
             if (i == insertIndex)
             {
-                g2d.setColor(GREEN);
+                g2d.setColor(INSERT_FREE);
             }
             else if (i == collisionIndex)
             {
-                g2d.setColor(RED);
+                g2d.setColor(INSERT_COLLISION);
             }
             else if (i == foundIndex)
             {
-                g2d.setColor(Color.CYAN);
+                g2d.setColor(SEARCH_AND_FOUND);
             }
             else if (i == notFoundIndex)
             {
-                g2d.setColor(Color.MAGENTA);
+                g2d.setColor(SEARCH_NOT_FOUND);
             }
             else if (-1 == array[i])
             {
-                g2d.setColor(Color.ORANGE);
+                g2d.setColor(DELETE);
             }
             else
             {

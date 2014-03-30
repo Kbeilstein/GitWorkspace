@@ -24,20 +24,23 @@ public class AddDeleteButtonHandler implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         JButton button = (JButton) e.getSource();
+        // bevor auf die Buttons reagiert wird, muss geprüft werden, ob die
+        // Textbox überhaupt eine Eingabe enthält und ob die vorherige
+        // Betätigung schon abgeschlossen ist, was mit einer Arrayposition von
+        // -1 gekennzeichnet wird
         if (!textBox.getText().isEmpty() && sondieren.getArrayPosition() == -1)
         {
             if (button.getText().equals("hinzuf\u00fcgen"))
             {
-                sondieren.setInsertSearchDelete("insert");
-                sondieren.add(Integer.parseInt(textBox.getText()));
+
             }
-            
+
             if (button.getText().equals("suchen"))
             {
                 sondieren.setInsertSearchDelete("search");
-                sondieren.search(Integer.parseInt(textBox.getText()));                
+                sondieren.search(Integer.parseInt(textBox.getText()));
             }
-            
+
             if (button.getText().equals("l\u00f6schen"))
             {
                 sondieren.setInsertSearchDelete("delete");

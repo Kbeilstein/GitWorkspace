@@ -33,7 +33,7 @@ public class ControlButtonsView extends JPanel
 
     private boolean play = false;
 
-    private Color borderColor = Color.darkGray;
+    private Color borderColor = Color.BLACK;
 
     private Color backButtonBackground;
 
@@ -69,7 +69,7 @@ public class ControlButtonsView extends JPanel
 
     private int paddingB = 50;
 
-    private int recSize = 10;
+    private int arcSize = 10;
 
     public ControlButtonsView()
     {
@@ -88,24 +88,24 @@ public class ControlButtonsView extends JPanel
 
         // Back-Button
         g2d.setColor(borderColor);
-        g2d.drawRoundRect(paddingX, paddingY1, rectWidth, rectHeight, recSize, recSize);
+        g2d.drawRoundRect(paddingX, paddingY1, rectWidth, rectHeight, arcSize, arcSize);
         g2d.setColor(backButtonBackground);
-        g2d.fillRoundRect(paddingXs, paddingY1s, rectWidhts, rectHeights, recSize, recSize);
+        g2d.fillRoundRect(paddingXs, paddingY1s, rectWidhts, rectHeights, arcSize, arcSize);
         g2d.setColor(backButtonForeground);
         g2d.fillPolygon(xPolyBack, yPolyPBack, 3);
         g2d.fillRect(15, 16, 2, 10);
 
         // Play / Stop -Button
         g2d.setColor(borderColor);
-        g2d.drawRoundRect(paddingX + paddingB, paddingY2, rectWidth, rectWidth, recSize, recSize);
+        g2d.drawRoundRect(paddingX + paddingB, paddingY2, rectWidth, rectWidth, arcSize, arcSize);
         g2d.setColor(playButtonBackground);
-        g2d.fillRoundRect(paddingXs + paddingB, paddingY2s, rectWidhts, rectWidhts, recSize, recSize);
+        g2d.fillRoundRect(paddingXs + paddingB, paddingY2s, rectWidhts, rectWidhts, arcSize, arcSize);
 
         // Next Button
         g2d.setColor(borderColor);
-        g2d.drawRoundRect(paddingX + paddingB * 2, paddingY1, rectWidth, rectHeight, recSize, recSize);
+        g2d.drawRoundRect(paddingX + paddingB * 2, paddingY1, rectWidth, rectHeight, arcSize, arcSize);
         g2d.setColor(nextButtonBackground);
-        g2d.fillRoundRect(paddingXs + paddingB * 2, paddingY1s, rectWidhts, rectHeights, recSize, recSize);
+        g2d.fillRoundRect(paddingXs + paddingB * 2, paddingY1s, rectWidhts, rectHeights, arcSize, arcSize);
         g2d.setColor(nextButtonForeground);
         g2d.fillPolygon(xPolyNext, yPolyNext, 3);
         g2d.fillRect(126, 16, 2, 10);
@@ -143,63 +143,63 @@ public class ControlButtonsView extends JPanel
     public void setBackButtonOn()
     {
         backButtonBackground = Color.LIGHT_GRAY;
-        backButtonForeground = Color.white;
+        backButtonForeground = Color.WHITE;
         repaint();
     }
 
     public void setBackButtonOff()
     {
-        backButtonBackground = Color.white;
-        backButtonForeground = Color.LIGHT_GRAY;
+        backButtonBackground = Color.WHITE;
+        backButtonForeground = Color.GRAY;
         repaint();
     }
 
     public void setBackButtonClicked()
     {
-        backButtonBackground = Color.gray;
-        backButtonForeground = Color.white;
+        backButtonBackground = Color.GRAY;
+        backButtonForeground = Color.WHITE;
         repaint();
     }
 
     public void setPlayButtonOn()
     {
         playButtonBackground = Color.LIGHT_GRAY;
-        playButtonForeground = Color.white;
+        playButtonForeground = Color.WHITE;
         repaint();
     }
 
     public void setPlayButtonOff()
     {
-        playButtonBackground = Color.white;
-        playButtonForeground = Color.LIGHT_GRAY;
+        playButtonBackground = Color.WHITE;
+        playButtonForeground = Color.GRAY;
         repaint();
     }
 
     public void setPlayButtonClicked()
     {
-        playButtonBackground = Color.gray;
-        playButtonForeground = Color.white;
+        playButtonBackground = Color.GRAY;
+        playButtonForeground = Color.WHITE;
         repaint();
     }
 
     public void setNextButtonOn()
     {
         nextButtonBackground = Color.LIGHT_GRAY;
-        nextButtonForeground = Color.white;
+        nextButtonForeground = Color.WHITE;
         repaint();
     }
 
     public void setNextButtonOff()
     {
-        nextButtonBackground = Color.white;
-        nextButtonForeground = Color.LIGHT_GRAY;
+        nextButtonBackground = Color.WHITE;
+        nextButtonForeground = Color.GRAY;
         repaint();
     }
 
     public void setNextButtonClicked()
     {
-        nextButtonBackground = Color.gray;
-        nextButtonForeground = Color.white;
+        nextButtonBackground = Color.GRAY;
+        nextButtonForeground = Color.WHITE;
         repaint();
     }
 }

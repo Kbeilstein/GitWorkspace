@@ -15,6 +15,7 @@ public class InsertValueTextBoxView extends JTextField
          * Das Textfeld soll nur Zahlen zulassen und als Maximum soll maximal
          * eine fünfstellige Zahl im Textfeld stehen.
          */
+        this.setToolTipText("Zahlen von 1-99");
         this.setDocument(new PlainDocument()
         {
             private static final long serialVersionUID = 1L;
