@@ -14,19 +14,20 @@ import teamprojekt.model.Sondieren;
 import teamprojekt.model.VerallgLinearesSondieren;
 import teamprojekt.view.LogView;
 import teamprojekt.view.MainView;
+import teamprojekt.view.SpinnerTextView;
 
 public class StartButtonHandler implements ActionListener
 {
     private JComboBox<String> cbVerfahren;
 
-    private JComboBox<?> cbArraySize;
+    private SpinnerTextView arraySize;
 
     private MainView panel;
 
-    public StartButtonHandler(JComboBox<String> cbVerfahren, JComboBox<Integer> cbArraySize, MainView panel)
+    public StartButtonHandler(JComboBox<String> cbVerfahren, SpinnerTextView textField, MainView panel)
     {
         this.cbVerfahren = cbVerfahren;
-        this.cbArraySize = cbArraySize;
+        this.arraySize = textField;
         this.panel = panel;
     }
 
@@ -36,30 +37,40 @@ public class StartButtonHandler implements ActionListener
         Sondieren sond;
 
         LogView lv = new LogView();
-        ArrayModel arrayModel = new ArrayModel((int) cbArraySize.getSelectedItem());
 
-        switch (cbVerfahren.getSelectedIndex())
+        String arraySizeText = arraySize.getText();
+
+        if (!arraySizeText.isEmpty() && !arraySizeText.equals("1") && !arraySizeText.equals("0"))
         {
-            case 0:
-                sond = new LinearesSondieren(arrayModel, lv);
-                break;
-            case 1:
-                sond = new VerallgLinearesSondieren(arrayModel, lv);
-                break;
-            case 2:
-                sond = new QuadratischesSondieren(arrayModel, lv);
-                break;
-            case 3:
-                sond = new AlternierendesQuadratischesSondieren(arrayModel, lv);
-                break;
-            case 4:
-                sond = new DoppelHashing(arrayModel, lv);
-                break;
-            default:
-                sond = new LinearesSondieren(arrayModel, lv);
-                break;
-        }
+            ArrayModel arrayModel = new ArrayModel(Integer.parseInt(arraySizeText));
 
-        panel.fill(arrayModel, lv, sond);
+            switch (cbVerfahren.getSelectedIndex())
+            {
+                case 0:
+                    sond = new LinearesSondieren(arrayModel, lv);
+                    break;
+                case 1:
+                    sond = new VerallgLinearesSondieren(arrayModel, lv);
+                    break;
+                case 2:
+                    sond = new QuadratischesSondieren(arrayModel, lv);
+                    break;
+                case 3:
+                    sond = new AlternierendesQuadratischesSondieren(arrayModel, lv);
+                    break;
+                case 4:
+                    sond = new DoppelHashing(arrayModel, lv);
+                    break;
+                default:
+                    sond = new LinearesSondieren(arrayModel, lv);
+                    break;
+            }
+
+            panel.fill(arrayModel, lv, sond);
+        }
+        else
+        {
+            System.out.println("ungültge Eingabe");
+        }
     }
 }

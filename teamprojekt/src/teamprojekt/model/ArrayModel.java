@@ -80,11 +80,11 @@ public class ArrayModel
         startIndex = start;
         endIndex = end;
         value = val;
-        isInsertPossible = insertPos;        
+        isInsertPossible = insertPos;
         if (end == start)
         {
             fireAll("insert");
-        }        
+        }
         else
         {
             fireAll("animationInsert");

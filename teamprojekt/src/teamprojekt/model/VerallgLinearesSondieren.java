@@ -138,6 +138,6 @@ public class VerallgLinearesSondieren extends Sondieren
     public void nextSearchPosition()
     {
         // TODO Auto-generated method stub
-        
+
     }
 }

@@ -132,13 +132,13 @@ public class QuadratischesSondieren extends Sondieren
     public void nextInsertPosition()
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void nextSearchPosition()
     {
         // TODO Auto-generated method stub
-        
+
     }
 }

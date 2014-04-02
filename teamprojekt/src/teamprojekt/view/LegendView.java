@@ -13,14 +13,6 @@ import javax.swing.border.Border;
 @SuppressWarnings("serial")
 public class LegendView extends JLabel
 {
-    private int x = 20;
-
-    private int xSmall = x + 1;
-
-    private int y = 33;
-
-    private int ySmall = y + 1;
-
     private int width = 25;
 
     private int widthSmall = width - 2;
@@ -54,6 +46,14 @@ public class LegendView extends JLabel
 
     public void paintComponent(Graphics g)
     {
+        // Variabeln werden erst hier deklariert und initialisiert, damit
+        // dynamisch auf eine Veränderung vom Layout reagiert werden kann
+        int y = this.getHeight() / 2 - 8;
+        int ySmall = y + 1;
+
+        int x = this.getWidth() / 2 - 470;
+        int xSmall = x + 1;
+
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

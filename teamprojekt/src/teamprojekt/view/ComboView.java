@@ -1,6 +1,7 @@
 package teamprojekt.view;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,14 +12,15 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import teamprojekt.control.ComboHashHandler;
 import teamprojekt.control.PseudoCodeButtonHandler;
+import teamprojekt.control.SpinnerMinusButtonListener;
+import teamprojekt.control.SpinnerPlusButtonListener;
 import teamprojekt.control.StartButtonHandler;
 
 @SuppressWarnings("serial")
 public class ComboView extends JPanel
 {
-    final private String[] verfahren =
+    final private String[] algorithm =
     { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "alternierendes Quad. Sondieren", "Doppelhashing" };
 
     public ComboView(MainView panel)
@@ -26,46 +28,63 @@ public class ComboView extends JPanel
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JComboBox<String> versVerf = new JComboBox<String>(verfahren);
-        versVerf.setEditable(false);
-        // versVerf.setFocusable(false);
-        c.insets = new Insets(10, 10, 0, 10); // top padding
-        c.gridx = 0;
-        c.gridy = 0;
-        versVerf.setBackground(Color.white);
-        versVerf.setForeground(Color.darkGray);
-        add(versVerf, c);
+        JComboBox<String> algorithmComboBox = new JComboBox<String>(algorithm);
+        algorithmComboBox.setEditable(false);
+        algorithmComboBox.setBackground(Color.white);
+        algorithmComboBox.setForeground(Color.darkGray);
 
-        JComboBox<Integer> versArryLaenge = new JComboBox<Integer>();
-        versArryLaenge.setEditable(false);
-        // versArryLaenge.setFocusable(false);
-        versArryLaenge.setBackground(Color.white);
-        versArryLaenge.setForeground(Color.darkGray);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        // c.anchor = GridBagConstraints.EAST;
+        JPanel spinnerPane = new JPanel();
+        spinnerPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        c.gridy = 1;
-        add(versArryLaenge, c);
-        versVerf.addActionListener(new ComboHashHandler(versArryLaenge));
+        SpinnerMinusButtonView minusButtonView = new SpinnerMinusButtonView();
+        FlowLayout flowLayout = (FlowLayout) minusButtonView.getLayout();
+        flowLayout.setVgap(8);
+        flowLayout.setHgap(8);
 
-        JButton start = new JButton("Start");
-        start.addActionListener(new StartButtonHandler(versVerf, versArryLaenge, panel));
+        SpinnerTextView spinnerTextView = new SpinnerTextView();
 
-        c.fill = GridBagConstraints.NONE;
-        // c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(30, 0, 0, 0); // top padding
-        c.gridy = 2; // third row
-        add(start, c);
+        SpinnerPlusButtonView plusButtonView = new SpinnerPlusButtonView();
+        flowLayout = (FlowLayout) plusButtonView.getLayout();
+        flowLayout.setVgap(8);
+        flowLayout.setHgap(8);
 
-        JButton pseudoCode = new JButton("Pseudo Code");
-        pseudoCode.addActionListener(new PseudoCodeButtonHandler(versVerf));
-        c.fill = GridBagConstraints.NONE;
-        c.insets = new Insets(50, 0, 17, 0);
-        c.gridy = 3;
-        add(pseudoCode, c);
+        SpinnerMinusButtonListener m = new SpinnerMinusButtonListener(minusButtonView, spinnerTextView);
+        minusButtonView.addMouseMotionListener(m);
+        minusButtonView.addMouseListener(m);
+
+        SpinnerPlusButtonListener p = new SpinnerPlusButtonListener(plusButtonView, spinnerTextView);
+        plusButtonView.addMouseMotionListener(p);
+        plusButtonView.addMouseListener(p);
+
+        spinnerPane.add(minusButtonView);
+        spinnerPane.add(spinnerTextView);
+        spinnerPane.add(plusButtonView);
+
+        JButton startButton = new JButton("Start");
+        startButton.addActionListener(new StartButtonHandler(algorithmComboBox, spinnerTextView, panel));
+
+        JButton pseudoCodeButton = new JButton("Pseudo Code");
+        pseudoCodeButton.addActionListener(new PseudoCodeButtonHandler(algorithmComboBox));
+
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Auswahl");
 
         setBorder(titleBorder1);
+
+        c.insets = new Insets(10, 10, 20, 10);
+        c.gridx = 0;
+        c.gridy = 0;
+        add(algorithmComboBox, c);
+
+        c.gridy = 1;
+        add(spinnerPane, c);
+
+        c.insets = new Insets(30, 0, 0, 0);
+        c.gridy = 2;
+        add(startButton, c);
+
+        c.insets = new Insets(50, 0, 17, 0);
+        c.gridy = 3;
+        add(pseudoCodeButton, c);
     }
 }

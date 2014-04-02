@@ -38,12 +38,12 @@ public class HashingView extends JFrame
         constraints.ipadx = 980;
         constraints.ipady = 570;
         add(panel, constraints);
-        
+
         LegendView legend = new LegendView();
         constraints.anchor = GridBagConstraints.LAST_LINE_START;
         constraints.gridheight = 1;
-        constraints.gridx=1;
-        constraints.gridy=1;
+        constraints.gridx = 1;
+        constraints.gridy = 1;
         constraints.ipadx = 971;
         constraints.ipady = 60;
 
