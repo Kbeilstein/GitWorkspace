@@ -9,22 +9,22 @@ import teamprojekt.view.SpinnerTextView;
 
 public class SpinnerMinusButtonListener implements MouseInputListener
 {
-    private SpinnerMinusButtonView minusButton;
+    private SpinnerMinusButtonView minusButtonView;
 
     private boolean minusClicked;
 
     private double radius = 7.5;
 
-    private double xMittelPunkt = radius;
+    private double xButtonCenter = radius;
 
-    private double yMittelPunkt = radius;
+    private double yButtonCenter = radius;
 
-    private SpinnerTextView spinnerText;
+    private SpinnerTextView spinnerTextView;
 
     public SpinnerMinusButtonListener(SpinnerMinusButtonView decre, SpinnerTextView text)
     {
-        minusButton = decre;
-        spinnerText = text;
+        minusButtonView = decre;
+        spinnerTextView = text;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -37,7 +37,7 @@ public class SpinnerMinusButtonListener implements MouseInputListener
 
     public void mouseExited(MouseEvent e)
     {
-        minusButton.setMinusButtonOff();
+        minusButtonView.setMinusButtonOff();
     }
 
     public void mousePressed(MouseEvent e)
@@ -45,29 +45,32 @@ public class SpinnerMinusButtonListener implements MouseInputListener
         if (isMinus(e))
         {
             minusClicked = true;
-            minusButton.setMinusButtonClicked();
+            minusButtonView.setMinusButtonClicked();
             int valueOfTextfield;
-            if (spinnerText.getText().isEmpty())
+            // Falls das Textfeld leer ist, setze den Wert auf 11 beende die
+            // Methode
+            if (spinnerTextView.getText().isEmpty())
             {
-                valueOfTextfield = 5;
+                spinnerTextView.setText("11");
+                return;
             }
             else
             {
-                valueOfTextfield = Integer.parseInt(spinnerText.getText());
+                valueOfTextfield = Integer.parseInt(spinnerTextView.getText());
             }
 
             if (valueOfTextfield < 5)
             {
-                spinnerText.setText("5");
+                spinnerTextView.setText("5");
             }
             else if (valueOfTextfield > 19)
             {
-                spinnerText.setText("19");
+                spinnerTextView.setText("19");
             }
             else if (valueOfTextfield > 5)
             {
                 valueOfTextfield--;
-                spinnerText.setText("" + valueOfTextfield);
+                spinnerTextView.setText("" + valueOfTextfield);
             }
         }
     }
@@ -88,22 +91,22 @@ public class SpinnerMinusButtonListener implements MouseInputListener
     {
         if (isMinus(e) && minusClicked)
         {
-            minusButton.setMinusButtonClicked();
+            minusButtonView.setMinusButtonClicked();
         }
         else if (isMinus(e))
         {
-            minusButton.setMinusButtonOn();
+            minusButtonView.setMinusButtonOn();
         }
         else
         {
-            minusButton.setMinusButtonOff();
+            minusButtonView.setMinusButtonOff();
         }
     }
 
+    // Abstand von Punkt 1 zu Punkt 2 =
+    // Wurzel aus (xPunkt1 - xPunkt2)^2 + (yPunkt1 - yPunkt2)^2
     private boolean isMinus(MouseEvent e)
     {
-        double dx = e.getX() - xMittelPunkt;
-        double dy = e.getY() - yMittelPunkt;
-        return Math.sqrt(dx * dx + dy * dy) < radius;
+        return Math.sqrt(Math.pow((e.getX() - xButtonCenter), 2) + Math.pow(e.getY() - yButtonCenter, 2)) < radius;
     }
 }

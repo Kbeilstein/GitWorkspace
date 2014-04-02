@@ -14,6 +14,7 @@ public class LayoutConfig extends JFrame
 {
     public LayoutConfig()
     {
+        super("Hashing");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Variable um die Bildschirmbreite abzuspeichern

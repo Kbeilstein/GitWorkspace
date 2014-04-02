@@ -9,6 +9,7 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -71,20 +72,34 @@ public class ComboView extends JPanel
 
         setBorder(titleBorder1);
 
-        c.insets = new Insets(10, 10, 20, 10);
-        c.gridx = 0;
+        JLabel selectAlgorithm = new JLabel("Sondierverfahren wählen:");
+        JLabel selectArraySize = new JLabel("Arraygröße wählen (5-19):");
+
+        c.insets = new Insets(10, 10, 0, 10);
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.gridy = 0;
+        add(selectAlgorithm, c);
+
+        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(2, 10, 20, 10);
+        c.gridx = 0;
+        c.gridy = 1;
         add(algorithmComboBox, c);
 
-        c.gridy = 1;
+        c.insets = new Insets(10, 10, 0, 10);
+        c.gridy = 2;
+        add(selectArraySize, c);
+
+        c.insets = new Insets(2, 10, 20, 10);
+        c.gridy = 3;
         add(spinnerPane, c);
 
         c.insets = new Insets(30, 0, 0, 0);
-        c.gridy = 2;
+        c.gridy = 4;
         add(startButton, c);
 
         c.insets = new Insets(50, 0, 17, 0);
-        c.gridy = 3;
+        c.gridy = 5;
         add(pseudoCodeButton, c);
     }
 }

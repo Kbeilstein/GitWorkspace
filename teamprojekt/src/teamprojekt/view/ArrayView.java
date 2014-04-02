@@ -35,11 +35,14 @@ public class ArrayView extends JPanel
     // Variable um dem Thread zu melden, das die Animation fertig ist
     private boolean animationDone;
 
-    // um bei einer Animation ein spezielles Index-Feld rot zu zeichnen
+    // um bei einer Animation ein spezielles Index-Feld farblich zu markieren
     private int collisionIndex;
 
-    // um bei einer Animation ein spezielles Index-Feld grün zu zeichnen
     private int insertIndex;
+
+    private int foundIndex;
+
+    private int notFoundIndex;
 
     private int endX;
 
@@ -49,13 +52,7 @@ public class ArrayView extends JPanel
 
     private String insertSearchDelete;
 
-    private int foundIndex;
-
     private boolean isFound;
-
-    // private boolean searchDone;
-
-    private int notFoundIndex;
 
     private Sondieren sond;
 
@@ -315,6 +312,7 @@ public class ArrayView extends JPanel
         isFound = model.getValueFound();
     }
 
+    // liefert den passenden x-Wert zu einem angegebenen Index
     private int getXPosition(int val)
     {
         return (val * RECT_PADDING + (value < 10 ? SPACE_SINGLE : SPACE) + startPaddingX);
@@ -346,7 +344,6 @@ public class ArrayView extends JPanel
                 autoAnimationThread = new StartNextThread(sond);
                 model.setAutoAnimationThread(autoAnimationThread);
             }
-            // sond.listenerNext();
         }
     }
 

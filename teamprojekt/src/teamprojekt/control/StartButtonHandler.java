@@ -69,8 +69,8 @@ public class StartButtonHandler implements ActionListener
             panel.fill(arrayModel, lv, sond);
         }
         else
-        {
-            System.out.println("ungültge Eingabe");
+        {            
+            arraySize.setText("11");
         }
     }
 }

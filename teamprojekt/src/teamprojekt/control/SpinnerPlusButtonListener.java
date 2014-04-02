@@ -15,9 +15,9 @@ public class SpinnerPlusButtonListener implements MouseInputListener
 
     private double radius = 7.5;
 
-    private double xMittelPunkt = radius;
+    private double xButtonCenter = radius;
 
-    private double yMittelPunkt = radius;
+    private double yButtonCenter = radius;
 
     private SpinnerTextView spinnerTextView;
 
@@ -47,9 +47,12 @@ public class SpinnerPlusButtonListener implements MouseInputListener
             plusClicked = true;
             plusButtonView.setPlusButtonClicked();
             int valueOfTextfield;
+            // Falls das Textfeld leer ist, setze den Wert auf 11 beende die
+            // Methode
             if (spinnerTextView.getText().isEmpty())
             {
-                valueOfTextfield = 19;
+                spinnerTextView.setText("11");
+                return;
             }
             else
             {
@@ -99,11 +102,11 @@ public class SpinnerPlusButtonListener implements MouseInputListener
         }
     }
 
+    // Abstand von Punkt 1 zu Punkt 2 =
+    // Wurzel aus (xPunkt1 - xPunkt2)^2 + (yPunkt1 - yPunkt2)^2
     private boolean isPlus(MouseEvent e)
     {
-        double dx = e.getX() - xMittelPunkt;
-        double dy = e.getY() - yMittelPunkt;
-        return (Math.sqrt(dx * dx + dy * dy)) < radius;
+        return Math.sqrt(Math.pow((e.getX() - xButtonCenter), 2) + Math.pow(e.getY() - yButtonCenter, 2)) < radius;
     }
 
 }
