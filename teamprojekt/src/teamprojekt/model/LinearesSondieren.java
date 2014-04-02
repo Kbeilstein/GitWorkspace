@@ -126,12 +126,6 @@ public class LinearesSondieren extends Sondieren
     }
 
     @Override
-    public void delete(int val)
-    {
-        search(val);// deleted(search(wert), wert);;
-    }
-
-    @Override
     public String getName()
     {
         return NAME;
@@ -159,12 +153,12 @@ public class LinearesSondieren extends Sondieren
         }
     }
 
-    public boolean isInsertPossible()
+    private boolean isInsertPossible()
     {
         return !(array[arrayPosition] != 0 && array[arrayPosition] != -1);
     }
 
-    public boolean isFound()
+    private boolean isFound()
     {
         return (array[arrayPosition] == value);
     }

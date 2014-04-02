@@ -8,7 +8,7 @@ import teamprojekt.view.LogView;
 public abstract class Sondieren
 {
 
-    private ArrayModel array;
+    private ArrayModel arrayModel;
 
     private LogView logView;
 
@@ -20,16 +20,10 @@ public abstract class Sondieren
 
     public Sondieren(ArrayModel arrayModel, LogView logView)
     {
-        this.array = arrayModel;
+        this.arrayModel = arrayModel;
         this.logView = logView;
         this.listeners = new ArrayList<>();
     }
-
-    public abstract void add(int value);
-
-    public abstract void search(int value);
-
-    public abstract void delete(int value);
 
     public abstract String getName();
 
@@ -39,19 +33,28 @@ public abstract class Sondieren
 
     public abstract void nextSearchPosition();
 
+    public abstract void add(int value);
+
+    public abstract void search(int value);
+
+    public void delete(int value)
+    {
+        search(value);
+    }
+
     public void insArrayEintragen(int arrayPosition, int value)
     {
         // Ausgabe in die LogView
         logView.added(value, arrayPosition);
         // schreiben des valuees ins Array
-        array.setValueAt(arrayPosition, value);
+        arrayModel.setValueAt(arrayPosition, value);
     }
 
     public void deleted(int index, int value)
     {
         if (index != -1)
         {
-            array.delete(index);
+            arrayModel.delete(index);
             logView.deleted(index, value);
         }
         else
@@ -68,7 +71,7 @@ public abstract class Sondieren
         // das Array wird bis zum Ende durchlaufen, falls der Wert 0 oder -1
         // auftritt, welcher eine noch leere Arrayposition kennzeichnet bricht
         // die Schleife ab und full wird auf false gesetzt
-        for (int value : array.getArray())
+        for (int value : arrayModel.getArray())
         {
             if (value == 0 || value == -1)
             {
@@ -96,7 +99,7 @@ public abstract class Sondieren
         listeners.add(ml);
     }
 
-    // alle angemeldeten Listener werden benachrichtig, ds der Next-Button
+    // alle angemeldeten Listener werden benachrichtig, das der Next-Button
     // geclicked wird
     public void listenerNext()
     {
@@ -129,7 +132,7 @@ public abstract class Sondieren
     {
         // beim drücken des Play Buttons zu Stop, wird der Thread der die
         // Animation ausführt auf wait gesetzt
-        AnimatorThread dummy = (AnimatorThread) array.getThread();
+        AnimatorThread dummy = (AnimatorThread) arrayModel.getThread();
         if (dummy != null && dummy.isAlive())
         {
             dummy.setWait();
@@ -141,8 +144,8 @@ public abstract class Sondieren
         // Threads werden geweckt, dazu wird geschaut, welcher Thread aktiv ist
         // und entsprechend mit der wake Methode geweckt
         // falls kein Thread wartet, wird der nächste Schritt ausgeführt
-        StartNextThread snThread = (StartNextThread) array.getAutoAnimationThread();
-        AnimatorThread animThread = (AnimatorThread) array.getThread();
+        StartNextThread snThread = (StartNextThread) arrayModel.getAutoAnimationThread();
+        AnimatorThread animThread = (AnimatorThread) arrayModel.getThread();
         if (snThread != null && snThread.isAlive())
         {
             snThread.wake();
@@ -157,8 +160,9 @@ public abstract class Sondieren
         }
     }
 
-    public boolean isAnimationThreadAlive()
-    {
-        return array.getThread() != null && array.getThread().isAlive();
-    }
+    // public boolean isAnimationThreadAlive()
+    // {
+    // return arrayModel.getThread() != null &&
+    // arrayModel.getThread().isAlive();
+    // }
 }

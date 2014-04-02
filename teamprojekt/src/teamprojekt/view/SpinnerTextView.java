@@ -1,5 +1,7 @@
 package teamprojekt.view;
 
+import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -14,14 +16,13 @@ public class SpinnerTextView extends JTextField
         // Zeilen auf 2 setzen, da der Wert maximal 2 Zeichen haben kann
         setColumns(2);
         setHorizontalAlignment(JTextField.CENTER);
+        setFont(new Font(Font.DIALOG, Font.PLAIN, 14));
 
         // um falsche Eingaeben zu unterbinden werden fast alle "ungültigen"
         // Eingaben im vorhinein gefiltert, 1 als alleinige Eingabe kann aber
         // vorkommen und muss mit dem drücken des Startbutton "abefangen" werden
         setDocument(new PlainDocument()
         {
-            private static final long serialVersionUID = 1L;
-
             @Override
             public void insertString(int off, String str, AttributeSet as) throws BadLocationException
             {
