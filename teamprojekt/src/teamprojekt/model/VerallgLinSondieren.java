@@ -2,7 +2,7 @@ package teamprojekt.model;
 
 import teamprojekt.view.LogView;
 
-public class VerallgLinearesSondieren extends Sondieren
+public class VerallgLinSondieren extends Sondieren
 {
 
     private ArrayModel arrayModel;
@@ -15,9 +15,9 @@ public class VerallgLinearesSondieren extends Sondieren
 
     private static final String NAME = "Verallgemeinertes Lineares Sondieren";
 
-    public VerallgLinearesSondieren(ArrayModel arrayModel, LogView logView)
+    public VerallgLinSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView);
+        super(arrayModel, logView, NAME);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLaenge = arrayModel.getLength();

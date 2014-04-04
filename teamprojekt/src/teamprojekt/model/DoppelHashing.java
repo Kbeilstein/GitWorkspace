@@ -11,11 +11,11 @@ public class DoppelHashing extends Sondieren
 
     private int arrayLaenge;
 
-    private static final String NAME = "Doppel Hashing";
+    private static final String NAME = "Doppel-Hashing";
 
     public DoppelHashing(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView);
+        super(arrayModel, logView, NAME);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLaenge = arrayModel.getLength();

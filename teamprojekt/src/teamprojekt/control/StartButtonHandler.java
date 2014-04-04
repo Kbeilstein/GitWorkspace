@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 
-import teamprojekt.model.AlternierendesQuadratischesSondieren;
+import teamprojekt.model.AlternierendesQuadrSondieren;
 import teamprojekt.model.ArrayModel;
 import teamprojekt.model.DoppelHashing;
 import teamprojekt.model.LinearesSondieren;
 import teamprojekt.model.QuadratischesSondieren;
 import teamprojekt.model.Sondieren;
-import teamprojekt.model.VerallgLinearesSondieren;
+import teamprojekt.model.VerallgLinSondieren;
 import teamprojekt.view.LogView;
 import teamprojekt.view.MainView;
 import teamprojekt.view.SpinnerTextView;
@@ -50,13 +50,13 @@ public class StartButtonHandler implements ActionListener
                     sond = new LinearesSondieren(arrayModel, lv);
                     break;
                 case 1:
-                    sond = new VerallgLinearesSondieren(arrayModel, lv);
+                    sond = new VerallgLinSondieren(arrayModel, lv);
                     break;
                 case 2:
                     sond = new QuadratischesSondieren(arrayModel, lv);
                     break;
                 case 3:
-                    sond = new AlternierendesQuadratischesSondieren(arrayModel, lv);
+                    sond = new AlternierendesQuadrSondieren(arrayModel, lv);
                     break;
                 case 4:
                     sond = new DoppelHashing(arrayModel, lv);

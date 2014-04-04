@@ -21,11 +21,11 @@ public class LinearesSondieren extends Sondieren
 
     private int index;
 
-    private static final String NAME = "lineares Sondieren";
+    private static final String NAME = "Lineares Sondieren";
 
     public LinearesSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView);
+        super(arrayModel, logView, NAME);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLength = arrayModel.getLength();
@@ -123,12 +123,6 @@ public class LinearesSondieren extends Sondieren
             index = -1;
             arrayPosition = -1;
         }
-    }
-
-    @Override
-    public String getName()
-    {
-        return NAME;
     }
 
     public int getArrayPosition()

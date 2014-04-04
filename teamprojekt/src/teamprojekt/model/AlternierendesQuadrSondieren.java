@@ -2,7 +2,7 @@ package teamprojekt.model;
 
 import teamprojekt.view.LogView;
 
-public class AlternierendesQuadratischesSondieren extends Sondieren
+public class AlternierendesQuadrSondieren extends Sondieren
 {
 
     private ArrayModel arrayModel;
@@ -11,11 +11,11 @@ public class AlternierendesQuadratischesSondieren extends Sondieren
 
     private int arrayLaenge;
 
-    private static final String NAME = "alternierendes Quadratisches Sondieren";
+    private static final String NAME = "Alternierendes Quadratisches Sondieren";
 
-    public AlternierendesQuadratischesSondieren(ArrayModel arrayModel, LogView logView)
+    public AlternierendesQuadrSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView);
+        super(arrayModel, logView, NAME);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLaenge = arrayModel.getLength();

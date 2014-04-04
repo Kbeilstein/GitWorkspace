@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import teamprojekt.control.ArraySizeTextListener;
 import teamprojekt.control.PseudoCodeButtonHandler;
 import teamprojekt.control.SpinnerMinusButtonListener;
 import teamprojekt.control.SpinnerPlusButtonListener;
@@ -21,18 +22,21 @@ import teamprojekt.control.StartButtonHandler;
 @SuppressWarnings("serial")
 public class ComboView extends JPanel
 {
-    final private String[] algorithm =
-    { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "alternierendes Quad. Sondieren", "Doppelhashing" };
+    private static final String[] ALGORITHM =
+    { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "Alternierendes Quadr. Sondieren", "Doppel-Hashing" };
 
     public ComboView(MainView panel)
     {
-        setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-        JComboBox<String> algorithmComboBox = new JComboBox<String>(algorithm);
+        JComboBox<String> algorithmComboBox = new JComboBox<String>(ALGORITHM);
         algorithmComboBox.setEditable(false);
         algorithmComboBox.setBackground(Color.white);
         algorithmComboBox.setForeground(Color.darkGray);
+
+        JComboBox<Integer> constPick = new JComboBox<Integer>();
+        constPick.setEditable(false);
+        constPick.setBackground(Color.white);
+        constPick.setForeground(Color.darkGray);
+        constPick.setEnabled(false);
 
         JPanel spinnerPane = new JPanel();
         spinnerPane.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -74,6 +78,15 @@ public class ComboView extends JPanel
 
         JLabel selectAlgorithm = new JLabel("Sondierverfahren wählen:");
         JLabel selectArraySize = new JLabel("Arraygröße wählen (5-19):");
+        JLabel constPickLabel = new JLabel("geeignetes c wählen:");
+        JLabel startButtonLabel = new JLabel("bitte gültigen Wert eingeben");
+
+        AlgorithmPickListener algoPickListener = new AlgorithmPickListener(spinnerTextView, algorithmComboBox, constPick, constPickLabel);
+        algorithmComboBox.addActionListener(algoPickListener);
+        spinnerTextView.getDocument().addDocumentListener(new ArraySizeTextListener(spinnerTextView, startButton, startButtonLabel, algoPickListener));
+
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
         c.insets = new Insets(10, 10, 0, 10);
         c.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -81,25 +94,38 @@ public class ComboView extends JPanel
         add(selectAlgorithm, c);
 
         c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(2, 10, 20, 10);
-        c.gridx = 0;
+        c.insets = new Insets(2, 10, 10, 10);
         c.gridy = 1;
         add(algorithmComboBox, c);
 
+        c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(10, 10, 0, 10);
         c.gridy = 2;
+        add(constPickLabel, c);
+
+        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(2, 10, 20, 10);
+        c.gridy = 3;
+        add(constPick, c);
+
+        c.insets = new Insets(10, 10, 0, 10);
+        c.gridy = 4;
         add(selectArraySize, c);
 
         c.insets = new Insets(2, 10, 20, 10);
-        c.gridy = 3;
+        c.gridy = 5;
         add(spinnerPane, c);
 
-        c.insets = new Insets(30, 0, 0, 0);
-        c.gridy = 4;
+        c.insets = new Insets(10, 0, 0, 0);
+        c.gridy = 6;
+        add(startButtonLabel, c);
+
+        c.insets = new Insets(10, 0, 0, 0);
+        c.gridy = 7;
         add(startButton, c);
 
-        c.insets = new Insets(50, 0, 17, 0);
-        c.gridy = 5;
+        c.insets = new Insets(30, 0, 17, 0);
+        c.gridy = 8;
         add(pseudoCodeButton, c);
     }
 }

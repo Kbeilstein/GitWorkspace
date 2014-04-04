@@ -25,7 +25,7 @@ public class QuadratischesSondieren extends Sondieren
 
     public QuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView);
+        super(arrayModel, logView, NAME);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLength = arrayModel.getLength();

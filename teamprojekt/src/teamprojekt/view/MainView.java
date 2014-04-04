@@ -76,7 +76,8 @@ public class MainView extends JPanel
         add(pane);
         add(sp);
 
-        // Rahmen der den Pane umgibt und das aktuelle Sondierverfahren enthält
+        // Rahmen der das Panel umgibt und das aktuelle Sondierverfahren und die
+        // Arraygröße angibt
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, sond.getName() + " " + Character.toString('\u2013') + " Arraygröße " + arrayModel.getLength());
         setBorder(titleBorder1);

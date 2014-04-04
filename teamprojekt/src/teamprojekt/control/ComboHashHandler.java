@@ -8,29 +8,27 @@ import javax.swing.JComboBox;
 public class ComboHashHandler implements ActionListener
 {
 
-    final private int[] linearesSondieren =
+    private static final int[] LINEARES_SONDIEREN =
     { 5, 7, 11, 13, 17, 19 };
 
-    final private int[] verallgLinearesSondieren =
+    private static final int[] VERALLG_LINEARES_SONDIEREN =
     { 5, 7, 11, 13, 17, 19 };
 
-    final private int[] quadratischesSondieren =
+    private static final int[] QUADRATISCHES_SONDIEREN =
     { 11, 13 };
 
-    final private int[] alternierendesQuadratischesSondieren =
+    private static final int[] ALTERNIERENDES_QUADRATISCHES_SONDIEREN =
     { 5, 7, 17, 19 };
 
-    final private int[] doppetHashing =
+    private static final int[] DOPPEL_HASHING =
     { 5, 7, 11, 13, 17 };
 
     private JComboBox<Integer> versArrayLaenge;
 
     public ComboHashHandler(JComboBox<Integer> versArryLaenge)
     {
-        // TODO Auto-generated constructor stub
         this.versArrayLaenge = versArryLaenge;
-        fillBox(linearesSondieren);
-
+        fillBox(LINEARES_SONDIEREN);
     }
 
     @Override
@@ -42,21 +40,20 @@ public class ComboHashHandler implements ActionListener
         switch (index)
         {
             case 0:
-                fillBox(linearesSondieren);
+                fillBox(LINEARES_SONDIEREN);
                 break;
             case 1:
-                fillBox(verallgLinearesSondieren);
+                fillBox(VERALLG_LINEARES_SONDIEREN);
                 break;
             case 2:
-                fillBox(quadratischesSondieren);
+                fillBox(QUADRATISCHES_SONDIEREN);
                 break;
             case 3:
-                fillBox(alternierendesQuadratischesSondieren);
+                fillBox(ALTERNIERENDES_QUADRATISCHES_SONDIEREN);
                 break;
             case 4:
-                fillBox(doppetHashing);
+                fillBox(DOPPEL_HASHING);
                 break;
-
             default:
                 break;
         }
