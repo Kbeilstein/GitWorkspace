@@ -4,78 +4,111 @@ import teamprojekt.view.LogView;
 
 public class AlternierendesQuadrSondieren extends Sondieren
 {
-
     private ArrayModel arrayModel;
 
     private LogView logView;
 
-    private int arrayLaenge;
+    private int arrayLength;
 
-    private static final String NAME = "Alternierendes Quadratisches Sondieren";
+    private int arrayPosition;
+
+    private int i;
+
+    private int j;
+
+    private int[] array;
+
+    private int value;
+
+    private int index;
+
+    private static final String NAME = "alternierendes Quadratisches Sondieren";
 
     public AlternierendesQuadrSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView, NAME);
+        super(arrayModel, logView);
         this.arrayModel = arrayModel;
         this.logView = logView;
-        this.arrayLaenge = arrayModel.getLength();
+        this.arrayLength = arrayModel.getLength();
+        arrayPosition = -1;
     }
 
     // h_(2i-1)(x) = (h(x) + i^2) mod m
     // h_(2i)(x) = (h(x) - i^2) mod m
     @Override
-    public void add(int wert)
+    public void add(int val)
     {
         // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
         // freie Plaetze enthaelt
+        value = val;
+
         if (isFull())
         {
             logView.full();
         }
-        else if (arrayModel.isAvailable(wert))
+        else if (arrayModel.isAvailable(value))
         {
-            logView.available(wert);
+            logView.available(value);
         }
         else
         {
-            int addPosition = getAddPosition(wert);
+            // Animation "starten"
 
-            if (addPosition != -1)
-            {
-                insArrayEintragen(getAddPosition(wert), wert);
-            }
-            else
-            {
-                logView.error();
-            }
+            // Anfangsposition des Hashwertes
+            arrayPosition = val % arrayLength;
+            // val um den "verschoben" wird
+            i = 1;
+            j = 1;
+
+            array = arrayModel.getArray();
+            logView.write(value + " soll auf Arrayposition " + arrayPosition + " eingefügt werden");
+            arrayModel.setValues(arrayPosition, arrayPosition, value, isInsertPossible());
         }
-        logView.write("");
     }
 
     @Override
-    public void search(int wert)
+    public void search(int val)
     {
         // mit -1 initialisiert, kennzeichnet "nicht gefunden"
-        int index = -1;
+        index = -1;
+        value = val;
 
         // Anfangsposition des Hashwertes
-        int arrayPosition = wert % (arrayLaenge);
-        // Variablen um bei Kollision die
-        int i = 1;
-        int j = 1;
+        arrayPosition = val % arrayLength;
+        // Wert um den "verschoben" wird
+        i = 1;
+        j = 1;
 
-        int[] array = arrayModel.getArray();
+        array = arrayModel.getArray();
 
-        // freie Arraypositionen sind mit dem int Wert 0 und -1
-        // gekennzeichnet
-        // falls nach so vielen Durchläufen wie der Arraylänge nichts gefunden
-        // wird, wird abgebrochen und ein -1 als Kenzeichnung zurück gegeben
-        while (array[arrayPosition] != 0 && i < arrayLaenge && array[arrayPosition] != wert)
+        arrayModel.setValuesSearch(arrayPosition, arrayPosition, value, isFound());
+        logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
+
+        // solange nicht der Wert oder ein leere Platz (mit 0 gekennzeichnet)
+        // auftritt läuft die while Schleife das ganze Array einmal durch
+    }
+
+    @Override
+    public void nextInsertPosition()
+    {
+        if (isInsertPossible())
         {
+            insArrayEintragen(arrayPosition, value);
+            arrayPosition = -1;
+        }
+        // es wird nur so lange nach einem Platz zum einfügen gesucht, solange
+        // das Array nicht einmal ganz durchlaufen wurde
+        // beim Quadratischen sondieren kann es sonst zu einer Endlosschleife
+        // kommen
+        else if (i <= arrayLength)
+        {
+            int oldArrayPosition = arrayPosition;
+
             // wenn i und j gleich sind, wird + gerechnet
             if (i == j)
             {
-                arrayPosition = ((wert % arrayLaenge) + i * i) % arrayLaenge;
+                arrayPosition = ((value % arrayLength) + i * i) % arrayLength;
+                logView.collisionAlternierendesQuadrSondierenPlus(value, arrayPosition, arrayLength, i);
                 i++;
             }
             // da nach dem + rechnen nur i erhoeht wird, wird der else Fall
@@ -86,44 +119,44 @@ public class AlternierendesQuadrSondieren extends Sondieren
             {
                 // Loesung um ein "-" bei modulo abzufangen
                 // (a % b + b) % b
-                arrayPosition = (((wert % arrayLaenge) - j * j) % arrayLaenge + arrayLaenge) % arrayLaenge;
+                arrayPosition = (((value % arrayLength) - j * j) % arrayLength + arrayLength) % arrayLength;
+                logView.collisionAlternierendesQuadrSondierenMinus(value, arrayPosition, arrayLength, j);
                 j++;
             }
+            
+            arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
         }
-
-        if (array[arrayPosition] == wert)
+        else
         {
-            index = arrayPosition;
+            logView.error();
+            arrayPosition = -1;
+            // keinen Platz für das Einfügen gefunden
+            arrayModel.valueFound();
         }
     }
 
     @Override
-    public void delete(int wert)
+    public void nextSearchPosition()
     {
-        // deleted(search(wert), wert);
-    }
-
-    private int getAddPosition(int wert)
-    {
-        // Anfangsposition des Hashwertes
-        int arrayPosition = wert % (arrayLaenge);
-        // Variablen um bei Kollision die
-        int i = 1;
-        int j = 1;
-
-        int[] array = arrayModel.getArray();
-
-        // freie Arraypositionen sind mit dem int Wert 0 und -1
-        // gekennzeichnet
-        // falls nach so vielen Durchläufen wie der Arraylänge nichts gefunden
-        // wird, wird abgebrochen und ein -1 als Kenzeichnung zurück gegeben
-        while (array[arrayPosition] != 0 && array[arrayPosition] != -1 && i < arrayLaenge)
+        if (isFound())
         {
+            index = arrayPosition;
+            arrayModel.valueFound();
+            logView.write(value + " an Arrayposition " + arrayPosition + "  gefunden\n");
+            arrayPosition = -1;
+            if (super.getInsertSearchDelete().equals("delete"))
+            {
+                deleted(index, value);
+            }
+        }
+        else if (!isFound() && i < arrayLength && array[arrayPosition] != 0)
+        {
+            int oldArrayPosition = arrayPosition;
+
             // wenn i und j gleich sind, wird + gerechnet
             if (i == j)
             {
-                logView.colQSi(wert, arrayPosition, arrayLaenge, i);
-                arrayPosition = ((wert % arrayLaenge) + i * i) % arrayLaenge;
+                arrayPosition = ((value % arrayLength) + i * i) % arrayLength;
                 i++;
             }
             // da nach dem + rechnen nur i erhoeht wird, wird der else Fall
@@ -132,18 +165,29 @@ public class AlternierendesQuadrSondieren extends Sondieren
             // naechsten Durchlauf wieder mit + gerechnet wird
             else
             {
-                logView.colQSj(wert, arrayPosition, arrayLaenge, j);
                 // Loesung um ein "-" bei modulo abzufangen
                 // (a % b + b) % b
-                arrayPosition = (((wert % arrayLaenge) - j * j) % arrayLaenge + arrayLaenge) % arrayLaenge;
+                arrayPosition = (((value % arrayLength) - j * j) % arrayLength + arrayLength) % arrayLength;
                 j++;
             }
+
+            logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
+            arrayModel.setValuesSearch(oldArrayPosition, arrayPosition, value, isFound());
         }
-        if (i >= arrayLaenge)
+        else
         {
+            arrayModel.valueNotFound();
+            if (array[arrayPosition] == 0)
+            {
+                logView.write(value + " nicht gefunden\n");
+            }
+            else
+            {
+                logView.write(value + " nicht gefunden, aber einmal durchlaufen\n");
+            }
+            index = -1;
             arrayPosition = -1;
         }
-        return arrayPosition;
     }
 
     @Override
@@ -155,21 +199,16 @@ public class AlternierendesQuadrSondieren extends Sondieren
     @Override
     public int getArrayPosition()
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return arrayPosition;
     }
 
-    @Override
-    public void nextInsertPosition()
+    public boolean isInsertPossible()
     {
-        // TODO Auto-generated method stub
-
+        return !(array[arrayPosition] != 0 && array[arrayPosition] != -1);
     }
 
-    @Override
-    public void nextSearchPosition()
+    public boolean isFound()
     {
-        // TODO Auto-generated method stub
-
+        return (array[arrayPosition] == value);
     }
 }

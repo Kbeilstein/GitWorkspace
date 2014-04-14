@@ -16,22 +16,16 @@ public abstract class Sondieren
 
     private ArrayList<ControlButtonsListener> listeners;
 
-    private String name;
-
     private boolean play;
 
-    public Sondieren(ArrayModel arrayModel, LogView logView, String name)
+    public Sondieren(ArrayModel arrayModel, LogView logView)
     {
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.listeners = new ArrayList<>();
-        this.name = name;
     }
 
-    public String getName()
-    {
-        return name;
-    }
+    public abstract String getName();
 
     public abstract int getArrayPosition();
 

@@ -98,23 +98,23 @@ public class ComboView extends JPanel
         c.gridy = 1;
         add(algorithmComboBox, c);
 
+        c.insets = new Insets(20, 10, 0, 10);
+        c.gridy = 2;
+        add(selectArraySize, c);
+
+        c.insets = new Insets(2, 10, 10, 10);
+        c.gridy = 3;
+        add(spinnerPane, c);
+
         c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(10, 10, 0, 10);
-        c.gridy = 2;
+        c.gridy = 4;
         add(constPickLabel, c);
 
         c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(2, 10, 20, 10);
-        c.gridy = 3;
-        add(constPick, c);
-
-        c.insets = new Insets(10, 10, 0, 10);
-        c.gridy = 4;
-        add(selectArraySize, c);
-
-        c.insets = new Insets(2, 10, 20, 10);
+        c.insets = new Insets(5, 10, 20, 10);
         c.gridy = 5;
-        add(spinnerPane, c);
+        add(constPick, c);
 
         c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 6;

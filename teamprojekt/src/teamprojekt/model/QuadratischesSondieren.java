@@ -4,7 +4,6 @@ import teamprojekt.view.LogView;
 
 public class QuadratischesSondieren extends Sondieren
 {
-
     private ArrayModel arrayModel;
 
     private LogView logView;
@@ -25,7 +24,7 @@ public class QuadratischesSondieren extends Sondieren
 
     public QuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
-        super(arrayModel, logView, NAME);
+        super(arrayModel, logView);
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.arrayLength = arrayModel.getLength();
@@ -60,7 +59,6 @@ public class QuadratischesSondieren extends Sondieren
             array = arrayModel.getArray();
             logView.write(value + " soll auf Arrayposition " + arrayPosition + " eingefügt werden");
             arrayModel.setValues(arrayPosition, arrayPosition, value, isInsertPossible());
-            // nextArrayPosition();
         }
     }
 
@@ -100,7 +98,7 @@ public class QuadratischesSondieren extends Sondieren
         {
             int oldArrayPosition = arrayPosition;
             arrayPosition = ((value % arrayLength) + (i * i)) % arrayLength;
-            logView.colQSi(value, arrayPosition, arrayLength, i);
+            logView.collisionAlternierendesQuadrSondierenPlus(value, arrayPosition, arrayLength, i);
             i++;
             arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
         }
@@ -130,12 +128,10 @@ public class QuadratischesSondieren extends Sondieren
         else if (!isFound() && i < arrayLength && array[arrayPosition] != 0)
         {
             int oldArrayPosition = arrayPosition;
-            arrayPosition = ((value % arrayLength) + (i * i)) % arrayLength;
-            // logView.collisionLinearesSondieren(value, arrayPosition,
-            // arrayLength, i);
-            i++;
+            arrayPosition = ((value % arrayLength) + (i * i)) % arrayLength;            
             logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
             arrayModel.setValuesSearch(oldArrayPosition, arrayPosition, value, isFound());
+            i++;
         }
         else
         {

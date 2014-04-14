@@ -11,7 +11,7 @@ import teamprojekt.model.DoppelHashing;
 import teamprojekt.model.LinearesSondieren;
 import teamprojekt.model.QuadratischesSondieren;
 import teamprojekt.model.Sondieren;
-import teamprojekt.model.VerallgLinSondieren;
+import teamprojekt.model.VerallgLinearesSondieren;
 import teamprojekt.view.LogView;
 import teamprojekt.view.MainView;
 import teamprojekt.view.SpinnerTextView;
@@ -50,7 +50,7 @@ public class StartButtonHandler implements ActionListener
                     sond = new LinearesSondieren(arrayModel, lv);
                     break;
                 case 1:
-                    sond = new VerallgLinSondieren(arrayModel, lv);
+                    sond = new VerallgLinearesSondieren(arrayModel, lv);
                     break;
                 case 2:
                     sond = new QuadratischesSondieren(arrayModel, lv);
