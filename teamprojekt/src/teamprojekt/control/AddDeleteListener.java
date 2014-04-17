@@ -178,17 +178,17 @@ public class AddDeleteListener implements MouseInputListener
 
     private boolean isInsert(MouseEvent e)
     {
-        return e.getX() > 2 && e.getY() > 2 && e.getX() < 102 && e.getY() < 22;
+        return e.getX() > 1 && e.getY() > 1 && e.getX() < 111 && e.getY() < 21;
     }
 
     private boolean isSearch(MouseEvent e)
     {
-        return e.getX() > 122 && e.getY() > 2 && e.getX() < 222 && e.getY() < 22;
+        return e.getX() > 126 && e.getY() > 1 && e.getX() < 226 && e.getY() < 21;
     }
 
     private boolean isDelete(MouseEvent e)
     {
-        return e.getX() > 242 && e.getY() > 2 && e.getX() < 342 && e.getY() < 22;
+        return e.getX() > 241 && e.getY() > 1 && e.getX() < 341 && e.getY() < 21;
     }
 
 }
