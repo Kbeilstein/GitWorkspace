@@ -17,7 +17,7 @@ public class ArrayModel
 
     private ArrayList<ChangeListener> listeners;
 
-    private Thread animThread;
+    private AnimatorThread animThread;
 
     private boolean isInsertPossible;
 
@@ -25,10 +25,12 @@ public class ArrayModel
 
     private StartNextThread snThread;
 
+    private int animationSpeed;
+
     public ArrayModel(int length)
     {
         array = new int[length];
-        listeners = new ArrayList<>();
+        listeners = new ArrayList<>();        
     }
 
     // public void printArray()
@@ -117,12 +119,12 @@ public class ArrayModel
         fireAll("not found");
     }
 
-    public void setThread(Thread thread)
+    public void setThread(AnimatorThread thread)
     {
         animThread = thread;
     }
 
-    public synchronized Thread getThread()
+    public synchronized AnimatorThread getThread()
     {
         return animThread;
     }
@@ -184,5 +186,15 @@ public class ArrayModel
     public StartNextThread getAutoAnimationThread()
     {
         return snThread;
+    }
+
+    public int getSpeed()
+    {
+        return animationSpeed;
+    }
+
+    public void setSpeed(int val)
+    {
+        animationSpeed = val;
     }
 }

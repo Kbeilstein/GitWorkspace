@@ -268,7 +268,7 @@ public class ArrayView extends JPanel
         }
         else
         {
-            animThread = new AnimatorThread(this);
+            animThread = new AnimatorThread(this, model);
             model.setThread(animThread);
             animThread.start();
         }

@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 @SuppressWarnings("serial")
-public class LayoutConfig extends JFrame
+public class LayoutConfigView extends JFrame
 {
-    public LayoutConfig()
+    public LayoutConfigView()
     {
         super("Hashing");
         setDefaultCloseOperation(EXIT_ON_CLOSE);

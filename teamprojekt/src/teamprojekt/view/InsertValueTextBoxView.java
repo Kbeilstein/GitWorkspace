@@ -23,8 +23,10 @@ public class InsertValueTextBoxView extends JTextField
             @Override
             public void insertString(int off, String str, AttributeSet as) throws BadLocationException
             {
-                // Prüfen, ob bereits 5 Zeichen drin stehen
-                if (getLength() >= 2)
+                // Prüft, ob bereits 2 Zeichen vorhanden sind oder ob der
+                // einzufügende String plus dem bisher vorhanden String länger
+                // als 2 Zeichen ist
+                if (getLength() >= 2 || (str.length() + getLength()) > 2)
                 {
                     return;
                 }

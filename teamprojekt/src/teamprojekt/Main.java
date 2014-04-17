@@ -1,11 +1,11 @@
 package teamprojekt;
 
-import teamprojekt.view.LayoutConfig;
+import teamprojekt.view.LayoutConfigView;
 
 public class Main
 {
     public static void main(String[] args)
-    {
-        new LayoutConfig();
+    {        
+        new LayoutConfigView();
     }
 }

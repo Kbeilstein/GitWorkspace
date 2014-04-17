@@ -11,10 +11,13 @@ public class AnimatorThread extends Thread
 
     private boolean wait;
 
-    public AnimatorThread(ArrayView animPanel)
+    private ArrayModel model;
+
+    public AnimatorThread(ArrayView animPanel, ArrayModel model)
     {
         this.animPanel = animPanel;
-        speed = 20;
+        this.model = model;
+        setSpeed();
     }
 
     public synchronized void run()
@@ -39,9 +42,9 @@ public class AnimatorThread extends Thread
         animPanel.startNext();
     }
 
-    public void setSpeed(int value)
+    public void setSpeed()
     {
-        speed = value * -1;
+        speed = model.getSpeed();
     }
 
     public void setWait()
