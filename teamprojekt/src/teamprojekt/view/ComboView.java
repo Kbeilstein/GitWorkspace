@@ -90,10 +90,9 @@ public class ComboView extends JPanel
         startButton.addMouseMotionListener(sbl);
 
         PseudoCodeButtonView pseudoCodeButton = new PseudoCodeButtonView();
-        // PseudoCodeButtonListener pcbl = new
-        // PseudoCodeButtonListener(pseudoCodeButton);
-        // pseudoCodeButton.addMouseListener(pcbl);
-        // pseudoCodeButton.addMouseMotionListener(pcbl);
+        PseudoCodeButtonListener pcbl = new PseudoCodeButtonListener(pseudoCodeButton, algorithmComboBox);
+        pseudoCodeButton.addMouseListener(pcbl);
+        pseudoCodeButton.addMouseMotionListener(pcbl);
 
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Auswahl");
