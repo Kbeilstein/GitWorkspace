@@ -2,19 +2,24 @@ package teamprojekt.control;
 
 import java.awt.event.MouseEvent;
 
+import javax.swing.JComboBox;
 import javax.swing.event.MouseInputListener;
 
 import teamprojekt.view.PseudoCodeButtonView;
+import teamprojekt.view.PseudoCodeView;
 
 public class PseudoCodeButtonListener implements MouseInputListener
 {
     private PseudoCodeButtonView psCoButton;
+    
+    private JComboBox<String> cbVerfahren;
 
     private boolean pseudoCodeClicked;
 
-    public PseudoCodeButtonListener(PseudoCodeButtonView b)
+    public PseudoCodeButtonListener(PseudoCodeButtonView b, JComboBox<String> cbVerfahren)
     {
         this.psCoButton = b;
+        this.cbVerfahren = cbVerfahren;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -27,6 +32,7 @@ public class PseudoCodeButtonListener implements MouseInputListener
         {
             pseudoCodeClicked = true;
             psCoButton.setPseudoButtonClicked();
+            new PseudoCodeView(cbVerfahren);
         }
     }
 

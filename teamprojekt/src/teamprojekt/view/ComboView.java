@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import teamprojekt.control.ArraySizeTextListener;
-import teamprojekt.control.PseudoCodeButtonHandler;
+import teamprojekt.control.PseudoCodeButtonListener;
 import teamprojekt.control.SpinnerMinusButtonListener;
 import teamprojekt.control.SpinnerPlusButtonListener;
 import teamprojekt.control.StartButtonHandler;
@@ -68,8 +68,14 @@ public class ComboView extends JPanel
         JButton startButton = new JButton("Start");
         startButton.addActionListener(new StartButtonHandler(algorithmComboBox, spinnerTextView, panel));
 
-        JButton pseudoCodeButton = new JButton("Pseudo Code");
-        pseudoCodeButton.addActionListener(new PseudoCodeButtonHandler(algorithmComboBox));
+        PseudoCodeButtonView pseudoCodeButton = new PseudoCodeButtonView();
+        flowLayout = (FlowLayout) pseudoCodeButton.getLayout();
+        flowLayout.setVgap(15);
+        flowLayout.setHgap(64);
+
+        PseudoCodeButtonListener psC = new PseudoCodeButtonListener(pseudoCodeButton, algorithmComboBox);
+        pseudoCodeButton.addMouseMotionListener(psC);
+        pseudoCodeButton.addMouseListener(psC);
 
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Auswahl");
@@ -124,6 +130,7 @@ public class ComboView extends JPanel
         c.gridy = 7;
         add(startButton, c);
 
+        c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(30, 0, 17, 0);
         c.gridy = 8;
         add(pseudoCodeButton, c);
