@@ -27,19 +27,23 @@ public class SpinnerPlusButtonListener implements MouseInputListener
         spinnerTextView = text;
     }
 
+    @Override
     public void mouseClicked(MouseEvent e)
     {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e)
     {
     }
 
+    @Override
     public void mouseExited(MouseEvent e)
     {
         plusButtonView.setPlusButtonOff();
     }
 
+    @Override
     public void mousePressed(MouseEvent e)
     {
         if (isPlus(e))
@@ -74,12 +78,14 @@ public class SpinnerPlusButtonListener implements MouseInputListener
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e)
     {
         plusClicked = false;
         mouseMoved(e);
     }
 
+    @Override
     public void mouseDragged(MouseEvent e)
     {
         mouseMoved(e);

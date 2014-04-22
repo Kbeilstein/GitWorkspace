@@ -32,6 +32,7 @@ public class LinearesSondieren extends Sondieren
         arrayPosition = -1;
     }
 
+    @Override
     public void add(int val)
     {
         // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
@@ -86,6 +87,7 @@ public class LinearesSondieren extends Sondieren
 
     }
 
+    @Override
     public void nextSearchPosition()
     {
         if (isFound())
@@ -131,11 +133,13 @@ public class LinearesSondieren extends Sondieren
         return NAME;
     }
 
+    @Override
     public int getArrayPosition()
     {
         return arrayPosition;
     }
 
+    @Override
     public void nextInsertPosition()
     {
         if (isInsertPossible())

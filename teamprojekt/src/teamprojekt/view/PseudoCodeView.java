@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 
 @SuppressWarnings("serial")
 public class PseudoCodeView extends JFrame
@@ -56,7 +57,7 @@ public class PseudoCodeView extends JFrame
     public PseudoCodeView(JComboBox<String> cbVerfahren)
     {
         this.cbVerfahren = cbVerfahren;
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         pack();
         setSize(650, 550);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

@@ -30,14 +30,17 @@ public class ControlButtonsListener implements MouseInputListener
         this.model = model;
     }
 
+    @Override
     public void mouseClicked(MouseEvent e)
     {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e)
     {
     }
 
+    @Override
     public void mouseExited(MouseEvent e)
     {
         button.setBackButtonOff();
@@ -45,6 +48,7 @@ public class ControlButtonsListener implements MouseInputListener
         button.setNextButtonOff();
     }
 
+    @Override
     public void mousePressed(MouseEvent e)
     {
         // Clicked Back-Button
@@ -83,7 +87,7 @@ public class ControlButtonsListener implements MouseInputListener
     public void nextButtonClicked()
     {
         String insertSearchDelete = sond.getInsertSearchDelete();
-        AnimatorThread animThread = (AnimatorThread) model.getThread();
+        AnimatorThread animThread = model.getThread();
 
         if (button.getPlay() && animThread != null && animThread.isAlive())
         {
@@ -110,6 +114,7 @@ public class ControlButtonsListener implements MouseInputListener
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e)
     {
         backClicked = false;
@@ -118,6 +123,7 @@ public class ControlButtonsListener implements MouseInputListener
         mouseMoved(e);
     }
 
+    @Override
     public void mouseDragged(MouseEvent e)
     {
         mouseMoved(e);

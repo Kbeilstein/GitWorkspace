@@ -123,7 +123,7 @@ public class AlternierendesQuadrSondieren extends Sondieren
                 logView.collisionAlternierendesQuadrSondierenMinus(value, arrayPosition, arrayLength, j);
                 j++;
             }
-            
+
             arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
         }
         else

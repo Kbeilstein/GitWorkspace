@@ -20,6 +20,7 @@ public class AnimatorThread extends Thread
         setSpeed();
     }
 
+    @Override
     public synchronized void run()
     {
         while (!animPanel.getAnimationDone())

@@ -3,6 +3,7 @@ package teamprojekt.view;
 import java.awt.Font;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -15,7 +16,7 @@ public class SpinnerTextView extends JTextField
     {
         // Zeilen auf 2 setzen, da der Wert maximal 2 Zeichen haben kann
         setColumns(2);
-        setHorizontalAlignment(JTextField.CENTER);
+        setHorizontalAlignment(SwingConstants.CENTER);
         setFont(new Font(Font.DIALOG, Font.PLAIN, 14));
 
         // um falsche Eingaeben zu unterbinden werden fast alle "ungültigen"

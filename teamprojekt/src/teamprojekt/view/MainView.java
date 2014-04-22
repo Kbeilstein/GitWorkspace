@@ -81,6 +81,7 @@ public class MainView extends JPanel
         AnimationSpeedListener asl = new AnimationSpeedListener(arrayModel, slider);
         slider.addMouseListener(asl);
         slider.addMouseMotionListener(asl);
+        slider.setToolTipText("Animationsgeschwindigkeit");
 
         // alle angelegten Views werden zur "Hauptpane" hinzugefügt
         add(aView);

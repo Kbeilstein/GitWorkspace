@@ -48,10 +48,11 @@ public class PseudoCodeButtonView extends JPanel
 
     public PseudoCodeButtonView()
     {
-        setSize(new Dimension(125, 20));
         setPseudoButtonOff();
+        setPreferredSize(new Dimension(128, 23));
     }
 
+    @Override
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);

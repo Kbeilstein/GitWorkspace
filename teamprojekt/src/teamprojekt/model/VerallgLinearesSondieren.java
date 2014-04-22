@@ -96,6 +96,7 @@ public class VerallgLinearesSondieren extends Sondieren
         // auftritt läuft die while Schleife das ganze Array einmal durch
     }
 
+    @Override
     public void nextInsertPosition()
     {
         if (isInsertPossible())

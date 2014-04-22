@@ -79,6 +79,7 @@ public class ControlButtonsView extends JPanel
         setNextButtonOff();
     }
 
+    @Override
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);

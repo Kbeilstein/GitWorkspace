@@ -22,10 +22,12 @@ public class PseudoCodeButtonListener implements MouseInputListener
         this.cbVerfahren = cbVerfahren;
     }
 
+    @Override
     public void mouseClicked(MouseEvent e)
     {
     }
 
+    @Override
     public void mousePressed(MouseEvent e)
     {
         if (isPseudoCode(e))
@@ -36,26 +38,31 @@ public class PseudoCodeButtonListener implements MouseInputListener
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e)
     {
         pseudoCodeClicked = false;
         mouseMoved(e);
     }
 
+    @Override
     public void mouseEntered(MouseEvent e)
     {
     }
 
+    @Override
     public void mouseExited(MouseEvent e)
     {
         psCoButton.setPseudoButtonOff();
     }
 
+    @Override
     public void mouseDragged(MouseEvent e)
     {
         mouseMoved(e);
     }
 
+    @Override
     public void mouseMoved(MouseEvent e)
     {
         if (isPseudoCode(e) && pseudoCodeClicked)
