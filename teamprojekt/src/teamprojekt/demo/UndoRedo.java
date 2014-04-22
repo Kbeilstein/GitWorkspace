@@ -127,45 +127,54 @@ class XController
 
 abstract class UndoRedoSetAnimationX implements UndoableEdit
 {
+    @Override
     public boolean addEdit(UndoableEdit edit)
     {
         return false;
     }
 
+    @Override
     public boolean canRedo()
     {
         return true;
     }
 
+    @Override
     public boolean canUndo()
     {
         return true;
     }
 
+    @Override
     public void die()
     {
     }
 
+    @Override
     public String getRedoPresentationName()
     {
         return null;
     }
 
+    @Override
     public String getUndoPresentationName()
     {
         return null;
     }
 
+    @Override
     public boolean isSignificant()
     {
         return true;
     }
 
+    @Override
     public boolean replaceEdit(UndoableEdit arg0)
     {
         return false;
     }
 
+    @Override
     public String getPresentationName()
     {
         return null;
@@ -193,12 +202,14 @@ class UndoRedoSetAnimation extends UndoRedoSetAnimationX
         newEnd = end;
     }
 
+    @Override
     public void undo() throws CannotUndoException
     {
         System.out.println("Undo: Start " + prevEnd + " End " + prevStart);
         model.setF(prevEnd, prevStart, true);
     }
 
+    @Override
     public void redo() throws CannotRedoException
     {
         System.out.println("Redo: Start " + newStart + " End " + newEnd);
@@ -216,6 +227,7 @@ class UndoRedoListener extends XController implements ActionListener
         this.model = model;
     }
 
+    @Override
     public void actionPerformed(ActionEvent event)
     {
         JButton button = (JButton) event.getSource();
@@ -269,6 +281,7 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
         // nextButtonOff();
     }
 
+    @Override
     public synchronized void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -351,6 +364,7 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
 
     // wird vom ActionListener bei Änderungen ausgeführt, wenn redo oder next
     // aufgerufen wurde
+    @Override
     public void changedF(int startVal, int endVal)
     {
         undo = false;
@@ -359,6 +373,7 @@ class AnimationPanel extends JPanel implements UndoRedoModelChangeListener
 
     // wird vom ActionListener bei Änderungen ausgeführt, wenn undo aufgerufen
     // wurde
+    @Override
     public void changedF(int startVal, int endVal, boolean undoVal)
     {
         undo = undoVal;
@@ -392,6 +407,7 @@ class Animator extends Thread
         speed = 10;
     }
 
+    @Override
     public synchronized void run()
     {
         animPanel.setDoneFalse();

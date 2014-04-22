@@ -44,6 +44,7 @@ public class LegendView extends JLabel
         setBorder(titleBorder1);
     }
 
+    @Override
     public void paintComponent(Graphics g)
     {
         // Variabeln werden erst hier deklariert und initialisiert, damit

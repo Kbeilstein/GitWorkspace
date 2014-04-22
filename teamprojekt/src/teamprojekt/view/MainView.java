@@ -81,6 +81,7 @@ public class MainView extends JPanel
         AnimationSpeedListener asl = new AnimationSpeedListener(arrayModel, slider);
         slider.addMouseListener(asl);
         slider.addMouseMotionListener(asl);
+        slider.setToolTipText("Animationsgeschwindigkeit");
 
         // alle angelegten Views werden zur "Hauptpane" hinzugefügt
         add(aView);
@@ -102,7 +103,7 @@ public class MainView extends JPanel
         pane.setBounds((this.getWidth() - 10 - 500) / 2, SECOND_ROW + 60, 700, 30);
         textBoxLabel.setBounds(10, 2, 70, 20);
         textBox.setBounds(80, 1, 50, 24);
-        adbView.setBounds(155, 1, 360, 30);        
+        adbView.setBounds(155, 1, 360, 30);
         sp.setBounds((this.getWidth() - 10 - (this.getWidth() - 40)) / 2 + insets.left, THIRD_ROW + insets.top + 60, this.getWidth() - 40, 260);
         updateUI();
     }

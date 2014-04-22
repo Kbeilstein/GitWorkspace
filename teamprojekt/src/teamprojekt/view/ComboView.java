@@ -7,17 +7,18 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicComboPopup;
 
 import teamprojekt.control.ArraySizeTextListener;
-import teamprojekt.control.PseudoCodeButtonHandler;
+import teamprojekt.control.PseudoCodeButtonListener;
 import teamprojekt.control.SpinnerMinusButtonListener;
 import teamprojekt.control.SpinnerPlusButtonListener;
-import teamprojekt.control.StartButtonHandler;
+import teamprojekt.control.StartButtonListener;
 
 @SuppressWarnings("serial")
 public class ComboView extends JPanel
@@ -32,11 +33,21 @@ public class ComboView extends JPanel
         algorithmComboBox.setBackground(Color.white);
         algorithmComboBox.setForeground(Color.darkGray);
 
+        Object child = algorithmComboBox.getAccessibleContext().getAccessibleChild(0);
+        BasicComboPopup popup = (BasicComboPopup) child;
+        JList<?> list = popup.getList();
+        list.setSelectionBackground(new Color(210, 210, 210));
+
         JComboBox<Integer> constPick = new JComboBox<Integer>();
         constPick.setEditable(false);
         constPick.setBackground(Color.white);
         constPick.setForeground(Color.darkGray);
         constPick.setEnabled(false);
+
+        Object child2 = constPick.getAccessibleContext().getAccessibleChild(0);
+        BasicComboPopup popup2 = (BasicComboPopup) child2;
+        JList<?> list2 = popup2.getList();
+        list2.setSelectionBackground(new Color(210, 210, 210));
 
         JPanel spinnerPane = new JPanel();
         spinnerPane.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -65,11 +76,23 @@ public class ComboView extends JPanel
         spinnerPane.add(spinnerTextView);
         spinnerPane.add(plusButtonView);
 
-        JButton startButton = new JButton("Start");
-        startButton.addActionListener(new StartButtonHandler(algorithmComboBox, spinnerTextView, panel));
+        // JButton startButton = new JButton("Start");
+        // startButton.addActionListener(new
+        // StartButtonHandler(algorithmComboBox, spinnerTextView, panel));
+        //
+        // JButton pseudoCodeButton = new JButton("Pseudo Code");
+        // pseudoCodeButton.addActionListener(new
+        // PseudoCodeButtonHandler(algorithmComboBox));
 
-        JButton pseudoCodeButton = new JButton("Pseudo Code");
-        pseudoCodeButton.addActionListener(new PseudoCodeButtonHandler(algorithmComboBox));
+        StartButtonView startButton = new StartButtonView();
+        StartButtonListener sbl = new StartButtonListener(algorithmComboBox, spinnerTextView, panel, startButton);
+        startButton.addMouseListener(sbl);
+        startButton.addMouseMotionListener(sbl);
+
+        PseudoCodeButtonView pseudoCodeButton = new PseudoCodeButtonView();
+        PseudoCodeButtonListener pcbl = new PseudoCodeButtonListener(pseudoCodeButton);
+        pseudoCodeButton.addMouseListener(pcbl);
+        pseudoCodeButton.addMouseMotionListener(pcbl);
 
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Auswahl");
@@ -83,7 +106,7 @@ public class ComboView extends JPanel
 
         AlgorithmPickListener algoPickListener = new AlgorithmPickListener(spinnerTextView, algorithmComboBox, constPick, constPickLabel);
         algorithmComboBox.addActionListener(algoPickListener);
-        spinnerTextView.getDocument().addDocumentListener(new ArraySizeTextListener(spinnerTextView, startButton, startButtonLabel, algoPickListener));
+        spinnerTextView.getDocument().addDocumentListener(new ArraySizeTextListener(spinnerTextView, startButtonLabel, algoPickListener));
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

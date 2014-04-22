@@ -27,19 +27,23 @@ public class SpinnerMinusButtonListener implements MouseInputListener
         spinnerTextView = text;
     }
 
+    @Override
     public void mouseClicked(MouseEvent e)
     {
     }
 
+    @Override
     public void mouseEntered(MouseEvent e)
     {
     }
 
+    @Override
     public void mouseExited(MouseEvent e)
     {
         minusButtonView.setMinusButtonOff();
     }
 
+    @Override
     public void mousePressed(MouseEvent e)
     {
         if (isMinus(e))
@@ -75,12 +79,14 @@ public class SpinnerMinusButtonListener implements MouseInputListener
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e)
     {
         minusClicked = false;
         mouseMoved(e);
     }
 
+    @Override
     public void mouseDragged(MouseEvent e)
     {
         mouseMoved(e);

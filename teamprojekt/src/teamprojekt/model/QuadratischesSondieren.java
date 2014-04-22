@@ -83,6 +83,7 @@ public class QuadratischesSondieren extends Sondieren
         // auftritt läuft die while Schleife das ganze Array einmal durch
     }
 
+    @Override
     public void nextInsertPosition()
     {
         if (isInsertPossible())
@@ -128,7 +129,7 @@ public class QuadratischesSondieren extends Sondieren
         else if (!isFound() && i < arrayLength && array[arrayPosition] != 0)
         {
             int oldArrayPosition = arrayPosition;
-            arrayPosition = ((value % arrayLength) + (i * i)) % arrayLength;            
+            arrayPosition = ((value % arrayLength) + (i * i)) % arrayLength;
             logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
             arrayModel.setValuesSearch(oldArrayPosition, arrayPosition, value, isFound());
             i++;

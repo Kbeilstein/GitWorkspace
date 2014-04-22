@@ -65,26 +65,31 @@ public class LogView extends JTextArea
 
     public void collisionVerallgLinearesSondieren(int wert, int arrayPosition, int arrayLaenge, int c, int i)
     {
+//        write("Kollision \u2192 Lineares Sondieren (Formel): " + (wert % arrayLaenge) + " + " + i + " mod " + arrayLaenge + " = " + arrayPosition + " \u2192 " + wert + " soll auf Feldposition " + arrayPosition + " eingefügt werden");
         write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> erw. Lineares Sondieren " + (wert % arrayLaenge) + " + " + c + " * " + i);
     }
 
     public void collisionQuadratischesSondieren(int wert, int arrayPosition, int arrayLaenge, int i)
     {
+//        write("Kollision \u2192 Lineares Sondieren (Formel): " + (wert % arrayLaenge) + " + " + i + " mod " + arrayLaenge + " = " + arrayPosition + " \u2192 " + wert + " soll auf Feldposition " + arrayPosition + " eingefügt werden");
         write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) + " + " + i + "^2");
     }
-    
+
     public void collisionAlternierendesQuadrSondierenPlus(int wert, int arrayPosition, int arrayLaenge, int i)
     {
+//        write("Kollision \u2192 Lineares Sondieren (Formel): " + (wert % arrayLaenge) + " + " + i + " mod " + arrayLaenge + " = " + arrayPosition + " \u2192 " + wert + " soll auf Feldposition " + arrayPosition + " eingefügt werden");
         write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> alternierendes Quadratisches Sondieren " + (wert % arrayLaenge) + " + " + i + "^2");
     }
 
-    public void collisionAlternierendesQuadrSondierenMinus(int wert, int arrayPosition, int arrayLaenge, int j)
+    public void collisionAlternierendesQuadrSondierenMinus(int wert, int arrayPosition, int arrayLaenge, int i)
     {
-        write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> alternierendes Quadratisches Sondieren " + (wert % arrayLaenge) + " - " + j + "^2");
+//        write("Kollision \u2192 Lineares Sondieren (Formel): " + (wert % arrayLaenge) + " + " + i + " mod " + arrayLaenge + " = " + arrayPosition + " \u2192 " + wert + " soll auf Feldposition " + arrayPosition + " eingefügt werden");
+        write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> alternierendes Quadratisches Sondieren " + (wert % arrayLaenge) + " - " + i + "^2");
     }
 
     public void collisionDoppelHashing(int wert, int arrayPosition, int arrayLaenge, int i)
     {
+//        write("Kollision \u2192 Lineares Sondieren (Formel): " + (wert % arrayLaenge) + " + " + i + " mod " + arrayLaenge + " = " + arrayPosition + " \u2192 " + wert + " soll auf Feldposition " + arrayPosition + " eingefügt werden");
         write(wert + " auf Feldposition " + arrayPosition + ", Kollision -> Doppel-Hashing " + arrayPosition + " - " + i + " * (1 + " + wert + " mod " + (arrayLaenge - 2) + ")");
     }
 

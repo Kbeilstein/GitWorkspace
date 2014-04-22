@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 
-public class ComboHashHandler implements ActionListener
+public class ComboHashListener implements ActionListener
 {
 
     private static final int[] LINEARES_SONDIEREN =
@@ -25,7 +25,7 @@ public class ComboHashHandler implements ActionListener
 
     private JComboBox<Integer> versArrayLaenge;
 
-    public ComboHashHandler(JComboBox<Integer> versArryLaenge)
+    public ComboHashListener(JComboBox<Integer> versArryLaenge)
     {
         this.versArrayLaenge = versArryLaenge;
         fillBox(LINEARES_SONDIEREN);

@@ -35,6 +35,7 @@ public class SpinnerPlusButtonView extends JPanel
         setPlusButtonOff();
     }
 
+    @Override
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);

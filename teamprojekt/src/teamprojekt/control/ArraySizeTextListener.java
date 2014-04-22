@@ -20,10 +20,10 @@ public class ArraySizeTextListener implements DocumentListener
 
     private AlgorithmPickListener algoPickListener;
 
-    public ArraySizeTextListener(SpinnerTextView spinnerTextView, JButton startButton, JLabel startButtonLabel, AlgorithmPickListener algoPickListener)
+    public ArraySizeTextListener(SpinnerTextView spinnerTextView, JLabel startButtonLabel, AlgorithmPickListener algoPickListener)
     {
         this.spinnerTextView = spinnerTextView;
-        this.startButton = startButton;
+        this.startButton = new JButton();
         this.startButtonLabel = startButtonLabel;
         this.algoPickListener = algoPickListener;
         insertUpdate(null);

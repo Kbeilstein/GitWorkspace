@@ -2,6 +2,7 @@ package teamprojekt.view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -48,8 +49,10 @@ public class PseudoCodeButtonView extends JPanel
     public PseudoCodeButtonView()
     {
         setPseudoButtonOff();
+        setPreferredSize(new Dimension(128, 23));
     }
 
+    @Override
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);

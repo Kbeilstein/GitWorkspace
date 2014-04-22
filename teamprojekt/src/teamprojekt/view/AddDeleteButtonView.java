@@ -65,6 +65,7 @@ public class AddDeleteButtonView extends JPanel
         setDeleteButtonOff();
     }
 
+    @Override
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);

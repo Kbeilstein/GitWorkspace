@@ -132,7 +132,7 @@ public abstract class Sondieren
     {
         // beim drücken des Play Buttons zu Stop, wird der Thread der die
         // Animation ausführt auf wait gesetzt
-        AnimatorThread dummy = (AnimatorThread) arrayModel.getThread();
+        AnimatorThread dummy = arrayModel.getThread();
         if (dummy != null && dummy.isAlive())
         {
             dummy.setWait();
@@ -144,8 +144,8 @@ public abstract class Sondieren
         // Threads werden geweckt, dazu wird geschaut, welcher Thread aktiv ist
         // und entsprechend mit der wake Methode geweckt
         // falls kein Thread wartet, wird der nächste Schritt ausgeführt
-        StartNextThread snThread = (StartNextThread) arrayModel.getAutoAnimationThread();
-        AnimatorThread animThread = (AnimatorThread) arrayModel.getThread();
+        StartNextThread snThread = arrayModel.getAutoAnimationThread();
+        AnimatorThread animThread = arrayModel.getThread();
         if (snThread != null && snThread.isAlive())
         {
             snThread.wake();

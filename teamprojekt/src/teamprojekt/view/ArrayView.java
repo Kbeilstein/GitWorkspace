@@ -99,6 +99,7 @@ public class ArrayView extends JPanel
         animationDone = true;
     }
 
+    @Override
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -259,7 +260,7 @@ public class ArrayView extends JPanel
     {
         insertSearchDelete = insSearchDel;
         update();
-        AnimatorThread animThread = (AnimatorThread) model.getThread();
+        AnimatorThread animThread = model.getThread();
         if (animThread != null && animThread.isAlive())
         {
             // //animationNext();

@@ -37,7 +37,7 @@ public class DoppelHashing extends Sondieren
     @Override
     public void add(int val)
     {
-     // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
+        // Kollisionsbehandlung wird nur durchgefuehrt, wenn das Array noch
         // freie Plaetze enthaelt
         value = val;
 
@@ -68,7 +68,7 @@ public class DoppelHashing extends Sondieren
     @Override
     public void search(int val)
     {
-     // mit -1 initialisiert, kennzeichnet "nicht gefunden"
+        // mit -1 initialisiert, kennzeichnet "nicht gefunden"
         index = -1;
         value = val;
 
@@ -84,12 +84,12 @@ public class DoppelHashing extends Sondieren
 
         // solange nicht der Wert oder ein leere Platz (mit 0 gekennzeichnet)
         // auftritt läuft die while Schleife das ganze Array einmal durch
-        
+
         // // Loesung um ein "-" bei modulo abzufangen
         // // (a % b + b) % b
         // arrayPosition = (((wert % arrayLaenge) - i * (1 + wert % (arrayLaenge
         // - 2))) % arrayLaenge + arrayLaenge) % arrayLaenge;
-        // i++;     
+        // i++;
     }
 
     // private int getAddPosition(int wert)
@@ -123,7 +123,8 @@ public class DoppelHashing extends Sondieren
     // }
     // return arrayPosition;
     // }
-    
+
+    @Override
     public void nextInsertPosition()
     {
         if (isInsertPossible())

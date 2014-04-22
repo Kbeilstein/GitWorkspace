@@ -30,7 +30,7 @@ public class ArrayModel
     public ArrayModel(int length)
     {
         array = new int[length];
-        listeners = new ArrayList<>();        
+        listeners = new ArrayList<>();
     }
 
     // public void printArray()
