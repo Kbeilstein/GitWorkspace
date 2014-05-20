@@ -1,6 +1,9 @@
 package teamprojekt.view;
 
+import java.awt.Font;
+
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -10,11 +13,13 @@ public class InsertValueTextBoxView extends JTextField
 {
     public InsertValueTextBoxView()
     {
-        /*
-         * 
-         * Das Textfeld soll nur Zahlen zulassen und als Maximum soll maximal
-         * eine fünfstellige Zahl im Textfeld stehen.
-         */
+        // Zeilen auf 2 setzen, da der Wert maximal 2 Zeichen haben kann
+        setColumns(2);
+        setHorizontalAlignment(SwingConstants.CENTER);
+        setFont(new Font(Font.DIALOG, Font.PLAIN, 14));
+
+        // um falsche Eingaben zu unterbinden werden fast "alle ungültigen"
+        // Eingaben im vorhinein gefiltert
         this.setToolTipText("Zahlen von 1-99");
         this.setDocument(new PlainDocument()
         {

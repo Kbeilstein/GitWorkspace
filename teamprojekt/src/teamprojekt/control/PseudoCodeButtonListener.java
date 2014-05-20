@@ -15,7 +15,7 @@ public class PseudoCodeButtonListener implements MouseInputListener
     private JComboBox<String> cbVerfahren;
 
     private boolean pseudoCodeClicked;
-
+    
     public PseudoCodeButtonListener(PseudoCodeButtonView b, JComboBox<String> cbVerfahren)
     {
         this.psCoButton = b;

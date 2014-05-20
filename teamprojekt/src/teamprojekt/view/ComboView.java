@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboPopup;
 
+import teamprojekt.control.AlgorithmPickListener;
 import teamprojekt.control.ArraySizeTextListener;
 import teamprojekt.control.PseudoCodeButtonListener;
 import teamprojekt.control.SpinnerMinusButtonListener;

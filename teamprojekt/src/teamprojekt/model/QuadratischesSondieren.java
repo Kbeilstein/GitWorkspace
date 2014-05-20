@@ -21,6 +21,8 @@ public class QuadratischesSondieren extends Sondieren
     private int index;
 
     private static final String NAME = "Quadratisches Sondieren";
+    
+    private static final String FORMULA = "(h(x) + i^2)";
 
     public QuadratischesSondieren(ArrayModel arrayModel, LogView logView)
     {
@@ -170,5 +172,11 @@ public class QuadratischesSondieren extends Sondieren
     public boolean isFound()
     {
         return (array[arrayPosition] == value);
+    }
+
+    @Override
+    public String getFormula()
+    {
+        return FORMULA;
     }
 }

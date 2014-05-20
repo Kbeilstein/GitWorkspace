@@ -27,6 +27,8 @@ public abstract class Sondieren
 
     public abstract String getName();
 
+    public abstract String getFormula();
+
     public abstract int getArrayPosition();
 
     public abstract void nextInsertPosition();

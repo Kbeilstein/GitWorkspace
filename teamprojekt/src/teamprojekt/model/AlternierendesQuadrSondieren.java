@@ -24,6 +24,8 @@ public class AlternierendesQuadrSondieren extends Sondieren
 
     private static final String NAME = "alternierendes Quadratisches Sondieren";
 
+    private static final String FORMULA = "(h0(x) + i^2), (h1(x) - i^2), ...";
+
     public AlternierendesQuadrSondieren(ArrayModel arrayModel, LogView logView)
     {
         super(arrayModel, logView);
@@ -210,5 +212,11 @@ public class AlternierendesQuadrSondieren extends Sondieren
     public boolean isFound()
     {
         return (array[arrayPosition] == value);
+    }
+
+    @Override
+    public String getFormula()
+    {
+        return FORMULA;
     }
 }

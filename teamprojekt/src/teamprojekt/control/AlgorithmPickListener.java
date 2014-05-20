@@ -1,4 +1,4 @@
-package teamprojekt.view;
+package teamprojekt.control;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+
+import teamprojekt.view.SpinnerTextView;
 
 public class AlgorithmPickListener implements ActionListener
 {

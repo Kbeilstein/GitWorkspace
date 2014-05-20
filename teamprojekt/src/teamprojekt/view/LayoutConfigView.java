@@ -1,7 +1,11 @@
 package teamprojekt.view;
 
 import java.awt.Dimension;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -12,10 +16,28 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 @SuppressWarnings("serial")
 public class LayoutConfigView extends JFrame
 {
+    private HelpFrameView hframe;
+
     public LayoutConfigView()
     {
         super("Hashing");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher()
+        {
+            public boolean dispatchKeyEvent(KeyEvent e)
+            {
+                if (KeyEvent.VK_F1 == e.getKeyCode() && e.toString().contains("KEY_PRESSED"))
+                {
+                    if (hframe == null)
+                    {
+                        hframe = new HelpFrameView();
+                    }
+                    hframe.setVisible(true);
+                }
+                return false;
+            }
+        });
 
         // Variable um die Bildschirmbreite abzuspeichern
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,5 +59,17 @@ public class LayoutConfigView extends JFrame
         setLayout(groupLayout);
 
         setVisible(true);
+    }
+}
+
+class MyKeyListener extends KeyAdapter
+{
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        if (e.getKeyCode() == KeyEvent.VK_DELETE)
+        {
+            System.out.println("Key \"Delete\" Pressed");
+        }
     }
 }

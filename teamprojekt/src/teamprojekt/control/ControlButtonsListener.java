@@ -28,6 +28,7 @@ public class ControlButtonsListener implements MouseInputListener
         button = b;
         this.sond = sond;
         this.model = model;
+        playButtonClicked();
     }
 
     @Override
@@ -61,18 +62,7 @@ public class ControlButtonsListener implements MouseInputListener
         else if (isPlay(e))
         {
             playClicked = true;
-            button.setPlay();
-            sond.setPlay();
-            if (!button.getPlay())
-            {
-                sond.threadGo();
-                // sond.listenerNext();
-            }
-            else
-            {
-                // Thread-Pausieren
-                sond.threadWait();
-            }
+            playButtonClicked();
             button.setPlayButtonClicked();
         }
         // Clicked Next-Button
@@ -81,6 +71,22 @@ public class ControlButtonsListener implements MouseInputListener
             nextClicked = true;
             button.setNextButtonClicked();
             nextButtonClicked();
+        }
+    }
+
+    private void playButtonClicked()
+    {
+        button.setPlay();
+        sond.setPlay();
+        if (!button.getPlay())
+        {
+            sond.threadGo();
+            // sond.listenerNext();
+        }
+        else
+        {
+            // Thread-Pausieren
+            sond.threadWait();
         }
     }
 

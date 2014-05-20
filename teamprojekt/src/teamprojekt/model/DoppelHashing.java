@@ -22,6 +22,8 @@ public class DoppelHashing extends Sondieren
 
     private static final String NAME = "Doppel-Hashing";
 
+    private static final String FORMULA = "h(x) - i * ( 1 + x mod (m-2))";
+
     public DoppelHashing(ArrayModel arrayModel, LogView logView)
     {
         super(arrayModel, logView);
@@ -34,6 +36,8 @@ public class DoppelHashing extends Sondieren
     // h(k) = k mod m
     // h'(k) = 1 + k mod (m-2)
     // h(k), h(k)-h(k), h(k)-2*h(k), ... , h(k)-(m-1)*h(k)
+    // h(x) - i * ( 1 + x mod (m-2))
+    // (value % arrayLength) - i * (1 + value % (arrayLength - 2))
     @Override
     public void add(int val)
     {
@@ -140,7 +144,7 @@ public class DoppelHashing extends Sondieren
         {
             int oldArrayPosition = arrayPosition;
             arrayPosition = (((value % arrayLength) - i * (1 + value % (arrayLength - 2))) % arrayLength + arrayLength) % arrayLength;
-            logView.collisionAlternierendesQuadrSondierenPlus(value, arrayPosition, arrayLength, i);
+            logView.collisionDoppelHashing(value, arrayPosition, arrayLength, i);
             i++;
             arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
         }
@@ -211,5 +215,11 @@ public class DoppelHashing extends Sondieren
     public boolean isFound()
     {
         return (array[arrayPosition] == value);
+    }
+
+    @Override
+    public String getFormula()
+    {
+        return FORMULA;
     }
 }

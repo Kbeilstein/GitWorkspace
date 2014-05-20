@@ -38,23 +38,32 @@ public class AddDeleteListener implements MouseInputListener
     @Override
     public void mousePressed(MouseEvent e)
     {
-        if (isInsert(e))
+        if (sondieren.getArrayPosition() == -1)
         {
-            insertClicked = true;
-            button.setInsertButtonClicked();
-            buttonReaction("insert");
+            if (isInsert(e))
+            {
+                insertClicked = true;
+                button.setInsertButtonClicked();
+                buttonReaction("insert");
+            }
+            else if (isSearch(e))
+            {
+                searchClicked = true;
+                button.setSearchButtonClicked();
+                buttonReaction("search");
+            }
+            else if (isDelete(e))
+            {
+                deleteClicked = true;
+                button.setDeleteButtonClicked();
+                buttonReaction("delete");
+            }
+            // Label auf "durchsichtig Setzen"
         }
-        else if (isSearch(e))
+        else if (isInsert(e) || isSearch(e) || isDelete(e))
         {
-            searchClicked = true;
-            button.setSearchButtonClicked();
-            buttonReaction("search");
-        }
-        else if (isDelete(e))
-        {
-            deleteClicked = true;
-            button.setDeleteButtonClicked();
-            buttonReaction("delete");
+            // Text in Label setzen
+            System.out.println("Aktion erst nach Ende der Animation möglich");
         }
     }
 
@@ -94,8 +103,8 @@ public class AddDeleteListener implements MouseInputListener
             {
                 sondieren.delete(typeToStart);
             }
+            textBox.setText("");
         }
-        textBox.setText("");
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ControlButtonsView extends JPanel
     private int yPolyNext[] =
     { 16, 26, 21 };
 
-    private boolean play = false;
+    private boolean play;
 
     private Color borderColor = Color.BLACK;
 

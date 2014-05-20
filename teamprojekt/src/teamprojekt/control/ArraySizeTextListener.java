@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import teamprojekt.view.AlgorithmPickListener;
 import teamprojekt.view.SpinnerTextView;
 
 public class ArraySizeTextListener implements DocumentListener

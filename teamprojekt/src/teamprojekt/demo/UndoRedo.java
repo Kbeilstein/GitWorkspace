@@ -1,19 +1,15 @@
 package teamprojekt.demo;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
@@ -433,40 +429,41 @@ class Animator extends Thread
 
 public class UndoRedo
 {
-    public static void main(String[] args)
-    {
-        JFrame f = new JFrame("Beispiel für Undo / Redo");
-        f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        f.setLayout(new BorderLayout());
-
-        UndoRedoModel model = new UndoRedoModel();
-        UndoManager manager = new UndoManager();
-
-        JPanel undoredoPanel = new JPanel(new GridLayout(1, 0));
-        JButton undoButton = new JButton("undo");
-        undoButton.setName("undo");
-        undoButton.setEnabled(false);
-        JButton redoButton = new JButton("next");
-        redoButton.setName("next");
-        redoButton.setEnabled(true);
-
-        UndoRedoListener unreHandler = new UndoRedoListener(model, manager, undoButton, redoButton);
-        redoButton.addActionListener(unreHandler);
-        undoButton.addActionListener(unreHandler);
-        undoredoPanel.add(undoButton);
-        undoredoPanel.add(redoButton);
-        f.add(undoredoPanel, BorderLayout.SOUTH);
-
-        // UndoRedoModelView view = new UndoRedoModelView();
-        AnimationPanel animPanel = new AnimationPanel(model);
-        model.addView(animPanel);
-
-        JPanel mainPanel = new JPanel(new GridLayout(1, 0));
-        mainPanel.add(animPanel);
-        f.add(mainPanel, BorderLayout.CENTER);
-
-        f.setLocation(300, 250);
-        f.setSize(500, 150); // f.pack();
-        f.setVisible(true);
-    }
+    // public static void main(String[] args)
+    // {
+    // JFrame f = new JFrame("Beispiel für Undo / Redo");
+    // f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    // f.setLayout(new BorderLayout());
+    //
+    // UndoRedoModel model = new UndoRedoModel();
+    // UndoManager manager = new UndoManager();
+    //
+    // JPanel undoredoPanel = new JPanel(new GridLayout(1, 0));
+    // JButton undoButton = new JButton("undo");
+    // undoButton.setName("undo");
+    // undoButton.setEnabled(false);
+    // JButton redoButton = new JButton("next");
+    // redoButton.setName("next");
+    // redoButton.setEnabled(true);
+    //
+    // UndoRedoListener unreHandler = new UndoRedoListener(model, manager,
+    // undoButton, redoButton);
+    // redoButton.addActionListener(unreHandler);
+    // undoButton.addActionListener(unreHandler);
+    // undoredoPanel.add(undoButton);
+    // undoredoPanel.add(redoButton);
+    // f.add(undoredoPanel, BorderLayout.SOUTH);
+    //
+    // // UndoRedoModelView view = new UndoRedoModelView();
+    // AnimationPanel animPanel = new AnimationPanel(model);
+    // model.addView(animPanel);
+    //
+    // JPanel mainPanel = new JPanel(new GridLayout(1, 0));
+    // mainPanel.add(animPanel);
+    // f.add(mainPanel, BorderLayout.CENTER);
+    //
+    // f.setLocation(300, 250);
+    // f.setSize(500, 150); // f.pack();
+    // f.setVisible(true);
+    // }
 }

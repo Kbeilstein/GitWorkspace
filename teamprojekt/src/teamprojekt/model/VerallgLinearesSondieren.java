@@ -24,6 +24,8 @@ public class VerallgLinearesSondieren extends Sondieren
 
     private static final String NAME = "Verallgemeinertes Lineares Sondieren";
 
+    private static final String FORMULA = "(h(x) + c * i)";
+
     public VerallgLinearesSondieren(ArrayModel arrayModel, LogView logView)
     {
         super(arrayModel, logView);
@@ -183,5 +185,11 @@ public class VerallgLinearesSondieren extends Sondieren
     public boolean isFound()
     {
         return (array[arrayPosition] == value);
+    }
+
+    @Override
+    public String getFormula()
+    {
+        return FORMULA;
     }
 }
