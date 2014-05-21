@@ -84,9 +84,9 @@ public class MainView extends JPanel
         lsbView.addMouseMotionListener(lsbListener);
 
         JLabel formula = new JLabel();
-        formula.setFont(new Font("Verdana", Font.PLAIN, 18));
-        formula.setForeground(Color.RED);
-        formula.setText("hi(x) = (" + sond.getFormula() + ") mod m");
+        formula.setFont(new Font("Verdana", Font.PLAIN, 14));
+        formula.setForeground(Color.DARK_GRAY);
+        formula.setText("Algorithmus: hi(x) = (" + sond.getFormula() + ") mod m");
 
         // alle angelegten Views werden zur "Hauptpane" hinzugefügt
         add(formula);
