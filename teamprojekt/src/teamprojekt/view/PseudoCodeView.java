@@ -15,51 +15,155 @@ public class PseudoCodeView extends JFrame
 
     private String cutS = "\n----------------------------------------------------------------------\n\n";
 
+    // Pseudo-Code für das lineare Sondieren mit Kommentaren
     private String codeLS = ""
-        + " Suchen: \n"
-        + " int position =  wert % arraylänge; \t\t\t\t\t"                          + "// \n"
-        + " while(array[position] != 0) \t\t\t\t\t\t\t"                             + "// suche solange bis leere Zelle \n\t"
-            + " if(array[position] == wert) \t\t\t\t\t\t"                           + "// ist der Wert gefunden \n\t\t"
-                + " return position; \t\t\t\t\t\t\t"                                    + "// gebe position zurück \n\t"
-            + " position++; \t\t\t\t\t\t\t\t\t"                                     + "// lineare progression \n\t"
-            + " position = (wert + position)% arraylänge; \t\t"                     + "// \n"
-        + " return 0; \t\t\t\t\t\t\t\t\t\t\t"                                       + "// wenn der wert nicht gefunden werden konnte \n"
-  
+        + " Suchen:"                                        + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + " return position;"                       + "\t\t\t\t\t\t\t\t"        + "// gebe Position zurueck"                + "\n\t"
+            + " position = (wert + position)% arraylänge;"  + "\t\t"                    + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden"                  + "\n"
         + cutS 
-      
-        + " Einf\u00fcgen: \n"
-        + " int position =  wert % arraylänge; \t\t\t\t\t"                          + "// \n"
-        + " while(array[position] != 0 && array[position] != -1) \t"                + "// suche solange bis leere Zelle oder als gelöscht Markiert \n\t"
-            + " position++; \t\t\t\t\t\t\t\t\t"                                     + "// lineare progression \n\t"
-            + " position = (wert + position) % arraylänge; \t\t"                    + "// \n"
-        + " array[position] = wert; \t\t\t\t\t\t\t\t"                               + "// füge den Wert an \n"
-      
+        + " Einf\u00fcgen:"                                 + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0 && array[position] != -1)"   + "\t"              + "// suche bis Zelle leer oder als geloescht Markiert " + "\n\t"
+            + " position = (wert + position) % arraylänge;" + "\t\t"                    + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " array[position] = wert;"                        + "\t\t\t\t\t\t\t\t"        + "// fuege den Wert an"                    + "\n"
         + cutS 
-  
-        + " L\u00f6schen: \n"
-        + " int position =  wert % arraylänge; \t\t\t\t\t"                          + "// \n"
-        + " while(array[position] != 0) \t\t\t\t\t\t\t"                             + "// suche solange bis leere Zelle \n\t"
-            + " if(array[position] == wert) \t\t\t\t\t\t"                           + "// ist der Wert gefunden \n\t\t"
-                + "array[position] = -1; \t\t\t\t\t\t\t"                            + "// Lösche den wert \n\t\t"
-                + "return array[position]; \t\t\t\t\t\t"                            + "// als gelöscht Markiert \n\t"
-            + " position++; \t\t\t\t\t\t\t\t\t"                                     + "// lineare progression \n\t"
-            + " position = (wert + position) %  arraylänge; \t\t"                   + "// \n"
-        + " return 0; \t\t\t\t\t\t\t\t\t\t\t"                                       + "// wenn der Wert nicht gefunden wurde";
+        + " L\u00f6schen:"                                  + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + "array[position] = -1;"                   + "\t\t\t\t\t\t\t"          + "// Loesche den wert"                     + "\n\t\t"
+                + "return array[position];"                 + "\t\t\t\t\t\t"            + "// als geloescht Markiert"               + "\n\t"
+            + " position = (wert + position) %  arraylänge;"+ "\t\t"                    + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden";
 
-    private String codeErwLS = "";
+    // Pseudo-Code für das Verallgemeinerte lineare Sondieren mit Kommentaren
+    private String codeErwLS = ""
+        + " Suchen:"                                        + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + " return position;"                       + "\t\t\t\t\t\t\t\t"        + "// gebe Position zurueck"                + "\n\t"
+            + " position = (wert + c * position)% arraylänge;"  + "\t\t"                + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden"                  + "\n"
+        + cutS 
+        + " Einf\u00fcgen:"                                 + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0 && array[position] != -1)"   + "\t"              + "// suche bis Zelle leer oder als geloescht Markiert " + "\n\t"
+            + " position = (wert + c * position) % arraylänge;" + "\t"                  + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " array[position] = wert;"                        + "\t\t\t\t\t\t\t\t"        + "// fuege den Wert an"                    + "\n"
+        + cutS 
+        + " L\u00f6schen:"                                  + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + "array[position] = -1;"                   + "\t\t\t\t\t\t\t"          + "// Loesche den wert"                     + "\n\t\t"
+                + "return array[position];"                 + "\t\t\t\t\t\t"            + "// als geloescht Markiert"               + "\n\t"
+            + " position = (wert + c * position) %  arraylänge;"+ "\t"                  + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden";
     
-    private String codeQS = " Suchen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n return position; \n" + cutS + " Hinzuf\u00fcgen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n if( wert == 0 || wert == -1) \n\t return position; \n else \n\t array[i] = -1 \n\t return position \n " + cutS + " L\u00f6schen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n if( wert == 0 || wert == -1) \n\t return position; \n else \n\t array[i] = -1 \n\t return position";;
+    // Pseudo-Code für das quadratisches Sondieren mit Kommentaren
+    private String codeQS = ""
+        + " Suchen:"                                        + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + " return position;"                       + "\t\t\t\t\t\t\t\t"        + "// gebe Position zurueck"                + "\n\t"
+            + " position = (wert + position^2)% arraylänge;"+ "\t\t"                    + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden"                  + "\n"
+        + cutS 
+        + " Einf\u00fcgen:"                                 + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0 && array[position] != -1)"   + "\t"              + "// suche bis Zelle leer oder als geloescht Markiert " + "\n\t"
+            + " position = (wert + position^2) % arraylänge;" + "\t\t"                  + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " array[position] = wert;"                        + "\t\t\t\t\t\t\t\t"        + "// fuege den Wert an"                    + "\n"
+        + cutS 
+        + " L\u00f6schen:"                                  + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + "array[position] = -1;"                   + "\t\t\t\t\t\t\t"          + "// Loesche den wert"                     + "\n\t\t"
+                + "return array[position];"                 + "\t\t\t\t\t\t"            + "// als geloescht Markiert"               + "\n\t"
+            + " position = (wert + position^2) %  arraylänge;" + "\t\t"                 + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden";
+    
+    // Pseudo-Code für das alternierendes quadratisches Sondieren mit Kommentaren
+    private String codeAltQS = ""
+        + " Suchen:"                                        + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + " return position;"                       + "\t\t\t\t\t\t\t\t"        + "// gebe Position zurueck"                + "\n\t"
+            + " position = (wert (+/-) position^2)% arraylänge;"+ "\t"                  + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden"                  + "\n"
+        + cutS 
+        + " Einf\u00fcgen:"                                 + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0 && array[position] != -1)"   + "\t"              + "// suche bis Zelle leer oder als geloescht Markiert " + "\n\t"
+            + " position = (wert (+/-) position^2) % arraylänge;"   + "\t"              + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " array[position] = wert;"                        + "\t\t\t\t\t\t\t\t"        + "// fuege den Wert an"                    + "\n"
+        + cutS 
+        + " L\u00f6schen:"                                  + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + "array[position] = -1;"                   + "\t\t\t\t\t\t\t"          + "// Loesche den wert"                     + "\n\t\t"
+                + "return array[position];"                 + "\t\t\t\t\t\t"            + "// als geloescht Markiert"               + "\n\t"
+            + " position = (wert (+/-) position^2) %  arraylänge;" + "\t"               + "// naechste Position / hX"               + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden";
 
-    private String codeAltQS = " Suchen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n return position; \n" + cutS + " Hinzuf\u00fcgen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n if( wert == 0 || wert == -1) \n\t return position; \n else \n\t array[i] = -1 \n\t return position \n " + cutS + " L\u00f6schen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n if( wert == 0 || wert == -1) \n\t return position; \n else \n\t array[i] = -1 \n\t return position";;
-
-    private String codeDH = " Suchen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n return position; \n" + cutS + " Hinzuf\u00fcgen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n if( wert == 0 || wert == -1) \n\t return position; \n else \n\t array[i] = -1 \n\t return position \n " + cutS + " L\u00f6schen: \n position = (wert)mod m \n while( i < arraygr\u00f6ße && array[i] != wert) \n \t position = (wert)mod m; \n\t i++; \n if( wert == 0 || wert == -1) \n\t return position; \n else \n\t array[i] = -1 \n\t return position";;
+    // Pseudo-Code für das Doppel-Hashing mit Kommentaren
+    private String codeDH = ""
+        + " Suchen:"                                        + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + " return position;"                       + "\t\t\t\t\t\t\t\t"        + "// gebe Position zurueck"                + "\n\t"
+            + " position = (value % arrayLength) - i *"     + "\t\t\t"                  + "// naechste Position / hX"               + "\n\t\t\t"
+            + " (1 + value % (arrayLength - 2))% arraylänge;"                                                                       + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden"                  + "\n"
+        + cutS 
+        + " Einf\u00fcgen:"                                 + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0 && array[position] != -1)"   + "\t"              + "// suche bis Zelle leer oder als geloescht Markiert " + "\n\t"
+            + " position = (value % arrayLength) - i *"     + "\t\t\t"                  + "// naechste Position / hX"               + "\n\t\t\t"
+            + " (1 + value % (arrayLength - 2))% arraylänge;"                                                                       + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " array[position] = wert;"                        + "\t\t\t\t\t\t\t\t"        + "// fuege den Wert an"                    + "\n"
+        + cutS 
+        + " L\u00f6schen:"                                  + "\n"
+        + " int position =  wert % arraylänge;"             + "\t\t\t\t\t"              + "// Anfangsposition / h0"                 + "\n"
+        + " while(array[position] != 0)"                    + "\t\t\t\t\t\t\t"          + "// suche solange bis leere Zelle"        + "\n\t"
+            + " if(array[position] == wert)"                + "\t\t\t\t\t\t"            + "// ist der Wert gefunden"                + "\n\t\t"
+                + "array[position] = -1;"                   + "\t\t\t\t\t\t\t"          + "// Loesche den wert"                     + "\n\t\t"
+                + "return array[position];"                 + "\t\t\t\t\t\t"            + "// als geloescht Markiert"               + "\n\t"
+            + " position = (value % arrayLength) - i *"     + "\t\t\t"                  + "// naechste Position / hX"               + "\n\t\t\t"
+            + " (1 + value % (arrayLength - 2))% arraylänge;"                                                                       + "\n\t"
+            + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
+        + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden";
 
     public PseudoCodeView(JComboBox<String> cbVerfahren)
     {
         this.cbVerfahren = cbVerfahren;
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         pack();
-        setSize(650, 550);
+        setSize(650, 570);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2));
         JTextArea text = new JTextArea();
