@@ -1,6 +1,7 @@
 package teamprojekt.view;
 
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.JComboBox;
@@ -14,10 +15,10 @@ public class PseudoCodeView extends JFrame
     private JComboBox<String> cbVerfahren;
 
     private String cutS = "\n----------------------------------------------------------------------\n\n";
-
+    /**@formatter:off**/
     // Pseudo-Code für das lineare Sondieren mit Kommentaren
     private String codeLS = ""
-        + " Suchen / L\u00f6schen:"                                     + "\n"
+        + " Suchen / L\u00f6schen:"                                     + "\n\n"
         + " int index = -1;"                                            + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// markiere als nicht gefunden"                  + "\n"
         + " int i = 1;"                                                 + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                  + "\n"
         + " int position = wert % arraylaenge;"                         + "\t\t\t\t\t\t\t"                  + "// Anfangsposition / h0"                         + "\n"
@@ -30,7 +31,7 @@ public class PseudoCodeView extends JFrame
             + " i++;"                                                   + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Zaehler um 1 erhoehen"                        + "\n"
         + " return index;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// Rueckgabe: Wert gefunden oder nicht gefunden" + "\n"
         + cutS 
-        + " Einf\u00fcgen:"                                             + "\n"
+        + " Einf\u00fcgen:"                                             + "\n\n"
         + " if(!arrayVoll && suche(wert)==-1)"                          + "\t\t\t\t\t\t\t"                  + "// Array nicht voll und Wert nicht gefunden"     + "\n\t"
             + " int position =  wert % arraylaenge;"                    + "\t\t\t\t\t\t"                    + "// Anfangsposition / h0"                         + "\n\t"
             + " int i= 1;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                  + "\n\t"
@@ -41,7 +42,7 @@ public class PseudoCodeView extends JFrame
                     
     // Pseudo-Code für das Verallgemeinerte lineare Sondieren mit Kommentaren
     private String codeErwLS = ""
-        + " Suchen / L\u00f6schen:"                                     + "\n"
+        + " Suchen / L\u00f6schen:"                                     + "\n\n"
         + " int index = -1;"                                            + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// markiere als nicht gefunden"                  + "\n"
         + " int i = 1;"                                                 + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                  + "\n"
         + " int c = {z.B.: 3,5,7};"                                     + "\t\t\t\t\t\t\t\t\t\t\t"          + "// waehle ein c welches teilerfremd mit Arraylaenge" + "\n"
@@ -55,7 +56,7 @@ public class PseudoCodeView extends JFrame
             + " i++;"                                                   + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Zaehler um 1 erhoehen"                        + "\n"
         + " return index;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// Rueckgabe: Wert gefunden oder nicht gefunden" + "\n"
         + cutS 
-        + " Einf\u00fcgen:"                                             + "\n"
+        + " Einf\u00fcgen:"                                             + "\n\n"
         + " if(!arrayVoll && suche(wert)==-1)"                          + "\t\t\t\t\t\t\t"                  + "// Array nicht voll oder Wert nicht gefunden"    + "\n\t"
             + " int position =  wert % arraylaenge;"                    + "\t\t\t\t\t\t"                    + "// Anfangsposition / h0"                         + "\n\t"
             + " int i= 1;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                  + "\n\t"
@@ -68,7 +69,7 @@ public class PseudoCodeView extends JFrame
                     
     // Pseudo-Code für das quadratisches Sondieren mit Kommentaren
     private String codeQS = ""
-        + " Suchen / L\u00f6schen:"                                     + "\n"
+        + " Suchen / L\u00f6schen:"                                     + "\n\n"
         + " int index = -1;"                                            + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// markiere als nicht gefunden"              + "\n"
         + " int i = 1;"                                                 + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"              + "\n"
         + " int position = wert % arraylaenge;"                         + "\t\t\t\t\t\t\t"                  + "// Anfangsposition / h0"                     + "\n"
@@ -82,7 +83,7 @@ public class PseudoCodeView extends JFrame
             + " i++;"                                                   + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Zaehler um 1 erhoehen"                    + "\n"
         + " return index;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// Rueckgabe: Wert gefunden oder nicht gefunden" + "\n"
         + cutS 
-        + " Einf\u00fcgen:"                                             + "\n"
+        + " Einf\u00fcgen:"                                             + "\n\n"
         + " if(!arrayVoll && suche(wert)==-1)"                          + "\t\t\t\t\t\t\t"                  + "// Array nicht voll oder Wert nicht gefunden"    + "\n\t"
             + " int position =  wert % arraylaenge;"                    + "\t\t\t\t\t\t"                    + "// Anfangsposition / h0"                         + "\n\t"
             + " int i= 1;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                  + "\n\t"
@@ -94,7 +95,7 @@ public class PseudoCodeView extends JFrame
              
     // Pseudo-Code für das alternierendes quadratisches Sondieren mit Kommentaren
     private String codeAltQS = ""
-        + " Suchen / L\u00f6schen:"                                     + "\n"
+        + " Suchen / L\u00f6schen:"                                     + "\n\n"
         + " int index = -1;"                                            + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// markiere als nicht gefunden"          + "\n"
         + " int i = 1;"                                                 + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"          + "\n"
         + " int j = 1;"                                                 + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"          + "\n"
@@ -114,7 +115,7 @@ public class PseudoCodeView extends JFrame
                     + " j++;"                                           + "\t\t\t\t\t\t\t\t\t\t\t"          + "// Zaehler um 1 erhoehen"                      + "\n"
         + " return index;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// Rueckgabe: Wert gefunden oder nicht gefunden"     + "\n"
         + cutS 
-        + " Einf\u00fcgen:"                                             + "\n"
+        + " Einf\u00fcgen:"                                             + "\n\n"
         + " if(!arrayVoll && suche(wert)==-1)"                          + "\t\t\t\t\t\t\t"                  + "// Array nicht voll oder Wert nicht gefunden"        + "\n\t"
             + " int position =  wert % arraylaenge;"                    + "\t\t\t\t\t\t"                    + "// Anfangsposition / h0"                             + "\n\t"
             + " int i= 1;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                      + "\n\t"
@@ -131,7 +132,7 @@ public class PseudoCodeView extends JFrame
              
     // Pseudo-Code für das Doppel-Hashing mit Kommentaren
     private String codeDH = ""
-        + " Suchen / L\u00f6schen:"                                     + "\n"
+        + " Suchen / L\u00f6schen:"                                     + "\n\n"
         + " int index = -1;"                                            + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// markiere als nicht gefunden"                      + "\n"
         + " int i = 1;"                                                 + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                      + "\n"
         + " int position = wert % arraylaenge;"                         + "\t\t\t\t\t\t\t"                  + "// Anfangsposition / h0"                             + "\n"
@@ -146,7 +147,7 @@ public class PseudoCodeView extends JFrame
             + " i++;"                                                   + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Zaehler um 1 erhoehen"                            + "\n"
         + " return index;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// Rueckgabe: Wert gefunden oder nicht gefunden"     + "\n"
         + cutS 
-        + " Einf\u00fcgen:"                                             + "\n"
+        + " Einf\u00fcgen:"                                             + "\n\n"
         + " if(!arrayVoll && suche(wert)==-1)"                          + "\t\t\t\t\t\t\t"                  + "// Array nicht voll oder Wert nicht gefunden"        + "\n\t"
             + " int position =  wert % arraylaenge;"                    + "\t\t\t\t\t\t"                    + "// Anfangsposition / h0"                             + "\n\t"
             + " int i= 1;"                                              + "\t\t\t\t\t\t\t\t\t\t\t\t\t"      + "// Wert um den verschoben wird"                      + "\n\t"
@@ -156,12 +157,12 @@ public class PseudoCodeView extends JFrame
                         + "     - i * (1 + wert % (arraylaenge - 2))) % arraylaenge) "  + ""                + "// "                                                 + "\n\t\t"
                         + " i++;"                                       + "\t\t\t\t\t\t\t\t\t\t\t\t"        + "// Zaehler um 1 erhoehen"                            + "\n\t"
             + " array[position] = wert;"                                + "\t\t\t\t\t\t\t\t\t"              + "// fuege den Wert ein"                               + "\n";
-     
+    /**@formatter:on**/
+    
     public PseudoCodeView(JComboBox<String> cbVerfahren)
     {
         this.cbVerfahren = cbVerfahren;
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        pack();
         setSize(650, 630);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2));
@@ -171,6 +172,8 @@ public class PseudoCodeView extends JFrame
         add(text);
         setTitle((String) cbVerfahren.getSelectedItem());
         text.setEditable(false);
+        text.setMargin(new Insets(10, 10, 10, 10));
+        pack();
         setVisible(true);
     }
 

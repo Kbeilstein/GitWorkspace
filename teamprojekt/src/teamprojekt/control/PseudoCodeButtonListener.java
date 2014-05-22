@@ -27,7 +27,7 @@ public class PseudoCodeButtonListener implements MouseInputListener
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        if (psCodeView == null)
+        if (true)
         {
             psCodeView = new PseudoCodeView(cbVerfahren);
         }
