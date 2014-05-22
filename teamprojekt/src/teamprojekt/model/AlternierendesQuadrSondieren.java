@@ -14,8 +14,6 @@ public class AlternierendesQuadrSondieren extends Sondieren
 
     private int i;
 
-    private int j;
-
     private int[] array;
 
     private int value;
@@ -60,7 +58,6 @@ public class AlternierendesQuadrSondieren extends Sondieren
             arrayPosition = val % arrayLength;
             // val um den "verschoben" wird
             i = 1;
-            j = 1;
 
             array = arrayModel.getArray();
             logView.write(value + " soll auf Arrayposition " + arrayPosition + " eingefügt werden");
@@ -79,7 +76,6 @@ public class AlternierendesQuadrSondieren extends Sondieren
         arrayPosition = val % arrayLength;
         // Wert um den "verschoben" wird
         i = 1;
-        j = 1;
 
         array = arrayModel.getArray();
 
@@ -107,11 +103,10 @@ public class AlternierendesQuadrSondieren extends Sondieren
             int oldArrayPosition = arrayPosition;
 
             // wenn i und j gleich sind, wird + gerechnet
-            if (i == j)
+            if ((i % 2) != 0)
             {
                 arrayPosition = ((value % arrayLength) + i * i) % arrayLength;
                 logView.collisionAlternierendesQuadrSondierenPlus(value, arrayPosition, arrayLength, i);
-                i++;
             }
             // da nach dem + rechnen nur i erhoeht wird, wird der else Fall
             // aufgerufen und hier mit - gerechnet, und danach j erhoeht,
@@ -121,11 +116,11 @@ public class AlternierendesQuadrSondieren extends Sondieren
             {
                 // Loesung um ein "-" bei modulo abzufangen
                 // (a % b + b) % b
-                arrayPosition = (((value % arrayLength) - j * j) % arrayLength + arrayLength) % arrayLength;
-                logView.collisionAlternierendesQuadrSondierenMinus(value, arrayPosition, arrayLength, j);
-                j++;
+                arrayPosition = (((value % arrayLength) - i * i) % arrayLength + arrayLength) % arrayLength;
+                logView.collisionAlternierendesQuadrSondierenMinus(value, arrayPosition, arrayLength, i);
             }
 
+            i++;
             arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
         }
         else
@@ -156,10 +151,9 @@ public class AlternierendesQuadrSondieren extends Sondieren
             int oldArrayPosition = arrayPosition;
 
             // wenn i und j gleich sind, wird + gerechnet
-            if (i == j)
+            if ((i % 2) != 0)
             {
                 arrayPosition = ((value % arrayLength) + i * i) % arrayLength;
-                i++;
             }
             // da nach dem + rechnen nur i erhoeht wird, wird der else Fall
             // aufgerufen und hier mit - gerechnet, und danach j erhoeht,
@@ -169,10 +163,10 @@ public class AlternierendesQuadrSondieren extends Sondieren
             {
                 // Loesung um ein "-" bei modulo abzufangen
                 // (a % b + b) % b
-                arrayPosition = (((value % arrayLength) - j * j) % arrayLength + arrayLength) % arrayLength;
-                j++;
+                arrayPosition = (((value % arrayLength) - i * i) % arrayLength + arrayLength) % arrayLength;
             }
 
+            i++;
             logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
             arrayModel.setValuesSearch(oldArrayPosition, arrayPosition, value, isFound());
         }

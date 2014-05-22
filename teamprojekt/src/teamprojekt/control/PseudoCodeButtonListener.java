@@ -11,11 +11,13 @@ import teamprojekt.view.PseudoCodeView;
 public class PseudoCodeButtonListener implements MouseInputListener
 {
     private PseudoCodeButtonView psCoButton;
-    
+
     private JComboBox<String> cbVerfahren;
 
     private boolean pseudoCodeClicked;
-    
+
+    private PseudoCodeView psCodeView;
+
     public PseudoCodeButtonListener(PseudoCodeButtonView b, JComboBox<String> cbVerfahren)
     {
         this.psCoButton = b;
@@ -25,7 +27,11 @@ public class PseudoCodeButtonListener implements MouseInputListener
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        new PseudoCodeView(cbVerfahren);
+        if (psCodeView == null)
+        {
+            psCodeView = new PseudoCodeView(cbVerfahren);
+        }
+        psCodeView.setVisible(true);
     }
 
     @Override

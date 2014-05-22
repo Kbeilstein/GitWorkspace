@@ -1,6 +1,7 @@
 package teamprojekt.view;
 
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.JComboBox;
@@ -15,6 +16,7 @@ public class PseudoCodeView extends JFrame
 
     private String cutS = "\n----------------------------------------------------------------------\n\n";
 
+    /** @formatter:off **/
     // Pseudo-Code für das lineare Sondieren mit Kommentaren
     private String codeLS = ""
         + " Suchen:"                                        + "\n"
@@ -158,11 +160,12 @@ public class PseudoCodeView extends JFrame
             + " position++;"                                + "\t\t\t\t\t\t\t\t\t\t"    + "// Position erhoehen"                    + "\n"
         + " return 0;"                                      + "\t\t\t\t\t\t\t\t\t\t\t"  + "// Wert nicht gefunden";
 
+    /** @formatter:on **/
+
     public PseudoCodeView(JComboBox<String> cbVerfahren)
     {
         this.cbVerfahren = cbVerfahren;
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        pack();
         setSize(650, 570);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2));
@@ -172,6 +175,8 @@ public class PseudoCodeView extends JFrame
         add(text);
         setTitle((String) cbVerfahren.getSelectedItem());
         text.setEditable(false);
+        text.setMargin(new Insets(10, 10, 10, 10));
+        pack();
         setVisible(true);
     }
 
