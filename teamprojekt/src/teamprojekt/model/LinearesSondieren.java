@@ -107,8 +107,6 @@ public class LinearesSondieren extends Sondieren
         {
             int oldArrayPosition = arrayPosition;
             arrayPosition = ((value % arrayLength) + i) % arrayLength;
-            // logView.collisionLinearesSondieren(value, arrayPosition,
-            // arrayLength, i);
             i++;
             logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
             arrayModel.setValuesSearch(oldArrayPosition, arrayPosition, value, isFound());
@@ -122,7 +120,7 @@ public class LinearesSondieren extends Sondieren
             }
             else
             {
-                logView.write(value + " nicht gefunden, aber einmal durchlaufen\n");
+                logView.write(value + " nicht gefunden, aber das Array wurde einmal durchlaufen\n");
             }
             index = -1;
             arrayPosition = -1;
