@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.GroupLayout;
@@ -59,17 +58,5 @@ public class LayoutConfigView extends JFrame
         setLayout(groupLayout);
 
         setVisible(true);
-    }
-}
-
-class MyKeyListener extends KeyAdapter
-{
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        if (e.getKeyCode() == KeyEvent.VK_DELETE)
-        {
-            System.out.println("Key \"Delete\" Pressed");
-        }
     }
 }

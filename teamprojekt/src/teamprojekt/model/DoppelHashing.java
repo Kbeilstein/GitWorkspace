@@ -22,7 +22,7 @@ public class DoppelHashing extends Sondieren
 
     private static final String NAME = "Doppel-Hashing";
 
-    private static final String FORMULA = "h(x) - i * ( 1 + x mod (m-2))";
+    private static final String FORMULA = "(h(x) - i * ( 1 + x mod (m-2))) mod m";
 
     public DoppelHashing(ArrayModel arrayModel, LogView logView)
     {
@@ -140,7 +140,7 @@ public class DoppelHashing extends Sondieren
         // das Array nicht einmal ganz durchlaufen wurde
         // beim Quadratischen sondieren kann es sonst zu einer Endlosschleife
         // kommen
-        else if (i <= arrayLength)
+        else if (i < arrayLength)
         {
             int oldArrayPosition = arrayPosition;
             arrayPosition = (((value % arrayLength) - i * (1 + value % (arrayLength - 2))) % arrayLength + arrayLength) % arrayLength;

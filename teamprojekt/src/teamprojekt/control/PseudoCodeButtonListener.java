@@ -27,11 +27,15 @@ public class PseudoCodeButtonListener implements MouseInputListener
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        if (psCodeView == null)
+        if (isPseudoCode(e))
         {
-            psCodeView = new PseudoCodeView(cbVerfahren);
+            if (psCodeView == null)
+            {
+                psCodeView = new PseudoCodeView(cbVerfahren);
+            }
+            psCodeView.fillText();
+            psCodeView.setVisible(true);
         }
-        psCodeView.setVisible(true);
     }
 
     @Override

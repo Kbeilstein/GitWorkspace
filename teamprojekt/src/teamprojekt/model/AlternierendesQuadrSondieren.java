@@ -22,7 +22,7 @@ public class AlternierendesQuadrSondieren extends Sondieren
 
     private static final String NAME = "alternierendes Quadratisches Sondieren";
 
-    private static final String FORMULA = "(h1(x) + i^2), (h2(x) - i^2), ...";
+    private static final String FORMULA = "(h1(x) + i^2) mod m, (h2(x) - i^2) mod m, ...";
 
     public AlternierendesQuadrSondieren(ArrayModel arrayModel, LogView logView)
     {
@@ -98,7 +98,7 @@ public class AlternierendesQuadrSondieren extends Sondieren
         // das Array nicht einmal ganz durchlaufen wurde
         // beim Quadratischen sondieren kann es sonst zu einer Endlosschleife
         // kommen
-        else if (i <= arrayLength)
+        else if (i < arrayLength)
         {
             int oldArrayPosition = arrayPosition;
 

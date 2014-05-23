@@ -102,7 +102,10 @@ public class LogSaveButtonListener implements MouseInputListener, PropertyChange
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        startSave();
+        if (isPseudoCode(e))
+        {
+            startSave();
+        }
     }
 
     @Override

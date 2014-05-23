@@ -63,7 +63,7 @@ public class AddDeleteListener implements MouseInputListener
         else if (isInsert(e) || isSearch(e) || isDelete(e))
         {
             // Text in Label setzen
-            System.out.println("Aktion erst nach Ende der Animation möglich");
+            // System.out.println("Aktion erst nach Ende der Animation möglich");
         }
     }
 

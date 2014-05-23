@@ -24,7 +24,7 @@ public class VerallgLinearesSondieren extends Sondieren
 
     private static final String NAME = "Verallgemeinertes Lineares Sondieren";
 
-    private static final String FORMULA = "(h(x) + c * i)";
+    private static final String FORMULA = "(h(x) + c * i) mod m";
 
     public VerallgLinearesSondieren(ArrayModel arrayModel, LogView logView)
     {
@@ -110,7 +110,7 @@ public class VerallgLinearesSondieren extends Sondieren
         // das Array nicht einmal ganz durchlaufen wurde
         // beim Quadratischen sondieren kann es sonst zu einer Endlosschleife
         // kommen
-        else if (i <= arrayLength)
+        else if (i < arrayLength)
         {
             int oldArrayPosition = arrayPosition;
             arrayPosition = ((value % arrayLength) + (c * i)) % arrayLength;

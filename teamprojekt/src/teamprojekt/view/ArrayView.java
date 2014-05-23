@@ -263,9 +263,7 @@ public class ArrayView extends JPanel
         AnimatorThread animThread = model.getThread();
         if (animThread != null && animThread.isAlive())
         {
-            // //animationNext();
             animThread.interrupt();
-            // animThread.wake();
         }
         else
         {

@@ -23,7 +23,7 @@ public class LinearesSondieren extends Sondieren
 
     private static final String NAME = "Lineares Sondieren";
 
-    private static final String FORMULA = "(h(x) + i)";
+    private static final String FORMULA = "(h(x) + i) mod m";
 
     public LinearesSondieren(ArrayModel arrayModel, LogView logView)
     {

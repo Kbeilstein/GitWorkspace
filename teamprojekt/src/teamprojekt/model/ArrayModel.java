@@ -83,7 +83,10 @@ public class ArrayModel
         endIndex = end;
         value = val;
         isInsertPossible = insertPos;
-        if (end == start)
+        // hier gab es einen Fehler beim quadratischen Sondieren, da end ==
+        // start auch regulär vorkommen kann und es muss zusätzlich noch auf
+        // isInsertPossible geprüft werden
+        if (end == start && isInsertPossible)
         {
             fireAll("insert");
         }
@@ -99,7 +102,10 @@ public class ArrayModel
         endIndex = end;
         value = val;
         valueFound = found;
-        if (end == start)
+        // hier gab es einen Fehler beim quadratischen Sondieren, da end ==
+        // start auch da vorkommen kann und es muss zusätzlich noch auf found
+        // geprüft werden
+        if (end == start && valueFound)
         {
             fireAll("search");
         }
