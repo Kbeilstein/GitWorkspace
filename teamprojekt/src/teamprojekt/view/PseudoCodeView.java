@@ -1,18 +1,16 @@
 package teamprojekt.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
@@ -205,7 +203,7 @@ public class PseudoCodeView extends JFrame
         + "// naechste Position/ hX \n"
         + "// wenn i gerade / - \n"
         + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen"
+        + "// Zaehler um 1 erhoehen\n"
         + "// Rueckgabe: Wert gefunden oder nicht gefunden";
 
     private String codeInsertAltQS= ""
@@ -307,50 +305,64 @@ public class PseudoCodeView extends JFrame
 
     private JLabel labelSearchDelete, labelInsert, labelInfo;
 
-    private JPanel panelSearchDelete, panelInsert, panelInfo;
-
     public PseudoCodeView(JComboBox<String> cbVerfahren)
     {
         this.cbVerfahren = cbVerfahren;
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(650, 630);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2));
-        setLayout(new GridLayout(3, 0));
 
-        panelSearchDelete = new JPanel(new BorderLayout());
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
         labelSearchDelete = new JLabel("Suchen / L\u00f6schen:");
         textCodeSearchDelete = new JTextArea();
         textCommentSearchDelete = new JTextArea();
 
-        panelInsert = new JPanel(new BorderLayout());
         labelInsert = new JLabel("Einf\u00fcgen:");
         textCodeInsert = new JTextArea();
         textCommentInsert = new JTextArea();
 
-        panelInfo = new JPanel(new BorderLayout());
         labelInfo = new JLabel("Info:");
         textInfo = new JTextArea("info");
 
         textCodeSearchDelete.setTabSize(2);
         textCodeInsert.setTabSize(2);
 
-        fillText();
+        // einrichten des GriBagLayouts
+        c.anchor = GridBagConstraints.LINE_START;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridwidth = 2;
+        c.insets = new Insets(6, 6, 6, 6);
+        add(labelSearchDelete, c);
+        c.gridwidth = 1;
+        c.gridy = 1;
+        c.insets = new Insets(0, 6, 6, 0);
+        add(textCodeSearchDelete, c);
+        c.gridx = 1;
+        c.insets = new Insets(0, 0, 6, 6);
+        add(textCommentSearchDelete, c);
 
-        panelSearchDelete.add(labelSearchDelete, BorderLayout.PAGE_START);
-        panelSearchDelete.add(textCodeSearchDelete, BorderLayout.LINE_START);
-        panelSearchDelete.add(textCommentSearchDelete, BorderLayout.CENTER);
+        c.gridwidth = 2;
+        c.gridy = 2;
+        c.gridx = 0;
+        c.insets = new Insets(6, 6, 6, 6);
+        add(labelInsert, c);
+        c.gridwidth = 1;
+        c.gridy = 3;
+        c.insets = new Insets(0, 6, 6, 0);
+        add(textCodeInsert, c);
+        c.gridx = 1;
+        c.insets = new Insets(0, 0, 6, 6);
+        add(textCommentInsert, c);
 
-        panelInsert.add(labelInsert, BorderLayout.PAGE_START);
-        panelInsert.add(textCodeInsert, BorderLayout.LINE_START);
-        panelInsert.add(textCommentInsert, BorderLayout.CENTER);
-
-        panelInfo.add(labelInfo, BorderLayout.PAGE_START);
-        panelInfo.add(textInfo, BorderLayout.CENTER);
-
-        add(panelSearchDelete);
-        add(panelInsert);
-        add(panelInfo);
+        c.gridwidth = 2;
+        c.gridy = 4;
+        c.gridx = 0;
+        c.insets = new Insets(6, 6, 6, 6);
+        add(labelInfo, c);
+        c.gridy = 5;
+        c.insets = new Insets(0, 6, 6, 6);
+        add(textInfo, c);
 
         textCodeSearchDelete.setEditable(false);
         textCommentSearchDelete.setEditable(false);
@@ -358,29 +370,32 @@ public class PseudoCodeView extends JFrame
         textCommentInsert.setEditable(false);
         textInfo.setEditable(false);
 
-        textCodeSearchDelete.setFont(new Font("Courier New", Font.BOLD, 14));
-        textCommentSearchDelete.setFont(new Font("Courier New", Font.ITALIC, 14));
-        textCodeInsert.setFont(new Font("Courier New", Font.BOLD, 14));
-        textCommentInsert.setFont(new Font("Courier New", Font.ITALIC, 14));
+        Font font = new Font("Verdana", Font.PLAIN, 12);
+        textCodeSearchDelete.setFont(font);
+        textCommentSearchDelete.setFont(font);
+        textCodeInsert.setFont(font);
+        textCommentInsert.setFont(font);
 
         textCommentSearchDelete.setForeground(Color.getHSBColor(0.283F, 1.0F, 0.5F));
         textCommentInsert.setForeground(Color.getHSBColor(0.283F, 1.0F, 0.5F));
 
-        labelSearchDelete.setFont(new Font("", Font.BOLD, 16));
-        labelInsert.setFont(new Font("", Font.BOLD, 16));
-        labelInfo.setFont(new Font("", Font.BOLD, 16));
+        font = new Font("Verdana", Font.BOLD, 14);
+        labelSearchDelete.setFont(font);
+        labelSearchDelete.setForeground(Color.DARK_GRAY);
+        labelInsert.setFont(font);
+        labelInsert.setForeground(Color.DARK_GRAY);
+        labelInfo.setFont(font);
+        labelInfo.setForeground(Color.DARK_GRAY);
 
-        textCodeSearchDelete.setMargin(new Insets(10, 10, 10, 10));
-        textCommentSearchDelete.setMargin(new Insets(10, 10, 10, 10));
-        textCodeInsert.setMargin(new Insets(10, 10, 10, 10));
-        textCommentInsert.setMargin(new Insets(10, 10, 10, 10));
-        textInfo.setMargin(new Insets(10, 10, 10, 10));
+        Insets inset = new Insets(6, 6, 6, 6);
+        textCodeSearchDelete.setMargin(inset);
+        textCommentSearchDelete.setMargin(inset);
+        textCodeInsert.setMargin(inset);
+        textCommentInsert.setMargin(inset);
+        textInfo.setMargin(inset);
 
-        panelSearchDelete.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        panelInsert.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        panelInfo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-
-        pack();
+        fillText();
+        setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2));
         setVisible(true);
     }
 
