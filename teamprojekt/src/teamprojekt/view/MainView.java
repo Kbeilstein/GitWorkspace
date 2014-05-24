@@ -21,18 +21,25 @@ import teamprojekt.control.MainViewResizeListener;
 import teamprojekt.model.ArrayModel;
 import teamprojekt.model.Sondieren;
 
+/**
+ * 
+ * View zur Darstellung/Anordnung der Komponenten des eigentlichen Hauptteils
+ * 
+ * die Klasse ist zunaechst ohne Inhalt, erst nach druecken des Start-Buttons
+ * wird entsprechend der gewaehlten Optionen die Views angelegt
+ * 
+ */
+
 @SuppressWarnings("serial")
 public class MainView extends JPanel
 {
-    public MainView()
-    {
-        setLayout(null);
-    }
-
     public void fill(ArrayModel arrayModel, LogView lv, Sondieren sond)
     {
+        // vor neuzeichnen wird erstmal alles "alte" entfernt
         removeAll();
 
+        // View die das Array zeichnet wird angelegt + Listener dem Model
+        // hinzugefuegt
         ArrayView aView = new ArrayView(arrayModel, sond);
         arrayModel.addListener(new ArrayViewListener(aView));
 

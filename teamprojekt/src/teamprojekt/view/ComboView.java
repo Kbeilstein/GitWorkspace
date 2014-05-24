@@ -21,14 +21,22 @@ import teamprojekt.control.SpinnerMinusButtonListener;
 import teamprojekt.control.SpinnerPlusButtonListener;
 import teamprojekt.control.StartButtonListener;
 
+/**
+ * 
+ * View zur Darstellung/Anordnung aller Komponenten in der Box oben links
+ * 
+ */
+
 @SuppressWarnings("serial")
 public class ComboView extends JPanel
 {
+    // vordefinierte Auswahl der verfuegbaren Verfahren
     private static final String[] ALGORITHM =
     { "Lineares Sondieren", "Verallg. Lineares Sondieren", "Quadratisches Sondieren", "Alternierendes Quadr. Sondieren", "Doppel-Hashing" };
 
     public ComboView(MainView panel)
     {
+        // erste ComboBox, Anzeige der verfuegbaren Verfahren
         JComboBox<String> algorithmComboBox = new JComboBox<String>(ALGORITHM);
         algorithmComboBox.setEditable(false);
         algorithmComboBox.setBackground(Color.white);
@@ -39,6 +47,8 @@ public class ComboView extends JPanel
         JList<?> list = popup.getList();
         list.setSelectionBackground(new Color(210, 210, 210));
 
+        // zweite ComboBox, zur Auswahl der Konstante c, wird nur bei verwendung
+        // von verallg. linearem Sondieren verwendet
         JComboBox<Integer> constPick = new JComboBox<Integer>();
         constPick.setEditable(false);
         constPick.setBackground(Color.white);
@@ -50,65 +60,74 @@ public class ComboView extends JPanel
         JList<?> list2 = popup2.getList();
         list2.setSelectionBackground(new Color(210, 210, 210));
 
+        // Anlegen eines Panel um die 3 Views fuer den Slider richtig zu
+        // platzieren
         JPanel spinnerPane = new JPanel();
-        spinnerPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        spinnerPane.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
+        // View fuer den Minus-Button
         SpinnerMinusButtonView minusButtonView = new SpinnerMinusButtonView();
         FlowLayout flowLayout = (FlowLayout) minusButtonView.getLayout();
         flowLayout.setVgap(8);
         flowLayout.setHgap(8);
 
+        // View fuer das Eingabefeld
         SpinnerTextView spinnerTextView = new SpinnerTextView();
 
+        // View fuer den Plus-Button
         SpinnerPlusButtonView plusButtonView = new SpinnerPlusButtonView();
         flowLayout = (FlowLayout) plusButtonView.getLayout();
         flowLayout.setVgap(8);
         flowLayout.setHgap(8);
 
+        // minus-Listener anmelden
         SpinnerMinusButtonListener m = new SpinnerMinusButtonListener(minusButtonView, spinnerTextView);
         minusButtonView.addMouseMotionListener(m);
         minusButtonView.addMouseListener(m);
 
+        // plus-Listener anmelden
         SpinnerPlusButtonListener p = new SpinnerPlusButtonListener(plusButtonView, spinnerTextView);
         plusButtonView.addMouseMotionListener(p);
         plusButtonView.addMouseListener(p);
 
+        // alle Views dem Panel hinzufuegen
         spinnerPane.add(minusButtonView);
         spinnerPane.add(spinnerTextView);
         spinnerPane.add(plusButtonView);
 
-        // JButton startButton = new JButton("Start");
-        // startButton.addActionListener(new
-        // StartButtonHandler(algorithmComboBox, spinnerTextView, panel));
-        //
-        // JButton pseudoCodeButton = new JButton("Pseudo Code");
-        // pseudoCodeButton.addActionListener(new
-        // PseudoCodeButtonHandler(algorithmComboBox));
-
+        // Button zum starten des gewaehlten Hash-Verfahrens
         StartButtonView startButton = new StartButtonView();
         StartButtonListener sbl = new StartButtonListener(algorithmComboBox, spinnerTextView, panel, startButton);
         startButton.addMouseListener(sbl);
         startButton.addMouseMotionListener(sbl);
 
+        // Button zur anzeige des Pseudo-Code Fensters
         PseudoCodeButtonView pseudoCodeButton = new PseudoCodeButtonView();
         PseudoCodeButtonListener pcbl = new PseudoCodeButtonListener(pseudoCodeButton, algorithmComboBox);
         pseudoCodeButton.addMouseListener(pcbl);
         pseudoCodeButton.addMouseMotionListener(pcbl);
 
+        // Zeichnen eines Rahmens um die aktuelle View, inkl. Ueberschrift
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Auswahl");
 
         setBorder(titleBorder1);
 
+        // Labels zum beschreiben der einzelnen Funktionen
         JLabel selectAlgorithm = new JLabel("Sondierverfahren wählen:");
         JLabel selectArraySize = new JLabel("Arraygröße wählen (5-19):");
         JLabel constPickLabel = new JLabel("geeignetes c wählen:");
         JLabel startButtonLabel = new JLabel("bitte gültigen Wert eingeben");
 
+        // Listener, der bei veraendernung der Arraygroesse die Werte fuer c
+        // anpasst
         AlgorithmPickListener algoPickListener = new AlgorithmPickListener(spinnerTextView, algorithmComboBox, constPick, constPickLabel);
         algorithmComboBox.addActionListener(algoPickListener);
+        // Listener der die Eingae im Textfeld auf gueltigkeit prueft
         spinnerTextView.getDocument().addDocumentListener(new ArraySizeTextListener(spinnerTextView, startButtonLabel, algoPickListener));
 
+        // einrichten des GridBagLayouts und entsprechendes hinzufuegen der
+        // Views
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
