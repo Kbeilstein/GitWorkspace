@@ -4,11 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -205,7 +205,7 @@ public class PseudoCodeView extends JFrame
         + "// naechste Position/ hX \n"
         + "// wenn i gerade / - \n"
         + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen"
+        + "// Zaehler um 1 erhoehen\n"
         + "// Rueckgabe: Wert gefunden oder nicht gefunden";
 
     private String codeInsertAltQS= ""
@@ -316,8 +316,9 @@ public class PseudoCodeView extends JFrame
         setSize(650, 630);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2));
-        setLayout(new GridLayout(3, 0));
 
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        
         panelSearchDelete = new JPanel(new BorderLayout());
         labelSearchDelete = new JLabel("Suchen / L\u00f6schen:");
         textCodeSearchDelete = new JTextArea();
