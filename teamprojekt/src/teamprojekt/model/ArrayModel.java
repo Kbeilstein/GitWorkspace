@@ -31,6 +31,7 @@ public class ArrayModel
     {
         array = new int[length];
         listeners = new ArrayList<>();
+        System.out.println("neues ArrayModel");
     }
 
     // public void printArray()

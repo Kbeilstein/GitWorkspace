@@ -5,6 +5,10 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * Klasse die zur Darstellung des Slider verwendet wird
+ **/
+
 @SuppressWarnings("serial")
 public class AnimationSpeedSliderView extends JPanel
 {
@@ -29,17 +33,23 @@ public class AnimationSpeedSliderView extends JPanel
         g.drawString("langsamer", this.getWidth() - 70, 8);
     }
 
+    // Methode um die X-Achse des "Schiebers" von Aussen zu veraendern
     public void setLine(int newX)
     {
         lineX = newX;
         repaint();
     }
 
+    // gibt das festgelegte Padding zurueck, wird vom Listener verwendet um die
+    // Linie korrekt zu zeichnen
     public int getPaddingX()
     {
         return PADDING_X;
     }
 
+    // gibt die aktuelle Position der Linie zurueck, wird beim Initialisieren
+    // vom Listener benoetigt, damit die Anfangsgeschwindigkeit mit der
+    // Slider-Position uebereinstimmt
     public int getLineX()
     {
         return lineX;

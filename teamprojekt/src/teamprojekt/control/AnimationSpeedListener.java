@@ -8,6 +8,12 @@ import teamprojekt.model.AnimatorThread;
 import teamprojekt.model.ArrayModel;
 import teamprojekt.view.AnimationSpeedSliderView;
 
+/**
+ * Klasse die auf Aenderungen des Geschwindigkeits-Slider reagiert
+ * 
+ * nur bei einem "click" oder dem "drag" wird auf die Eingabe reagiert
+ **/
+
 public class AnimationSpeedListener implements MouseInputListener
 {
     private ArrayModel model;
@@ -16,6 +22,7 @@ public class AnimationSpeedListener implements MouseInputListener
 
     private int sizeX;
 
+    // langsamste moegliche Geschwindigkeit, 30ms "sleep"
     private static final double MAX_VALUE = 30.0;
 
     public AnimationSpeedListener(ArrayModel model, AnimationSpeedSliderView panel)
@@ -35,6 +42,8 @@ public class AnimationSpeedListener implements MouseInputListener
         }
     }
 
+    // Berechnung der Sliderposition und der sich daraus ergebenden
+    // Geschwindigkeit
     private void refreshValue(int newX)
     {
         int paddingX = sliderPanel.getPaddingX();
@@ -61,6 +70,12 @@ public class AnimationSpeedListener implements MouseInputListener
     }
 
     @Override
+    public void mouseDragged(MouseEvent e)
+    {
+        refreshValue(e.getX());
+    }
+
+    @Override
     public void mousePressed(MouseEvent e)
     {
     }
@@ -78,12 +93,6 @@ public class AnimationSpeedListener implements MouseInputListener
     @Override
     public void mouseExited(MouseEvent e)
     {
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e)
-    {
-        refreshValue(e.getX());
     }
 
     @Override

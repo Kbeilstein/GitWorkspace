@@ -68,7 +68,6 @@ public class StartButtonListener implements MouseInputListener
                     break;
                 default:
                     sond = new LinearesSondieren(arrayModel, lv);
-                    break;
             }
 
             panel.fill(arrayModel, lv, sond);
@@ -77,12 +76,6 @@ public class StartButtonListener implements MouseInputListener
         {
             arraySize.setText("11");
         }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e)
-    {
-        action();
     }
 
     @Override
@@ -108,6 +101,11 @@ public class StartButtonListener implements MouseInputListener
 
     @Override
     public void mouseEntered(MouseEvent e)
+    {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e)
     {
     }
 
