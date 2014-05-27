@@ -16,6 +16,7 @@ import javax.swing.plaf.basic.BasicComboPopup;
 
 import teamprojekt.control.AlgorithmPickListener;
 import teamprojekt.control.ArraySizeTextListener;
+import teamprojekt.control.LogOpenButtonListener;
 import teamprojekt.control.PseudoCodeButtonListener;
 import teamprojekt.control.SpinnerMinusButtonListener;
 import teamprojekt.control.SpinnerPlusButtonListener;
@@ -97,7 +98,7 @@ public class ComboView extends JPanel
 
         // Button zum starten des gewaehlten Hash-Verfahrens
         StartButtonView startButton = new StartButtonView();
-        StartButtonListener sbl = new StartButtonListener(algorithmComboBox, spinnerTextView, panel, startButton);
+        StartButtonListener sbl = new StartButtonListener(algorithmComboBox, constPick, spinnerTextView, panel, startButton);
         startButton.addMouseListener(sbl);
         startButton.addMouseMotionListener(sbl);
 
@@ -106,6 +107,12 @@ public class ComboView extends JPanel
         PseudoCodeButtonListener pcbl = new PseudoCodeButtonListener(pseudoCodeButton, algorithmComboBox);
         pseudoCodeButton.addMouseListener(pcbl);
         pseudoCodeButton.addMouseMotionListener(pcbl);
+
+        // Buttin zum laden des Log
+        LogOpenButtonView logOpenButton = new LogOpenButtonView();
+        LogOpenButtonListener lobListener = new LogOpenButtonListener(logOpenButton, sbl);
+        logOpenButton.addMouseListener(lobListener);
+        logOpenButton.addMouseMotionListener(lobListener);
 
         // Zeichnen eines Rahmens um die aktuelle View, inkl. Ueberschrift
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
@@ -163,12 +170,15 @@ public class ComboView extends JPanel
         c.gridy = 6;
         add(startButtonLabel, c);
 
-        c.insets = new Insets(10, 0, 0, 0);
         c.gridy = 7;
         add(startButton, c);
 
-        c.insets = new Insets(30, 0, 17, 0);
+        c.insets = new Insets(30, 0, 10, 0);
         c.gridy = 8;
         add(pseudoCodeButton, c);
+
+        c.insets = new Insets(10, 0, 17, 0);
+        c.gridy = 9;
+        add(logOpenButton, c);
     }
 }

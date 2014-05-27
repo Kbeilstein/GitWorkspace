@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import teamprojekt.model.AnimatorThread;
 import teamprojekt.model.ArrayModel;
+import teamprojekt.model.NextActionThread;
 import teamprojekt.model.Sondieren;
 import teamprojekt.model.StartNextThread;
 
@@ -185,7 +186,7 @@ public class ArrayView extends JPanel
         }
     }
 
-    public synchronized void animationNext()
+    public void animationNext()
     {
         if (xMotion < endX)
         {
@@ -228,7 +229,7 @@ public class ArrayView extends JPanel
         repaint();
     }
 
-    public synchronized void animationInsert()
+    public void animationInsert()
     {
         update();
         if (isInsertPossible)
@@ -251,12 +252,12 @@ public class ArrayView extends JPanel
         animationDone();
     }
 
-    public synchronized void animationUndo()
+    public void animationUndo()
     {
 
     }
 
-    public synchronized void startAnimation(String insSearchDel)
+    public void startAnimation(String insSearchDel)
     {
         insertSearchDelete = insSearchDel;
         update();
@@ -281,7 +282,7 @@ public class ArrayView extends JPanel
         repaint();
     }
 
-    public synchronized void animationDone()
+    public void animationDone()
     {
         // insertionDone = true;
         // searchDone = true;
@@ -294,7 +295,7 @@ public class ArrayView extends JPanel
         startNext();
     }
 
-    public synchronized boolean getAnimationDone()
+    public boolean getAnimationDone()
     {
         return animationDone;
     }
@@ -316,7 +317,7 @@ public class ArrayView extends JPanel
         return (val * RECT_PADDING + (value < 10 ? SPACE_SINGLE : SPACE) + startPaddingX);
     }
 
-    public synchronized void animationSearch()
+    public void animationSearch()
     {
         update();
         if (isFound)
@@ -332,7 +333,7 @@ public class ArrayView extends JPanel
         startNext();
     }
 
-    public synchronized void startNext()
+    public void startNext()
     {
         // wird nur "betreten" um die Animation automatisch ablaufen zu lassen
         if (!animationPaintDone && sond.getPlay())
@@ -343,9 +344,16 @@ public class ArrayView extends JPanel
                 model.setAutoAnimationThread(autoAnimationThread);
             }
         }
+        // fertig mit der vorherigen Aktion, falls Sequence-Liste noch nicht
+        // leer ist, werden die
+        // weiteren Werte abgearbeitet
+        else if (animationPaintDone && !sond.autoActionDone())// && sond.actualActionDone())
+        {
+            new NextActionThread(sond);
+        }
     }
 
-    public synchronized boolean getPlay()
+    public boolean getPlay()
     {
         return sond.getPlay();
     }

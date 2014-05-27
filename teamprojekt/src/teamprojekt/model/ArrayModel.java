@@ -31,7 +31,6 @@ public class ArrayModel
     {
         array = new int[length];
         listeners = new ArrayList<>();
-        System.out.println("neues ArrayModel");
     }
 
     // public void printArray()
@@ -131,7 +130,7 @@ public class ArrayModel
         animThread = thread;
     }
 
-    public synchronized AnimatorThread getThread()
+    public AnimatorThread getThread()
     {
         return animThread;
     }
@@ -171,7 +170,7 @@ public class ArrayModel
         return dummy;
     }
 
-    public boolean isAvailable(int val)
+    public boolean exists(int val)
     {
         boolean dummy = false;
         for (int arrayVal : array)
