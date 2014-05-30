@@ -1,6 +1,7 @@
 package teamprojekt.control;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.event.MouseInputListener;
@@ -9,6 +10,7 @@ import teamprojekt.model.AlternierendesQuadrSondieren;
 import teamprojekt.model.ArrayModel;
 import teamprojekt.model.DoppelHashing;
 import teamprojekt.model.LinearesSondieren;
+import teamprojekt.model.Pair;
 import teamprojekt.model.QuadratischesSondieren;
 import teamprojekt.model.Sondieren;
 import teamprojekt.model.VerallgLinearesSondieren;
@@ -29,15 +31,18 @@ public class StartButtonListener implements MouseInputListener
 
     private MainView panel;
 
-    public StartButtonListener(JComboBox<String> cbVerfahren, SpinnerTextView textField, MainView panel, StartButtonView b)
+    private JComboBox<Integer> constPick;
+
+    public StartButtonListener(JComboBox<String> cbVerfahren, JComboBox<Integer> constPick, SpinnerTextView textField, MainView panel, StartButtonView b)
     {
         this.cbVerfahren = cbVerfahren;
+        this.constPick = constPick;
         this.arraySize = textField;
         this.panel = panel;
         this.startButton = b;
     }
 
-    private void action()
+    public void action(ArrayList<Pair> sequence)
     {
         Sondieren sond;
 
@@ -55,7 +60,7 @@ public class StartButtonListener implements MouseInputListener
                     sond = new LinearesSondieren(arrayModel, lv);
                     break;
                 case 1:
-                    sond = new VerallgLinearesSondieren(arrayModel, lv);
+                    sond = new VerallgLinearesSondieren(arrayModel, lv, (int) constPick.getSelectedItem());
                     break;
                 case 2:
                     sond = new QuadratischesSondieren(arrayModel, lv);
@@ -70,6 +75,7 @@ public class StartButtonListener implements MouseInputListener
                     sond = new LinearesSondieren(arrayModel, lv);
             }
 
+            sond.setArrayList(sequence);
             panel.fill(arrayModel, lv, sond);
         }
         else
@@ -94,7 +100,7 @@ public class StartButtonListener implements MouseInputListener
         startClicked = false;
         if (isStart(e))
         {
-            action();
+            action(new ArrayList<Pair>());
         }
         mouseMoved(e);
     }

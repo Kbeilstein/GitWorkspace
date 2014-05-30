@@ -77,6 +77,8 @@ public class AddDeleteListener implements MouseInputListener
         // Werte die per Copy-Paste eingefügt werden sonst zu Fehler führen
         for (int i = 0; i < textBoxString.length() && !textBoxString.equals("0"); i++)
         {
+            // laenge darf maximal 2 sein und an beiden Stellen muss der Wert
+            // eine Zahle sein
             if (textBoxString.charAt(i) >= '0' && textBoxString.charAt(i) <= '9' && i < 2)
             {
                 possible = true;
@@ -89,19 +91,19 @@ public class AddDeleteListener implements MouseInputListener
 
         if (possible && sondieren.getArrayPosition() == -1)
         {
-            int typeToStart = Integer.parseInt(textBox.getText());
+            int value = Integer.parseInt(textBox.getText());
             sondieren.setInsertSearchDelete(type);
             if (type.equals("insert"))
             {
-                sondieren.add(typeToStart);
+                sondieren.insert(value);
             }
             else if (type.equals("search"))
             {
-                sondieren.search(typeToStart);
+                sondieren.search(value);
             }
             else
             {
-                sondieren.delete(typeToStart);
+                sondieren.delete(value);
             }
             textBox.setText("");
         }
