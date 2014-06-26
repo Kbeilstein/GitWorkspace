@@ -27,7 +27,7 @@ public class PseudoCodeView extends JFrame
         + " int position = wert % arraylaenge;\n"
         + " while(array[position] != 0 && index == -1)\n\t" 
             + " if(array[position] == wert)\n\t\t"
-                + " index= position;\n\t\t"
+                + " index = position;\n\t\t"
                 + " if(loeschen)\n\t\t\t"
                     + " array[position] = -1;\n\t"
             + " position = ((wert % arraylaenge) + i) % arraylaenge;\n\t"
