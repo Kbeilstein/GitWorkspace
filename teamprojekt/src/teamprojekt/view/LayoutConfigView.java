@@ -30,7 +30,7 @@ public class LayoutConfigView extends JFrame
                 {
                     if (hframe == null)
                     {
-                        hframe = new HelpFrameView();
+                        hframe = new HelpFrameView();                        
                     }
                     hframe.setVisible(true);
                 }
