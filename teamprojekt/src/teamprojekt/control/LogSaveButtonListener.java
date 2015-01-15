@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Locale;
 
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 import javax.swing.LookAndFeel;
@@ -36,7 +37,7 @@ public class LogSaveButtonListener implements MouseInputListener, PropertyChange
         this.logsaveButton = b;
         text = logField;
         extension = ".txt";
-        JFileChooser.setDefaultLocale(Locale.GERMAN);
+        JComponent.setDefaultLocale(Locale.GERMAN);
     }
 
     public void startSave()

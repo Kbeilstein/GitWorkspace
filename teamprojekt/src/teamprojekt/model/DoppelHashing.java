@@ -35,7 +35,7 @@ public class DoppelHashing extends Sondieren
     public int getNextPosition()
     {
         int nextPosition = (((value % arrayLength) - i * (1 + value % (arrayLength - 2))) % arrayLength + arrayLength) % arrayLength;
-        logView.collisionDoppelHashing(value, nextPosition, arrayLength, i);
+        logView.collisionDoppelHashing(value, nextPosition, arrayLength, i, insertSearchDelete);
         return nextPosition;
     }
 }

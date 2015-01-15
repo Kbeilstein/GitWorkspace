@@ -22,6 +22,7 @@ public class Pair
         return action;
     }
 
+    @Override
     public String toString()
     {
         return value + " " + action;

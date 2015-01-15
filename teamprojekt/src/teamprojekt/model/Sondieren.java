@@ -2,6 +2,8 @@ package teamprojekt.model;
 
 import java.util.ArrayList;
 
+import javax.swing.undo.UndoManager;
+
 import teamprojekt.control.ControlButtonsListener;
 import teamprojekt.view.LogView;
 
@@ -21,9 +23,9 @@ public abstract class Sondieren
 
     protected int arrayLength;
 
-    protected int arrayPosition;
+    protected ArrayList<Integer> arrayPosition;
 
-    private String insertSearchDelete;
+    protected String insertSearchDelete;
 
     private ArrayList<ControlButtonsListener> listeners;
 
@@ -31,13 +33,24 @@ public abstract class Sondieren
 
     private boolean play;
 
+    private int posIndex;
+
+    private UndoManager manager;
+
     public Sondieren(ArrayModel arrayModel, LogView logView)
     {
         this.arrayModel = arrayModel;
         this.logView = logView;
         this.listeners = new ArrayList<>();
         this.arrayLength = arrayModel.getLength();
-        arrayPosition = -1;
+        resetArrayPos();
+    }
+
+    private void resetArrayPos()
+    {
+        arrayPosition = new ArrayList<Integer>();
+        manager = new UndoManager();
+        posIndex = 0;
     }
 
     public abstract String getName();
@@ -50,27 +63,26 @@ public abstract class Sondieren
     {
         if (isFound())
         {
-            index = arrayPosition;
+            index = arrayPosition.get(posIndex);
             arrayModel.valueFound();
-            logView.write(value + " an Arrayposition " + arrayPosition + "  gefunden\n");
-            arrayPosition = -1;
+            logView.write(value + " an Arrayposition " + arrayPosition.get(posIndex) + "  gefunden\n");
+            resetArrayPos();
             if (getInsertSearchDelete().equals("delete"))
             {
                 deleted(index, value);
             }
         }
-        else if (!isFound() && i < arrayLength && array[arrayPosition] != 0)
+        else if (!isFound() && i < arrayLength && array[arrayPosition.get(posIndex)] != 0)
         {
-            int oldArrayPosition = arrayPosition;
-            arrayPosition = getNextPosition();
+            arrayPosition.add(getNextPosition());
             i++;
-            logView.write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
-            arrayModel.setValuesSearch(oldArrayPosition, arrayPosition, value, isFound());
+            posIndex++;
+            arrayModel.setValuesSearch(arrayPosition.get(posIndex - 1), arrayPosition.get(posIndex), value, isFound());
         }
         else
         {
             arrayModel.valueNotFound();
-            if (array[arrayPosition] == 0)
+            if (array[arrayPosition.get(posIndex)] == 0)
             {
                 logView.write(value + " nicht gefunden\n");
             }
@@ -79,7 +91,7 @@ public abstract class Sondieren
                 logView.write(value + " nicht gefunden, aber das Array wurde einmal durchlaufen\n");
             }
             index = -1;
-            arrayPosition = -1;
+            resetArrayPos();
         }
     }
 
@@ -90,21 +102,27 @@ public abstract class Sondieren
         value = val;
 
         // Anfangsposition des Hashwertes
-        arrayPosition = val % arrayLength;
+        arrayPosition.add(val % arrayLength);
         // Wert um den "verschoben" wird
         i = 1;
 
         array = arrayModel.getArray();
 
-        arrayModel.setValuesSearch(arrayPosition, arrayPosition, value, isFound());
+        arrayModel.setValuesSearch(arrayPosition.get(posIndex), arrayPosition.get(posIndex), value, isFound());
 
         // da loeschen und suchen die gleiche Funktion nutzen muss um es Log
         // eindeutig zu unterscheiden, geprueft werden, um was es sich handelt
         if (getInsertSearchDelete().equals("search"))
         {
             logView.writeSearch(value);
+            logView.writeFirstSearch(value, arrayPosition.get(posIndex));
         }
-        logView.writeFirstSearch(value, arrayPosition);
+        else
+        {
+            logView.writeDelete(val);
+            logView.writeFirstDelete(value, arrayPosition.get(posIndex));
+        }
+
     }
 
     public void insert(int val)
@@ -126,14 +144,45 @@ public abstract class Sondieren
             value = val;
 
             // Anfangsposition des Hashwertes
-            arrayPosition = val % arrayLength;
+            arrayPosition.add(val % arrayLength);
             // Wert um den "verschoben" wird
             i = 1;
+            posIndex = 0;
 
             array = arrayModel.getArray();
             logView.writeInsert(val);
-            logView.writeFirstInsert(value, arrayPosition);
-            arrayModel.setValues(arrayPosition, arrayPosition, value, isInsertPossible());
+            logView.writeFirstInsert(value, arrayPosition.get(posIndex));
+            arrayModel.setValues(arrayPosition.get(posIndex), arrayPosition.get(posIndex), value, isInsertPossible());
+        }
+    }
+
+    public void prevPosition()
+    {
+        if (getInsertSearchDelete().equals("insert"))
+        {
+            arrayModel.setValues(arrayPosition.get(posIndex), arrayPosition.get(posIndex - 1), value, isInsertPossibleRedo());
+        }
+        else
+        {
+            arrayModel.setValuesSearch(arrayPosition.get(posIndex), arrayPosition.get(posIndex - 1), value, isFound());
+        }
+
+        logView.deleteLast();
+
+        arrayPosition.remove(posIndex);
+        posIndex--;
+        i--;
+    }
+
+    public void redoPosition()
+    {
+        if (getInsertSearchDelete().equals("insert"))
+        {
+            nextInsertPosition();
+        }
+        else
+        {
+            nextSearchPosition();
         }
     }
 
@@ -141,20 +190,20 @@ public abstract class Sondieren
     {
         if (isInsertPossible())
         {
-            insArrayEintragen(arrayPosition, value);
-            arrayPosition = -1;
+            insArrayEintragen(arrayPosition.get(posIndex), value);
+            resetArrayPos();
         }
         else if (i < arrayLength)
         {
-            int oldArrayPosition = arrayPosition;
-            arrayPosition = getNextPosition();
+            arrayPosition.add(getNextPosition());
+            posIndex++;
             i++;
-            arrayModel.setValues(oldArrayPosition, arrayPosition, value, isInsertPossible());
+            arrayModel.setValues(arrayPosition.get(posIndex - 1), arrayPosition.get(posIndex), value, isInsertPossible());
         }
         else
         {
             logView.error();
-            arrayPosition = -1;
+            resetArrayPos();
             // keinen Platz für das Einfügen gefunden
             arrayModel.valueFound();
         }
@@ -162,17 +211,21 @@ public abstract class Sondieren
 
     protected boolean isInsertPossible()
     {
-        return !(array[arrayPosition] != 0 && array[arrayPosition] != -1);
+        return !(array[arrayPosition.get(posIndex)] != 0 && array[arrayPosition.get(posIndex)] != -1);
+    }
+
+    protected boolean isInsertPossibleRedo()
+    {
+        return !(array[arrayPosition.get(posIndex - 1)] != 0 && array[arrayPosition.get(posIndex - 1)] != -1);
     }
 
     protected boolean isFound()
     {
-        return (array[arrayPosition] == value);
+        return (array[arrayPosition.get(posIndex)] == value);
     }
 
     public void delete(int val)
     {
-        logView.writeDelete(val);
         search(val);
     }
 
@@ -338,9 +391,9 @@ public abstract class Sondieren
         return actionDone;
     }
 
-    public int getArrayPosition()
+    public boolean getArrayPosition()
     {
-        return arrayPosition;
+        return arrayPosition.isEmpty();
     }
 
     public void setArrayList(ArrayList<Pair> seq)
@@ -350,5 +403,10 @@ public abstract class Sondieren
         {
             new NextActionThread(this);
         }
+    }
+
+    public UndoManager getManager()
+    {
+        return manager;
     }
 }

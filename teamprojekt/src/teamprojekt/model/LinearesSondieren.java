@@ -25,10 +25,11 @@ public class LinearesSondieren extends Sondieren
         return FORMULA;
     }
 
+    @Override
     public int getNextPosition()
     {
         int nextPosition = ((value % arrayLength) + i) % arrayLength;
-        logView.collisionLinearesSondieren(value, nextPosition, arrayLength, i);
+        logView.collisionLinearesSondieren(value, nextPosition, arrayLength, i, insertSearchDelete);
         return nextPosition;
     }
 }

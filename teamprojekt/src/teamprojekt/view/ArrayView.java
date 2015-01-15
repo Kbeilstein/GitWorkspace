@@ -347,7 +347,8 @@ public class ArrayView extends JPanel
         // fertig mit der vorherigen Aktion, falls Sequence-Liste noch nicht
         // leer ist, werden die
         // weiteren Werte abgearbeitet
-        else if (animationPaintDone && !sond.autoActionDone())// && sond.actualActionDone())
+        else if (animationPaintDone && !sond.autoActionDone())// &&
+                                                              // sond.actualActionDone())
         {
             new NextActionThread(sond);
         }

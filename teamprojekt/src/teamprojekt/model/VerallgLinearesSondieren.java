@@ -28,10 +28,11 @@ public class VerallgLinearesSondieren extends Sondieren
         return FORMULA;
     }
 
+    @Override
     public int getNextPosition()
     {
         int nextPosition = ((value % arrayLength) + (c * i)) % arrayLength;
-        logView.collisionVerallgLinearesSondieren(value, nextPosition, arrayLength, c, i);
+        logView.collisionVerallgLinearesSondieren(value, nextPosition, arrayLength, c, i, insertSearchDelete);
         return nextPosition;
     }
 }

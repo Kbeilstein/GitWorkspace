@@ -1,7 +1,7 @@
 package teamprojekt.view;
 
 import javax.swing.JTextArea;
-import javax.swing.text.DefaultCaret;
+import javax.swing.text.BadLocationException;
 
 @SuppressWarnings("serial")
 public class LogView extends JTextArea
@@ -11,17 +11,25 @@ public class LogView extends JTextArea
         super();
         setEditable(false);
         setAutoscrolls(true);
-        // damit bei einem neuen Eintrag in der Textarea automatisch weiter
-        // gescrollt wird
-        DefaultCaret caret = (DefaultCaret) this.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         setRows(10);
     }
 
     // die eigentliche schreib-Methode
     public void write(String text)
     {
-        append(text + "\n");
+        // um bei dem ersten Eintrag eine leer Zeile zu verhindern
+        if (this.getDocument().getLength() == 0)
+        {
+            append(text);
+        }
+        else
+        {
+            append("\n" + text);
+        }
+
+        // damit bei einem neuen Eintrag in der Textarea automatisch weiter
+        // gescrollt wird
+        this.setCaretPosition(this.getDocument().getLength());
     }
 
     public void added(int value, int arrayPosition)
@@ -59,50 +67,54 @@ public class LogView extends JTextArea
         write("Fuer c wird " + c + " gew\u00e4hlt\n");
     }
 
-    public void collisionLinearesSondieren(int value, int arrayPosition, int arrayLength, int i)
+    private String insertSearchDeleteText(int arrayPosition, String isd)
     {
-        write("Kollision \u2192 Lineares Sondieren: " + value + " + " + i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + " soll auf Arrayposition " + arrayPosition + " eingef\u00fcgt werden");
+        String text = "";
+        if (isd.equals("insert"))
+        {
+            text += " soll auf Arrayposition " + arrayPosition + " eingef\u00fcgt werden";
+        }
+        else if (isd.equals("search"))
+        {
+            text += " wird auf Arrayposition " + arrayPosition + " gesucht";
+        }
+        else
+        {
+            text += " soll auf Arrayposition " + arrayPosition + " gel\u00f6scht werden";
+        }
+
+        return text;
     }
 
-    public void collisionVerallgLinearesSondieren(int value, int arrayPosition, int arrayLength, int c, int i)
+    public void collisionLinearesSondieren(int value, int arrayPosition, int arrayLength, int i, String isd)
     {
-        write("Kollision \u2192 Verallgemeintertes Lineares Sondieren: " + value + " + " + c + " * " + i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + " soll auf Arrayposition " + arrayPosition + " eingef\u00fcgt werden");
-        // write(wert + " auf Feldposition " + arrayPosition +
-        // ", Kollision -> erw. Lineares Sondieren " + (wert % arrayLaenge) +
-        // " + " + c + " * " + i);
+        write("Kollision \u2192 Lineares Sondieren: " + value + " + " + i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + insertSearchDeleteText(arrayPosition, isd));
     }
 
-    public void collisionQuadratischesSondieren(int value, int arrayPosition, int arrayLength, int i)
+    public void collisionVerallgLinearesSondieren(int value, int arrayPosition, int arrayLength, int c, int i, String isd)
     {
-        write("Kollision \u2192 Quadratisches Sondieren: " + value + " + " + i * i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + " soll auf Arrayposition " + arrayPosition + " eingef\u00fcgt werden");
-        // write(wert + " auf Feldposition " + arrayPosition +
-        // ", Kollision -> Quadratisches Sondieren " + (wert % arrayLaenge) +
-        // " + " + i + "^2");
+        write("Kollision \u2192 Verallgemeintertes Lineares Sondieren: " + value + " + " + c + " * " + i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + insertSearchDeleteText(arrayPosition, isd));
     }
 
-    public void collisionAlternierendesQuadrSondierenPlus(int value, int arrayPosition, int arrayLength, int i)
+    public void collisionQuadratischesSondieren(int value, int arrayPosition, int arrayLength, int i, String isd)
     {
-        write("Kollision \u2192 Alternierendes Quadratisches Sondieren: " + value + " + " + i * i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + " soll auf Arrayposition " + arrayPosition + " eingef\u00fcgt werden");
-        // write(wert + " auf Feldposition " + arrayPosition +
-        // ", Kollision -> alternierendes Quadratisches Sondieren " + (wert %
-        // arrayLaenge) + " + " + i + "^2");
+        write("Kollision \u2192 Quadratisches Sondieren: " + value + " + " + i * i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + insertSearchDeleteText(arrayPosition, isd));
     }
 
-    public void collisionAlternierendesQuadrSondierenMinus(int value, int arrayPosition, int arrayLength, int i)
+    public void collisionAlternierendesQuadrSondierenPlus(int value, int arrayPosition, int arrayLength, int i, String isd)
     {
-        write("Kollision \u2192 Alternierendes Quadratisches Sondieren: " + value + " - " + i * i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + " soll auf Arrayposition " + arrayPosition + " eingef\u00fcgt werden");
-        // write(wert + " auf Feldposition " + arrayPosition +
-        // ", Kollision -> alternierendes Quadratisches Sondieren " + (wert %
-        // arrayLaenge) + " - " + i + "^2");
+        write("Kollision \u2192 Alternierendes Quadratisches Sondieren: " + value + " + " + i * i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + insertSearchDeleteText(arrayPosition, isd));
     }
 
-    public void collisionDoppelHashing(int value, int arrayPosition, int arrayLength, int i)
+    public void collisionAlternierendesQuadrSondierenMinus(int value, int arrayPosition, int arrayLength, int i, String isd)
+    {
+        write("Kollision \u2192 Alternierendes Quadratisches Sondieren: " + value + " - " + i * i + " mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + insertSearchDeleteText(arrayPosition, isd));
+    }
+
+    public void collisionDoppelHashing(int value, int arrayPosition, int arrayLength, int i, String isd)
     {
         // h(x) - i * ( 1 + x mod (m-2))
-        write("Kollision \u2192 Doppel-Hashing: (" + value + " mod " + arrayLength + ") - " + i + " * (1 + " + value + " mod (" + (arrayLength - 2) + ")) mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + " soll auf Arrayposition " + arrayPosition + " eingef\u00fcgt werden");
-        // write(wert + " auf Feldposition " + arrayPosition +
-        // ", Kollision -> Doppel-Hashing " + arrayPosition + " - " + i +
-        // " * (1 + " + wert + " mod " + (arrayLaenge - 2) + ")");
+        write("Kollision \u2192 Doppel-Hashing: (" + value + " mod " + arrayLength + ") - " + i + " * (1 + " + value + " mod (" + (arrayLength - 2) + ")) mod " + arrayLength + " = " + arrayPosition + " \u2192 " + value + insertSearchDeleteText(arrayPosition, isd));
     }
 
     public void writeFirstInsert(int value, int arrayPosition)
@@ -113,6 +125,11 @@ public class LogView extends JTextArea
     public void writeFirstSearch(int value, int arrayPosition)
     {
         write(value + " wird an Arrayposition " + arrayPosition + " gesucht");
+    }
+
+    public void writeFirstDelete(int value, int arrayPosition)
+    {
+        write(value + " soll auf Arrayposition " + arrayPosition + " gel\u00f6scht werden");
     }
 
     public void writeInsert(int value)
@@ -130,4 +147,19 @@ public class LogView extends JTextArea
         write("L\u00f6schen des Wertes: " + value);
     }
 
+    public void deleteLast()
+    {
+        // damit bei einem neuen Eintrag in der Textarea automatisch weiter
+        // gescrollt wird
+        int end;
+        try
+        {
+            end = getLineEndOffset(getLineCount() - 2);
+            setText(getText(0, end - 1));
+        }
+        catch (BadLocationException e)
+        {
+        }
+        this.setCaretPosition(this.getDocument().getLength());
+    }
 }

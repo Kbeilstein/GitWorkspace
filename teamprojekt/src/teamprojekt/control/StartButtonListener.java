@@ -44,15 +44,22 @@ public class StartButtonListener implements MouseInputListener
 
     public void action(ArrayList<Pair> sequence)
     {
-        Sondieren sond;
-
-        LogView lv = new LogView();
-
-        String arraySizeText = arraySize.getText();
-
-        if (!arraySizeText.isEmpty() && !arraySizeText.equals("1") && !arraySizeText.equals("0"))
+        // Falls bei Log laden abgebrochen wurde soll keine neues Verfahren
+        // gestartet werden, daher die zuerst die if Anweisung
+        if (sequence != null)
         {
-            ArrayModel arrayModel = new ArrayModel(Integer.parseInt(arraySizeText));
+            Sondieren sond;
+
+            LogView lv = new LogView();
+
+            String arraySizeText = arraySize.getText();
+
+            if (arraySizeText.isEmpty() || arraySizeText.equals("1") || arraySizeText.equals("0"))
+            {
+                arraySize.setText("11");
+            }
+
+            ArrayModel arrayModel = new ArrayModel(Integer.parseInt(arraySize.getText()));
 
             switch (cbVerfahren.getSelectedIndex())
             {
@@ -77,10 +84,6 @@ public class StartButtonListener implements MouseInputListener
 
             sond.setArrayList(sequence);
             panel.fill(arrayModel, lv, sond);
-        }
-        else
-        {
-            arraySize.setText("11");
         }
     }
 

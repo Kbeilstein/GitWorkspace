@@ -22,17 +22,15 @@ public class LayoutConfigView extends JFrame
         super("Hashing");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        // Die Hilfe anhand der F1-Taste öffnen
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher()
         {
+            @Override
             public boolean dispatchKeyEvent(KeyEvent e)
             {
                 if (KeyEvent.VK_F1 == e.getKeyCode() && e.toString().contains("KEY_PRESSED"))
                 {
-                    if (hframe == null)
-                    {
-                        hframe = new HelpFrameView();                        
-                    }
-                    hframe.setVisible(true);
+                    openHelpFrame();
                 }
                 return false;
             }
@@ -54,9 +52,19 @@ public class LayoutConfigView extends JFrame
         // Layout erstellt durch WindowBuilder-Plugin
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(5).addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false).addComponent(untenlinks, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE).addComponent(obenlinks, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)).addPreferredGap(ComponentPlacement.RELATED).addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addComponent(untenrechts, GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE).addComponent(obenrechts, GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)).addGap(5)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addComponent(obenlinks, GroupLayout.PREFERRED_SIZE, 460, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(untenlinks, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED)).addGroup(groupLayout.createSequentialGroup().addComponent(obenrechts, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED).addComponent(untenrechts, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))).addGap(5)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addComponent(obenlinks, GroupLayout.PREFERRED_SIZE, 480, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(untenlinks, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED)).addGroup(groupLayout.createSequentialGroup().addComponent(obenrechts, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE).addPreferredGap(ComponentPlacement.RELATED).addComponent(untenrechts, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))).addGap(5)));
         setLayout(groupLayout);
 
         setVisible(true);
+    }
+
+    // oeffnet des Hilfefensters
+    public void openHelpFrame()
+    {
+        if (hframe == null)
+        {
+            hframe = new HelpFrameView();
+        }
+        hframe.setVisible(true);
     }
 }

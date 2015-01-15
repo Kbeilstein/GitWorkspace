@@ -1,6 +1,7 @@
 package teamprojekt.view;
 
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.IOException;
 
@@ -22,6 +23,7 @@ public class HelpFrameView extends JFrame
             JEditorPane textfield = new JEditorPane(getClass().getResource("HilfeText.html"));
             JScrollPane scrollPane = new JScrollPane(textfield);
             textfield.setEditable(false);
+            textfield.setMargin(new Insets(0, 10, 10, 10));
             add(scrollPane);
         }
         catch (IOException e)
@@ -30,7 +32,7 @@ public class HelpFrameView extends JFrame
         }
 
         setLocation((int) (screenSize.getWidth() / 2 - getSize().getWidth() / 2) - 400, (int) (screenSize.getHeight() / 2 - getSize().getHeight() / 2) - 400);
-        setSize(800, 800);
+        setSize(920, 780);
         setVisible(true);
     }
 }

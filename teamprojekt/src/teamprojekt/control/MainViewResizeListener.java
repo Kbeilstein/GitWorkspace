@@ -30,11 +30,11 @@ public class MainViewResizeListener implements ComponentListener
         this.cbView = cbView;
         this.slider = slider;
         this.mainViewcbView = mainViewcbView;
-        this.textBoxLabel =textBoxLabel;
+        this.textBoxLabel = textBoxLabel;
         this.textBox = textBox;
-        this.adbView =adbView;
+        this.adbView = adbView;
     }
-    
+
     @Override
     public void componentResized(ComponentEvent e)
     {

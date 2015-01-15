@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
@@ -30,7 +31,7 @@ public class LogOpenButtonListener implements MouseInputListener
     {
         this.logsaveButton = b;
         this.sbListener = sbListener;
-        JFileChooser.setDefaultLocale(Locale.GERMAN);
+        JComponent.setDefaultLocale(Locale.GERMAN);
     }
 
     public ArrayList<Pair> startOpen()
@@ -38,6 +39,7 @@ public class LogOpenButtonListener implements MouseInputListener
         ArrayList<Pair> sequence = new ArrayList<>();
         JFileChooser fileChooser = null;
         LookAndFeel previousLF = UIManager.getLookAndFeel();
+        // Optik des Auswahlfensters wird dem aktuellen Design angepaﬂt
         try
         {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -49,10 +51,12 @@ public class LogOpenButtonListener implements MouseInputListener
         {
         }
 
+        // Filterung verschiedener Dateitypen
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter(".txt", "txt"));
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter(".log", "log"));
 
+        // Einlesen der Log Datei in eine ArrayList anhand von "Markern"
         if (fileChooser != null && fileChooser.showOpenDialog(fileChooser) == JFileChooser.APPROVE_OPTION)
         {
             String fileName = fileChooser.getSelectedFile().getAbsolutePath();
@@ -83,6 +87,12 @@ public class LogOpenButtonListener implements MouseInputListener
             {
                 sequence = new ArrayList<>();
             }
+        }
+        else
+        {
+            // Falls abgebrochen wird soll keine neues Verfahren gestartet
+            // werden
+            sequence = null;
         }
         return sequence;
     }

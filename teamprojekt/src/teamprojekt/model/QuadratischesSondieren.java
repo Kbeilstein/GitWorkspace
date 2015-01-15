@@ -30,7 +30,7 @@ public class QuadratischesSondieren extends Sondieren
     public int getNextPosition()
     {
         int nexPosition = ((value % arrayLength) + (i * i)) % arrayLength;
-        logView.collisionAlternierendesQuadrSondierenPlus(value, nexPosition, arrayLength, i);
+        logView.collisionAlternierendesQuadrSondierenPlus(value, nexPosition, arrayLength, i, insertSearchDelete);
         return nexPosition;
     }
 }

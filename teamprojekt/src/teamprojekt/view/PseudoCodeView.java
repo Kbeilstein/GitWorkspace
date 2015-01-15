@@ -19,286 +19,64 @@ public class PseudoCodeView extends JFrame
 {
     private JComboBox<String> cbVerfahren;
 
-    /**@formatter:off**/
+    /** @formatter:off **/
     // Pseudo-Code für das lineare Sondieren mit Kommentaren
-    private String codeSearchDeleteLS = ""
-        + " int index = -1;\n"
-        + " int i = 1;\n"
-        + " int position = wert % arraylaenge;\n"
-        + " while(array[position] != 0 && index == -1)\n\t" 
-            + " if(array[position] == wert)\n\t\t"
-                + " index = position;\n\t\t"
-                + " if(loeschen)\n\t\t\t"
-                    + " array[position] = -1;\n\t"
-            + " position = ((wert % arraylaenge) + i) % arraylaenge;\n\t"
-            + " i++;\n"
-        + " return index;";
-    
-    private String commSearchDeleteLS =""
-        + "// markiere als nicht gefunden\n"
-        + "// Wert um den verschoben wird\n"
-        + "// Wert um den verschoben wird\n"
-        + "// suche bis leere Zelle oder Wert gefunden\n"
-        + "// ist der Wert gefunden\n"
-        + "// setze die Position auf den Index\n"
-        + "// wenn der Wert geloescht werden soll\n" 
-        + "// markiere als geloescht\n"
-        + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// Rueckgabe: Wert gefunden oder nicht gefunden";
+    private String codeSearchDeleteLS = "" + " int index = -1;\n" + " int i = 1;\n" + " int position = wert % arraylaenge;\n" + " while(array[position] != 0 && index == -1)\n\t" + " if(array[position] == wert)\n\t\t" + " index = position;\n\t\t" + " if(loeschen)\n\t\t\t" + " array[position] = -1;\n\t" + " position = ((wert % arraylaenge) + i) % arraylaenge;\n\t" + " i++;\n" + " return index;";
 
-    private String codeInsertLS = ""
-        + " if(!arrayVoll && suche(wert)==-1)\n\t"
-            + " int position =  wert % arraylaenge;\n\t"
-            + " int i= 1;\n\t"
-            + " while(array[position] != 0 && array[position] != -1)\n\t\t"
-                    + " position = ((wert % arraylaenge) + i) % arraylaenge;\n\t\t"
-                    + " i++;\n\t"
-            + " array[position] = wert;";
-    
-    private String commInsertLS = ""
-        + "// Array nicht voll und Wert nicht gefunden\n"     
-        + "// Anfangsposition / h0\n"
-        + "// Wert um den verschoben wird\n"
-        + "// suche bis leere oder als geloescht markierte Zelle\n"
-        + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen\n" 
-        + "// fuege den Wert ein";
-    
-    private String infoLS = "LS";
-                    
+    private String commSearchDeleteLS = "" + "// markiere als nicht gefunden\n" + "// Wert um den verschoben wird\n" + "// Wert um den verschoben wird\n" + "// suche bis leere Zelle oder Wert gefunden\n" + "// ist der Wert gefunden\n" + "// setze die Position auf den Index\n" + "// wenn der Wert geloescht werden soll\n" + "// markiere als geloescht\n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// Rueckgabe: Wert gefunden oder nicht gefunden";
+
+    private String codeInsertLS = "" + " if(!arrayVoll && suche(wert)==-1)\n\t" + " int position =  wert % arraylaenge;\n\t" + " int i= 1;\n\t" + " while(array[position] != 0 && array[position] != -1)\n\t\t" + " position = ((wert % arraylaenge) + i) % arraylaenge;\n\t\t" + " i++;\n\t" + " array[position] = wert;";
+
+    private String commInsertLS = "" + "// Array nicht voll und Wert nicht gefunden\n" + "// Anfangsposition / h0\n" + "// Wert um den verschoben wird\n" + "// suche bis leere oder als geloescht markierte Zelle\n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// fuege den Wert ein";
+
+    private String infoLS = "Die Funktionalit\u00e4t des Linearen Sondieren ist relativ einfach und wird auch als \"naives\" Verfahren bezeichnet.\n" + "Große belegte Teilstücke des Arrays haben eine st\u00e4rkere Tendenz zu wachsen als kleine (Prim\u00e4re H\u00e4ufung).";
+
     // Pseudo-Code für das Verallgemeinerte lineare Sondieren mit Kommentaren
-    private String codeSearchDeleteErwLS = ""
-        + " int index = -1;\n"
-        + " int i = 1;\n"
-        + " int c = benutzerauswahl;\n"
-        + " int position = wert % arraylaenge;\n"
-        + " while(array[position] != 0 && index == -1)\n\t"
-            + " if(array[position] == wert)\n\t\t"
-                + " index = position;\n\t\t"
-                + " if(loeschen)\n\t\t\t"
-                    + " array[position] = -1;\n\t"
-            + " position = ((wert % arraylaenge) + (c * i)) % arraylaenge;\n\t"
-            + " i++;\n"
-        + " return index;";
-    
-    private String commSearchDeleteErwLS =""
-        + "// markiere als nicht gefunden\n"
-        + "// Wert um den verschoben wird\n"
-        + "// gewähltes c, teilerfremd mit Arraylaenge\n"
-        + "// Anfangsposition / h0\n"
-        + "// suche bis leere Zelle oder Wert gefunden\n"
-        + "// ist der Wert gefunden\n"
-        + "// setze die Position auf den Index\n"
-        + "// wenn der Wert geloescht werden soll\n"
-        + "// markiere als geloescht\n"
-        + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// Rueckgabe: Position wenn Wert gefunden oder -1 wenn nicht gefunden";
-    
-    private String codeInsertErwLS = ""
-        + " if(!arrayVoll && suche(wert) == -1)\n\t"
-            + " int position =  wert % arraylaenge;\n\t"
-            + " int i = 1;\n\t"
-            + " int c = benutzerauswahl;\n\t"
-            + " while(array[position] != 0 && array[position] != -1 \n\t\t\t"
-                    + " && i < arraylaenge)\n\t\t"
-                + " position = ((wert % arraylaenge) + (c * i)) % arraylaenge;\n\t\t"
-                + " i++;\n\t"
-            + " array[position] = wert;";
-    
-    private String commInsertErwLS = ""
-        + "// Array nicht voll und Wert nicht vorhanden\n"
-        + "// Anfangsposition / h0\n"
-        + "// Wert um den verschoben wird\n"
-        + "// gewähltes c, teilerfremd mit Arraylaenge\n"
-        + "// suche bis leere oder als geloescht markierte Zelle\n"
-        + "// oder einmal durch das Array gelaufen\n"
-        + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// fuege den Wert ein";
-    
-    private String infoErwLS = "ErwLS";
-                    
+    private String codeSearchDeleteErwLS = "" + " int index = -1;\n" + " int i = 1;\n" + " int c = benutzerauswahl;\n" + " int position = wert % arraylaenge;\n" + " while(array[position] != 0 && index == -1)\n\t" + " if(array[position] == wert)\n\t\t" + " index = position;\n\t\t" + " if(loeschen)\n\t\t\t" + " array[position] = -1;\n\t" + " position = ((wert % arraylaenge) + (c * i)) % arraylaenge;\n\t" + " i++;\n" + " return index;";
+
+    private String commSearchDeleteErwLS = "" + "// markiere als nicht gefunden\n" + "// Wert um den verschoben wird\n" + "// gewähltes c, teilerfremd mit Arraylaenge\n" + "// Anfangsposition / h0\n" + "// suche bis leere Zelle oder Wert gefunden\n" + "// ist der Wert gefunden\n" + "// setze die Position auf den Index\n" + "// wenn der Wert geloescht werden soll\n" + "// markiere als geloescht\n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// Rueckgabe: Position wenn Wert gefunden oder -1 wenn nicht gefunden";
+
+    private String codeInsertErwLS = "" + " if(!arrayVoll && suche(wert) == -1)\n\t" + " int position =  wert % arraylaenge;\n\t" + " int i = 1;\n\t" + " int c = benutzerauswahl;\n\t" + " while(array[position] != 0 && array[position] != -1 \n\t\t\t" + " && i < arraylaenge)\n\t\t" + " position = ((wert % arraylaenge) + (c * i)) % arraylaenge;\n\t\t" + " i++;\n\t" + " array[position] = wert;";
+
+    private String commInsertErwLS = "" + "// Array nicht voll und Wert nicht vorhanden\n" + "// Anfangsposition / h0\n" + "// Wert um den verschoben wird\n" + "// gewähltes c, teilerfremd mit Arraylaenge\n" + "// suche bis leere oder als geloescht markierte Zelle\n" + "// oder einmal durch das Array gelaufen\n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// fuege den Wert ein";
+
+    private String infoErwLS = "Das verallgemeinerte lineare Sondieren unterscheidet sich vom linearen Sondieren nur durch eine zus\u00e4tzliche Konstante c.\n" + "Die zus\u00e4tzliche Konstante kann das Problem der \"prim\u00e4ren H\u00e4ufung\" nicht lösen.";
+
     // Pseudo-Code für das quadratisches Sondieren mit Kommentaren
-    private String codeSearchDeleteQS = ""
-        + " int index = -1;\n"
-        + " int i = 1;\n"
-        + " int position = wert % arraylaenge;\n"
-        + " while(array[position] != 0 && index == -1\n\t\t"
-                + " && i < arraylaenge)\n\t"
-            + " if(array[position] == wert)\n\t\t"
-                + " index = position;\n\t\t"
-                + " if(loeschen)\n\t\t\t"
-                    + " array[position] = -1;\n\t"
-            + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t"
-            + " i++;\n"
-        + " return index;";
-    
-    private String commSearchDeleteQS = ""
-        + "// markiere als nicht gefunden\n"
-        + "// Wert um den verschoben wird\n"
-        + "// Anfangsposition / h0\n"
-        + "// suche bis leere Zelle oder Wert gefunden\n"
-        + "// oder einmal durch das Array gelaufen\n"
-        + "// ist der Wert gefunden\n"
-        + "// setze die Position auf den Index\n"
-        + "// wenn der Wert geloescht werden soll\n"
-        + "// markiere als geloescht\n"
-        + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// Rueckgabe: Wert gefunden oder nicht gefunden";
+    private String codeSearchDeleteQS = "" + " int index = -1;\n" + " int i = 1;\n" + " int position = wert % arraylaenge;\n" + " while(array[position] != 0 && index == -1\n\t\t" + " && i < arraylaenge)\n\t" + " if(array[position] == wert)\n\t\t" + " index = position;\n\t\t" + " if(loeschen)\n\t\t\t" + " array[position] = -1;\n\t" + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t" + " i++;\n" + " return index;";
 
-    private String codeInsertQS= ""
-        + " if(!arrayVoll && suche(wert) == -1)\n\t"
-            + " int position =  wert % arraylaenge;\n\t"
-            + " int i = 1;\n\t"
-            + " while(array[position] != 0 && array[position] != -1\n\t\t\t"
-                    + " && i < arraylaenge)\n\t\t"
-                + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t\t"
-                + " i++;\n\t"
-            + " array[position] = wert;";
-        
-    private String commInsertQS= ""
-            + "// Array nicht voll oder Wert nicht gefunden\n"
-            + "// Anfangsposition / h0\n"
-            + "// Wert um den verschoben wird\n" 
-            + "// suche bis leere oder als geloescht markierte Zelle\n"
-            + "// oder bis einmal durch Array gelaufen\n"
-            + "// naechste Position / hX\n"
-            + "// Zaehler um 1 erhoehen\n"
-            + "// fuege den Wert ein";
-    
-    private String infoQS = "QS";
-             
-    // Pseudo-Code für das alternierendes quadratisches Sondieren mit Kommentaren
-    private String codeSearchDeleteAltQS = ""
-        + " int index = -1;\n"
-        + " int i = 1;\n"
-        + " int position = wert % arraylaenge;\n"
-        + " while(array[position] != 0 && index == -1\n\t\t"
-                + " && i < arraylaenge)\n\t"
-            + " if(array[position] == wert)\n\t\t"
-                + " index = position;\n\t\t"
-                + " if(loeschen)\n\t\t\t"
-                    + " array[position] = -1;\n\t\t"
-                + " if(i % 2 != 0)\n\t\t\t"
-                    + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t\t"
-                + " else\n\t\t\t"
-                    + " position = ((wert % arraylaenge) - (i * i)) % arraylaenge;\n\t\t"
-                + " i++;\n"
-        + " return index;";
-    
-    private String commSearchDeleteAltQS = ""
-        + "// markiere als nicht gefunden\n"
-        + "// Wert um den verschoben wird\n"
-        + "// Anfangsposition / h0\n"
-        + "// suche bis leere Zelle oder Wert gefunden\n"
-        + "// oder bis einmal durch Array gelaufen\n"
-        + "// ist der Wert gefunden\n"
-        + "// setze die Position auf den Index\n"
-        + "// wenn der Wert geloescht werden soll\n"
-        + "// markiere als geloescht\n"
-        + "// wenn i ungerade / + \n"
-        + "// naechste Position/ hX \n"
-        + "// wenn i gerade / - \n"
-        + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// Rueckgabe: Wert gefunden oder nicht gefunden";
+    private String commSearchDeleteQS = "" + "// markiere als nicht gefunden\n" + "// Wert um den verschoben wird\n" + "// Anfangsposition / h0\n" + "// suche bis leere Zelle oder Wert gefunden\n" + "// oder einmal durch das Array gelaufen\n" + "// ist der Wert gefunden\n" + "// setze die Position auf den Index\n" + "// wenn der Wert geloescht werden soll\n" + "// markiere als geloescht\n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// Rueckgabe: Wert gefunden oder nicht gefunden";
 
-    private String codeInsertAltQS= ""
-        + " if(!arrayVoll && suche(wert)==-1)\n\t"
-            + " int position =  wert % arraylaenge;\n\t"
-            + " int i = 1;\n\t"
-            + " int j = 1;\n\t"
-            + " while(array[position] != 0 && array[position] != -1\n\t\t\t"
-                    + " && i < arraylaenge)\n\t\t"
-                + " if(array[position] == wert)\n\t\t\t"
-                    + " index = position;\n\t\t\t"
-                    + " if(i % 2 != 0)\n\t\t\t\t"
-                        + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t\t\t"
-                    + " else\n\t\t\t\t"
-                        + " position = ((wert % arraylaenge) - (i * i)) % arraylaenge;\n\t\t\t"
-                    + " i++;\n\t"
-            + " if(array[position] != 0 && array[position] != -1)\n\t\t"
-                + " array[position] = wert;";
-        
-    private String commInsertAltQS= ""
-        + "// Array nicht voll oder Wert nicht gefunden\n"
-        + "// Anfangsposition / h0\n"
-        + "// Wert um den verschoben wird\n"
-        + "// Wert um den verschoben wird\n"
-        + "// suche bis leere Zelle oder Wert gefunden\n"
-        + "// oder bis einmal durch Array gelaufen\n"
-        + "// ist der Wert gefunden\n"
-        + "// setze die Position auf den Index\n"
-        + "// wenn i ungerade / + \n"
-        + "// naechste Position/ hX\n"
-        + "// wenn i gerade / - \n"
-        + "// naechste Position / hX\n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// wenn leere oder als gelöscht markierte Zelle gefunden\n"
-        + "// fuege den Wert ein";
-    
-    private String infoAltQS = "AltQS";
-        
+    private String codeInsertQS = "" + " if(!arrayVoll && suche(wert) == -1)\n\t" + " int position =  wert % arraylaenge;\n\t" + " int i = 1;\n\t" + " while(array[position] != 0 && array[position] != -1\n\t\t\t" + " && i < arraylaenge)\n\t\t" + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t\t" + " i++;\n\t" + " array[position] = wert;";
+
+    private String commInsertQS = "" + "// Array nicht voll oder Wert nicht gefunden\n" + "// Anfangsposition / h0\n" + "// Wert um den verschoben wird\n" + "// suche bis leere oder als geloescht markierte Zelle\n" + "// oder bis einmal durch Array gelaufen\n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// fuege den Wert ein";
+
+    private String infoQS = "Das Problem der \"prim\u00e4ren H\u00e4ufung\" wird durch das quadratische Wachstum vermieden.";
+
+    // Pseudo-Code für das alternierendes quadratisches Sondieren mit
+    // Kommentaren
+    private String codeSearchDeleteAltQS = "" + " int index = -1;\n" + " int i = 1;\n" + " int position = wert % arraylaenge;\n" + " while(array[position] != 0 && index == -1\n\t\t" + " && i < arraylaenge)\n\t" + " if(array[position] == wert)\n\t\t" + " index = position;\n\t\t" + " if(loeschen)\n\t\t\t" + " array[position] = -1;\n\t\t" + " if(i % 2 != 0)\n\t\t\t" + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t\t" + " else\n\t\t\t" + " position = ((wert % arraylaenge) - (i * i)) % arraylaenge;\n\t\t" + " i++;\n" + " return index;";
+
+    private String commSearchDeleteAltQS = "" + "// markiere als nicht gefunden\n" + "// Wert um den verschoben wird\n" + "// Anfangsposition / h0\n" + "// suche bis leere Zelle oder Wert gefunden\n" + "// oder bis einmal durch Array gelaufen\n" + "// ist der Wert gefunden\n" + "// setze die Position auf den Index\n" + "// wenn der Wert geloescht werden soll\n" + "// markiere als geloescht\n" + "// wenn i ungerade / + \n" + "// naechste Position/ hX \n" + "// wenn i gerade / - \n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// Rueckgabe: Wert gefunden oder nicht gefunden";
+
+    private String codeInsertAltQS = "" + " if(!arrayVoll && suche(wert)==-1)\n\t" + " int position =  wert % arraylaenge;\n\t" + " int i = 1;\n\t" + " int j = 1;\n\t" + " while(array[position] != 0 && array[position] != -1\n\t\t\t" + " && i < arraylaenge)\n\t\t" + " if(array[position] == wert)\n\t\t\t" + " index = position;\n\t\t\t" + " if(i % 2 != 0)\n\t\t\t\t" + " position = ((wert % arraylaenge) + (i * i)) % arraylaenge;\n\t\t\t" + " else\n\t\t\t\t" + " position = ((wert % arraylaenge) - (i * i)) % arraylaenge;\n\t\t\t" + " i++;\n\t" + " if(array[position] != 0 && array[position] != -1)\n\t\t" + " array[position] = wert;";
+
+    private String commInsertAltQS = "" + "// Array nicht voll oder Wert nicht gefunden\n" + "// Anfangsposition / h0\n" + "// Wert um den verschoben wird\n" + "// Wert um den verschoben wird\n" + "// suche bis leere Zelle oder Wert gefunden\n" + "// oder bis einmal durch Array gelaufen\n" + "// ist der Wert gefunden\n" + "// setze die Position auf den Index\n" + "// wenn i ungerade / + \n" + "// naechste Position/ hX\n" + "// wenn i gerade / - \n" + "// naechste Position / hX\n" + "// Zaehler um 1 erhoehen\n" + "// wenn leere oder als gelöscht markierte Zelle gefunden\n" + "// fuege den Wert ein";
+
+    private String infoAltQS = "Das Quadratische Sondieren kann durch Alternieren des Vorzeichens noch verbessert werden. Wählt man die Länge des Arrays m = 4 * j + 3,\nwobei m eine Primzahl ist, kann sichergestellt werden, dass alle Arraypositionen bei der Kollisionsbehandlung betrachtet werden.";
+
     // Pseudo-Code für das Doppel-Hashing mit Kommentaren
-    private String codeSearchDeleteDH = ""
-        + " int index = -1;\n"
-        + " int i = 1;\n"
-        + " int position = wert % arraylaenge;\n"
-        + " while(array[position] != 0 && index == -1\n\t\t"
-                + " && i < arraylaenge)\n\t"
-            + " if(array[position] == wert)\n\t\t"
-                + " index= position;\n\t\t"
-                + " if(loeschen)\n\t\t\t"
-                    + " array[position] = -1;\n\t"
-            + " position = (((wert % arraylaenge)\n\t\t"
-                + " - i * (1 + wert % (arraylaenge - 2))) % arraylaenge)\n\t"
-            + " i++;\n"
-        + " return index;";
-    
-    private String commSearchDeleteDH = ""
-        + "// markiere als nicht gefunden\n"
-        + "// Wert um den verschoben wird\n"
-        + "// Anfangsposition / h0\n"
-        + "// suche bis leere Zelle oder Wert gefunden\n"
-        + "// oder bis einmal durch Array gelaufen\n"
-        + "// ist der Wert gefunden\n"
-        + "// setze die Position auf den Index\n"
-        + "// wenn der Wert geloescht werden soll\n"
-        + "// markiere als geloescht\n"
-        + "// naechste Position / hX\n"
-        + "// \n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// Rueckgabe: Wert gefunden oder nicht gefunden";
+    private String codeSearchDeleteDH = "" + " int index = -1;\n" + " int i = 1;\n" + " int position = wert % arraylaenge;\n" + " while(array[position] != 0 && index == -1\n\t\t" + " && i < arraylaenge)\n\t" + " if(array[position] == wert)\n\t\t" + " index= position;\n\t\t" + " if(loeschen)\n\t\t\t" + " array[position] = -1;\n\t" + " position = (((wert % arraylaenge)\n\t\t" + " - i * (1 + wert % (arraylaenge - 2))) % arraylaenge)\n\t" + " i++;\n" + " return index;";
 
-    
-    private String codeInsertDH = ""
-        + " if(!arrayVoll && suche(wert)==-1)\n\t"
-            + " int position =  wert % arraylaenge;\n\t"
-            + " int i= 1;\n\t"
-            + " while(array[position] != 0 && array[position] != -1\n\t\t\t"
-                    + " && i < arraylaenge)\n\t\t"
-                + " position = (((wert % arraylaenge)\n\t\t\t"
-                    + " - i * (1 + wert % (arraylaenge - 2))) % arraylaenge)\n\t\t"
-                + " i++;\n\t" 
-            + " array[position] = wert;";
-    
-    private String commInsertDH = ""
-        + "// Array nicht voll oder Wert nicht gefunden\n"
-        + "// Anfangsposition / h0\n"
-        + "// Wert um den verschoben wird\n"
-        + "// suche bis leere oder als geloescht markierte Zelle\n"
-        + "// oder bis einmal durch Array gelaufen\n"
-        + "// naechste Position / hX\n"
-        + "// \n"
-        + "// Zaehler um 1 erhoehen\n"
-        + "// fuege den Wert ein";
-    
-    private String infoDH = "DH";
+    private String commSearchDeleteDH = "" + "// markiere als nicht gefunden\n" + "// Wert um den verschoben wird\n" + "// Anfangsposition / h0\n" + "// suche bis leere Zelle oder Wert gefunden\n" + "// oder bis einmal durch Array gelaufen\n" + "// ist der Wert gefunden\n" + "// setze die Position auf den Index\n" + "// wenn der Wert geloescht werden soll\n" + "// markiere als geloescht\n" + "// naechste Position / hX\n" + "// \n" + "// Zaehler um 1 erhoehen\n" + "// Rueckgabe: Wert gefunden oder nicht gefunden";
 
-    /**@formatter:on**/
+    private String codeInsertDH = "" + " if(!arrayVoll && suche(wert)==-1)\n\t" + " int position =  wert % arraylaenge;\n\t" + " int i= 1;\n\t" + " while(array[position] != 0 && array[position] != -1\n\t\t\t" + " && i < arraylaenge)\n\t\t" + " position = (((wert % arraylaenge)\n\t\t\t" + " - i * (1 + wert % (arraylaenge - 2))) % arraylaenge)\n\t\t" + " i++;\n\t" + " array[position] = wert;";
+
+    private String commInsertDH = "" + "// Array nicht voll oder Wert nicht gefunden\n" + "// Anfangsposition / h0\n" + "// Wert um den verschoben wird\n" + "// suche bis leere oder als geloescht markierte Zelle\n" + "// oder bis einmal durch Array gelaufen\n" + "// naechste Position / hX\n" + "// \n" + "// Zaehler um 1 erhoehen\n" + "// fuege den Wert ein";
+
+    private String infoDH = "Beim Doppel-Hashing werden zwei voneinander unabhängige Hashfunktionen verwendet.\nDie Kosten sind nahe den Kosten für ein \"ideales\" Hashing.";
+
+    /** @formatter:on **/
 
     private JTextArea textCodeSearchDelete, textCommentSearchDelete,
     textCodeInsert, textCommentInsert, textInfo;

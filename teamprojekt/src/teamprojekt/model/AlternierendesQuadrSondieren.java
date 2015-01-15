@@ -35,7 +35,7 @@ public class AlternierendesQuadrSondieren extends Sondieren
         if ((i % 2) != 0)
         {
             nextPosition = ((value % arrayLength) + i * i) % arrayLength;
-            logView.collisionAlternierendesQuadrSondierenPlus(value, nextPosition, arrayLength, i);
+            logView.collisionAlternierendesQuadrSondierenPlus(value, nextPosition, arrayLength, i, insertSearchDelete);
         }
         // da nach dem + rechnen nur i erhoeht wird, wird der else Fall
         // aufgerufen und hier mit - gerechnet, und danach j erhoeht,
@@ -46,7 +46,7 @@ public class AlternierendesQuadrSondieren extends Sondieren
             // Loesung um ein "-" bei modulo abzufangen
             // (a % b + b) % b
             nextPosition = (((value % arrayLength) - i * i) % arrayLength + arrayLength) % arrayLength;
-            logView.collisionAlternierendesQuadrSondierenMinus(value, nextPosition, arrayLength, i);
+            logView.collisionAlternierendesQuadrSondierenMinus(value, nextPosition, arrayLength, i, insertSearchDelete);
         }
 
         return nextPosition;

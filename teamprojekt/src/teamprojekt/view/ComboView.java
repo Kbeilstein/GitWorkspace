@@ -16,6 +16,7 @@ import javax.swing.plaf.basic.BasicComboPopup;
 
 import teamprojekt.control.AlgorithmPickListener;
 import teamprojekt.control.ArraySizeTextListener;
+import teamprojekt.control.HelpButtonListener;
 import teamprojekt.control.LogOpenButtonListener;
 import teamprojekt.control.PseudoCodeButtonListener;
 import teamprojekt.control.SpinnerMinusButtonListener;
@@ -114,6 +115,12 @@ public class ComboView extends JPanel
         logOpenButton.addMouseListener(lobListener);
         logOpenButton.addMouseMotionListener(lobListener);
 
+        // Buttin zum laden des Log
+        HelpButtonView helpButton = new HelpButtonView();
+        HelpButtonListener helpListener = new HelpButtonListener(helpButton);
+        helpButton.addMouseListener(helpListener);
+        helpButton.addMouseMotionListener(helpListener);
+
         // Zeichnen eines Rahmens um die aktuelle View, inkl. Ueberschrift
         Border lineBorder1 = BorderFactory.createLineBorder(Color.BLACK);
         Border titleBorder1 = BorderFactory.createTitledBorder(lineBorder1, "Auswahl");
@@ -177,8 +184,12 @@ public class ComboView extends JPanel
         c.gridy = 8;
         add(pseudoCodeButton, c);
 
-        c.insets = new Insets(10, 0, 17, 0);
+        c.insets = new Insets(10, 0, 10, 0);
         c.gridy = 9;
         add(logOpenButton, c);
+
+        c.insets = new Insets(10, 0, 17, 0);
+        c.gridy = 10;
+        add(helpButton, c);
     }
 }

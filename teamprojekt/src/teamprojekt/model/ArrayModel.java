@@ -33,15 +33,6 @@ public class ArrayModel
         listeners = new ArrayList<>();
     }
 
-    // public void printArray()
-    // {
-    // for (int wert : array)
-    // {
-    // System.out.print(wert + " ");
-    // }
-    // System.out.println();
-    // }
-
     public int[] getArray()
     {
         return array;
